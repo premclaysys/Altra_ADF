@@ -20,6 +20,10 @@
 						"sqlReaderQuery": "SELECT isnull(max(TransactionID),0) from [Transactions_Staging]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
 					}
 				}
 			},
