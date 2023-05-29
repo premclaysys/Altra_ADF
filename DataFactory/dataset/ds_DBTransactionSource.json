@@ -1,5 +1,5 @@
 {
-	"name": "ds_DBTransaction",
+	"name": "ds_DBTransactionSource",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Altra_Test_Link",
