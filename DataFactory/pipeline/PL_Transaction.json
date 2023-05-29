@@ -3,26 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Set LastTransactionID",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Last transaction ID",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "LastTransactionID",
-					"value": {
-						"value": "@activity('Last transaction ID').output.firstRow",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "Last transaction ID",
 				"type": "Lookup",
 				"dependsOn": [],
@@ -46,6 +26,45 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Last transaction ID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": {
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where transaction > @activity('Last transaction ID').output.firstRow",
+							"type": "Expression"
+						},
+						"partitionOption": "None",
+						"convertDecimalToInteger": false,
+						"queryTimeout": "02:00:00"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_DBTransactionSource",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"variables": {
