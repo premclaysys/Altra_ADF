@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transactions"
+			"table": "Transactions_Staging"
 		}
 	}
 }
