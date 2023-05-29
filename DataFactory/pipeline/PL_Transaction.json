@@ -50,7 +50,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where transaction > @activity('Last transaction ID').output.firstRow",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE transactiondatetime >= '2023-05-26'",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
