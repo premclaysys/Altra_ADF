@@ -17,8 +17,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > ",
+						"oracleReaderQuery": {
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TransactionID > @activity('Last transaction ID').output",
+							"type": "Expression"
+						},
 						"partitionOption": "None",
+						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -244,7 +248,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "LastTransactionID",
-					"value": ""
+					"value": {
+						"value": "@activity('Last transaction ID').output.firstRow",
+						"type": "Expression"
+					}
 				}
 			},
 			{
