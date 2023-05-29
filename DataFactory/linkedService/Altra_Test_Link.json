@@ -1,0 +1,16 @@
+{
+	"name": "Altra_Test_Link",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhZTg0OGE1ZS1jZDY3LTQ5MDQtYjEwMi1jNzlhMThmOThmMmQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "AltraOracleIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
