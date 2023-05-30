@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM  DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \nFETCH FIRST 10 ROWS ONLY",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS FETCH FIRST 10 ROWS ONLY",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
