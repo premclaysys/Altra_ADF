@@ -139,18 +139,6 @@
 							},
 							{
 								"source": {
-									"name": "TransactionSortIndex",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionSortIndex",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
 									"name": "PrincipalAmount",
 									"type": "String",
 									"physicalType": "String"
@@ -189,18 +177,6 @@
 									"physicalType": "decimal",
 									"scale": 3,
 									"precision": 38
-								}
-							},
-							{
-								"source": {
-									"name": "CURRRTXNSTATCD",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "CURRRTXNSTATCD",
-									"type": "String",
-									"physicalType": "nvarchar"
 								}
 							},
 							{
