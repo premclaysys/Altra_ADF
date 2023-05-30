@@ -13,7 +13,19 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select max(transactionid) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_o_TransactionSource",
+						"type": "DatasetReference"
+					}
+				}
 			},
 			{
 				"name": "cd_oracletofile",
