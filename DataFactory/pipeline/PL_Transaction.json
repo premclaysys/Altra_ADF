@@ -286,7 +286,7 @@
 				"typeProperties": {
 					"variableName": "LastTransID",
 					"value": {
-						"value": "@string(activity('LastTransactionID').output.firstRow)",
+						"value": "@string(activity('LastTransactionID').output)",
 						"type": "Expression"
 					}
 				}
