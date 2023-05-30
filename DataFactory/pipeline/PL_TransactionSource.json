@@ -53,6 +53,17 @@
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
@@ -64,7 +75,8 @@
 								},
 								"sink": {
 									"name": "ACCOUNTNUMBER",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -74,7 +86,8 @@
 								},
 								"sink": {
 									"name": "ACCOUNTTRANSACTIONNUMBER",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -84,7 +97,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONID",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -94,7 +108,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONFISCALDATE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -104,7 +119,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONDATETIME",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -114,7 +130,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONEFFECTIVEDATE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -124,7 +141,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONTYPECODE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -134,7 +152,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONTYPE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -144,7 +163,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONSTATUSCODE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -154,7 +174,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONSTATUS",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -164,7 +185,8 @@
 								},
 								"sink": {
 									"name": "TRANSACTIONDESCRIPTION",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -174,7 +196,8 @@
 								},
 								"sink": {
 									"name": "PRINCIPALAMOUNT",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -184,7 +207,8 @@
 								},
 								"sink": {
 									"name": "PRINCIPALBALANCE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -194,7 +218,8 @@
 								},
 								"sink": {
 									"name": "LOANINTERESTAMOUNT",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -204,7 +229,8 @@
 								},
 								"sink": {
 									"name": "LATECHARGEAMOUNT",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -214,16 +240,34 @@
 								},
 								"sink": {
 									"name": "CHECKNBR",
-									"type": "String"
+									"type": "String",
+									"physicalType": "String"
 								}
 							}
-						]
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_o_TransactionSource",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_dt_TransactionRecord",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@concat(variables('LastTransID'),'.csv')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
