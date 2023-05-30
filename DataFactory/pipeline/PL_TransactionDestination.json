@@ -41,6 +41,188 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCOUNTNUMBER",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AccountNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNTTRANSACTIONNUMBER",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AccountTransactionNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONFISCALDATE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionFiscalDate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONDATETIME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionDateTime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONEFFECTIVEDATE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionEffectiveDate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONTYPECODE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONTYPE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONSTATUSCODE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONSTATUS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONDESCRIPTION",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PRINCIPALAMOUNT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PrincipalAmount",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PRINCIPALBALANCE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PrincipalBalance",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LOANINTERESTAMOUNT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LoanInterestAmount",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CHECKNBR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CHECKNBR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -51,13 +233,7 @@
 				"inputs": [
 					{
 						"referenceName": "ds_dt_TransactionRecord",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@concat(variables('sourcefilename'),'.csv')",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
