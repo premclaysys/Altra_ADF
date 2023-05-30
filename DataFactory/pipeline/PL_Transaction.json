@@ -249,7 +249,13 @@
 				"outputs": [
 					{
 						"referenceName": "ds_dt_TransactionRecord",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('LastTransID')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
