@@ -49,12 +49,24 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "LastTransID",
+					"value": {
+						"value": "@string(activity('LastTransactionID').output.firstRow)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
 			"LastTransID": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"LastTransID": {
+				"type": "String"
 			}
 		},
 		"annotations": []
