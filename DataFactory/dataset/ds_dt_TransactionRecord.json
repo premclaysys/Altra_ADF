@@ -29,67 +29,63 @@
 		},
 		"schema": [
 			{
-				"name": "AccountNumber",
+				"name": "ACCOUNTNUMBER",
 				"type": "String"
 			},
 			{
-				"name": "AccountTransactionNumber",
+				"name": "ACCOUNTTRANSACTIONNUMBER",
 				"type": "String"
 			},
 			{
-				"name": "TransactionID",
+				"name": "TRANSACTIONID",
 				"type": "String"
 			},
 			{
-				"name": "TransactionFiscalDate",
+				"name": "TRANSACTIONFISCALDATE",
 				"type": "String"
 			},
 			{
-				"name": "TransactionDateTime",
+				"name": "TRANSACTIONDATETIME",
 				"type": "String"
 			},
 			{
-				"name": "TransactionEffectiveDate",
+				"name": "TRANSACTIONEFFECTIVEDATE",
 				"type": "String"
 			},
 			{
-				"name": "TransactionTypeCode",
+				"name": "TRANSACTIONTYPECODE",
 				"type": "String"
 			},
 			{
-				"name": "TransactionType",
+				"name": "TRANSACTIONTYPE",
 				"type": "String"
 			},
 			{
-				"name": "TransactionStatusCode",
+				"name": "TRANSACTIONSTATUSCODE",
 				"type": "String"
 			},
 			{
-				"name": "TransactionStatus",
+				"name": "TRANSACTIONSTATUS",
 				"type": "String"
 			},
 			{
-				"name": "TransactionDescription",
+				"name": "TRANSACTIONDESCRIPTION",
 				"type": "String"
 			},
 			{
-				"name": "TransactionSortIndex",
+				"name": "PRINCIPALAMOUNT",
 				"type": "String"
 			},
 			{
-				"name": "PrincipalAmount",
+				"name": "PRINCIPALBALANCE",
 				"type": "String"
 			},
 			{
-				"name": "PrincipalBalance",
+				"name": "LOANINTERESTAMOUNT",
 				"type": "String"
 			},
 			{
-				"name": "LoanInterestAmount",
-				"type": "String"
-			},
-			{
-				"name": "CURRRTXNSTATCD",
+				"name": "LATECHARGEAMOUNT",
 				"type": "String"
 			},
 			{
