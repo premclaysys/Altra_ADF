@@ -233,7 +233,13 @@
 				"inputs": [
 					{
 						"referenceName": "ds_dt_TransactionRecord",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('sourcefilename')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
