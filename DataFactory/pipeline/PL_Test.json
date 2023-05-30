@@ -43,8 +43,8 @@
 								},
 								"sink": {
 									"name": "AccountNumber",
-									"type": "Decimal",
-									"physicalType": "decimal"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -55,8 +55,8 @@
 								},
 								"sink": {
 									"name": "AccountTransactionNumber",
-									"type": "Decimal",
-									"physicalType": "decimal"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -67,8 +67,8 @@
 								},
 								"sink": {
 									"name": "TransactionID",
-									"type": "Decimal",
-									"physicalType": "decimal"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -79,8 +79,8 @@
 								},
 								"sink": {
 									"name": "TransactionFiscalDate",
-									"type": "DateTime",
-									"physicalType": "date"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -91,8 +91,8 @@
 								},
 								"sink": {
 									"name": "TransactionDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -103,8 +103,8 @@
 								},
 								"sink": {
 									"name": "TransactionEffectiveDate",
-									"type": "DateTime",
-									"physicalType": "date"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -169,26 +169,14 @@
 							},
 							{
 								"source": {
-									"name": "TransactionSortIndex",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionSortIndex",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
 									"name": "PrincipalAmount",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "PrincipalAmount",
-									"type": "Decimal",
-									"physicalType": "decimal"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -199,8 +187,8 @@
 								},
 								"sink": {
 									"name": "PrincipalBalance",
-									"type": "Decimal",
-									"physicalType": "decimal"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -211,18 +199,6 @@
 								},
 								"sink": {
 									"name": "LoanInterestAmount",
-									"type": "Decimal",
-									"physicalType": "decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "CURRRTXNSTATCD",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "CURRRTXNSTATCD",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
@@ -235,8 +211,8 @@
 								},
 								"sink": {
 									"name": "CHECKNBR",
-									"type": "Decimal",
-									"physicalType": "decimal"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							}
 						],
