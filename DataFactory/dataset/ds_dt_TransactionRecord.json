@@ -15,10 +15,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				},
+				"fileName": "aLTRATRANSACTION.csv",
 				"container": "adftest123"
 			},
 			"columnDelimiter": ",",
