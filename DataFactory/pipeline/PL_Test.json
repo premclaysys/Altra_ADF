@@ -22,9 +22,15 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
 					},
 					"enableStaging": false,
 					"translator": {
@@ -36,9 +42,9 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "ACCOUNTNUMBER",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 1
 								}
 							},
 							{
@@ -47,9 +53,9 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "ACCOUNTTRANSACTIONNUMBER",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 2
 								}
 							},
 							{
@@ -58,9 +64,9 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "TRANSACTIONID",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 3
 								}
 							},
 							{
@@ -69,9 +75,9 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "TRANSACTIONFISCALDATE",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 4
 								}
 							},
 							{
@@ -80,9 +86,9 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "TRANSACTIONDATETIME",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 5
 								}
 							},
 							{
@@ -91,9 +97,9 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "TRANSACTIONEFFECTIVEDATE",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 6
 								}
 							},
 							{
@@ -102,9 +108,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "TRANSACTIONTYPECODE",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 7
 								}
 							},
 							{
@@ -113,9 +119,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "TRANSACTIONTYPE",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 8
 								}
 							},
 							{
@@ -124,9 +130,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "TRANSACTIONSTATUSCODE",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 9
 								}
 							},
 							{
@@ -135,9 +141,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "TRANSACTIONSTATUS",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 10
 								}
 							},
 							{
@@ -146,9 +152,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "TRANSACTIONDESCRIPTION",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 11
 								}
 							},
 							{
@@ -157,9 +163,9 @@
 									"type": "Double"
 								},
 								"sink": {
-									"name": "PRINCIPALAMOUNT",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 12
 								}
 							},
 							{
@@ -168,9 +174,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "PRINCIPALBALANCE",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 13
 								}
 							},
 							{
@@ -179,9 +185,9 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "LOANINTERESTAMOUNT",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 14
 								}
 							},
 							{
@@ -190,9 +196,9 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "LATECHARGEAMOUNT",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 15
 								}
 							},
 							{
@@ -201,9 +207,9 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "CHECKNBR",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 16
 								}
 							}
 						],
@@ -222,7 +228,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "DelimitedText1",
 						"type": "DatasetReference"
 					}
 				]
