@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "test.csv",
+				"fileName": "aLTRATRANSACTION.csv",
 				"container": "adftest123"
 			},
 			"columnDelimiter": ",",
