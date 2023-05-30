@@ -236,7 +236,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"filename": {
-								"value": "@variables('sourcefilename')",
+								"value": "@concat(variables('sourcefilename'),'.csv')",
 								"type": "Expression"
 							}
 						}
