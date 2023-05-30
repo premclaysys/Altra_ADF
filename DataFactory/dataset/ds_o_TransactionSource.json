@@ -1,0 +1,16 @@
+{
+	"name": "ds_o_TransactionSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Altra_Test_Link",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DNACUSTOM",
+			"table": "VW_DIGITALBANKINGTRANSACTIONS"
+		}
+	}
+}
