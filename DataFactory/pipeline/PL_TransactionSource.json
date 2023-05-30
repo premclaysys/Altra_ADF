@@ -1,5 +1,5 @@
 {
-	"name": "PL_Transaction",
+	"name": "PL_TransactionSource",
 	"properties": {
 		"activities": [
 			{
@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select max(transactionid) as TransID from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"oracleReaderQuery": "select min(transactionid) as TransID from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
