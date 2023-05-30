@@ -48,10 +48,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select top 10 * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
-						"partitionOption": "None",
-						"queryTimeout": "02:00:00"
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
@@ -251,7 +250,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "OracleTable1",
+						"referenceName": "AzureSqlTable2",
 						"type": "DatasetReference"
 					}
 				],
