@@ -69,7 +69,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) FROM Transactions",
+						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) as transID FROM Transactions",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -78,8 +78,30 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "filenames",
+					"value": ""
+				}
 			}
 		],
+		"variables": {
+			"filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
