@@ -16,21 +16,20 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS FETCH FIRST 10 ROWS ONLY",
-						"partitionOption": "None",
-						"queryTimeout": "02:00:00"
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "DelimitedTextReadSettings"
 						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -38,178 +37,184 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ACCOUNTNUMBER",
-									"type": "Decimal"
+									"name": "AccountNumber",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 1
+									"name": "AccountNumber",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "ACCOUNTTRANSACTIONNUMBER",
-									"type": "Decimal"
+									"name": "AccountTransactionNumber",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 2
+									"name": "AccountTransactionNumber",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONID",
-									"type": "Decimal"
+									"name": "TransactionID",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 3
+									"name": "TransactionID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONFISCALDATE",
-									"type": "DateTime"
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
+									"name": "TransactionTypeCode",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 4
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONDATETIME",
-									"type": "DateTime"
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
+									"name": "TransactionType",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 5
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONEFFECTIVEDATE",
-									"type": "DateTime"
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
+									"name": "TransactionStatusCode",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 6
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONTYPECODE",
-									"type": "String"
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
+									"name": "TransactionStatus",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 7
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONTYPE",
-									"type": "String"
+									"name": "TransactionDescription",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
+									"name": "TransactionDescription",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 8
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONSTATUSCODE",
-									"type": "String"
+									"name": "TransactionSortIndex",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 9
+									"name": "TransactionSortIndex",
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONSTATUS",
-									"type": "String"
+									"name": "PrincipalAmount",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 10
+									"name": "PrincipalAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONDESCRIPTION",
-									"type": "String"
+									"name": "PrincipalBalance",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 11
+									"name": "PrincipalBalance",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
 								"source": {
-									"name": "PRINCIPALAMOUNT",
-									"type": "Double"
+									"name": "LoanInterestAmount",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 12
+									"name": "LoanInterestAmount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
 								"source": {
-									"name": "PRINCIPALBALANCE",
-									"type": "String"
+									"name": "CURRRTXNSTATCD",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
+									"name": "CURRRTXNSTATCD",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 13
-								}
-							},
-							{
-								"source": {
-									"name": "LOANINTERESTAMOUNT",
-									"type": "Decimal"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 14
-								}
-							},
-							{
-								"source": {
-									"name": "LATECHARGEAMOUNT",
-									"type": "Decimal"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 15
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
 									"name": "CHECKNBR",
-									"type": "Decimal"
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 16
+									"name": "CHECKNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							}
 						],
@@ -222,13 +227,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "OracleTable1",
+						"referenceName": "DelimitedText2",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
 					}
 				]
