@@ -80,8 +80,8 @@
 				}
 			},
 			{
-				"name": "Append variable1",
-				"type": "AppendVariable",
+				"name": "Set filename",
+				"type": "SetVariable",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -92,8 +92,11 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "filenames",
-					"value": ""
+					"variableName": "filename",
+					"value": {
+						"value": "@string(add(int(activity('Lookup1').output.firstRow.transID),1))",
+						"type": "Expression"
+					}
 				}
 			}
 		],
