@@ -37,48 +37,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "AccountNumber",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "AccountNumber",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 0,
-									"precision": 22
-								}
-							},
-							{
-								"source": {
-									"name": "AccountTransactionNumber",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "AccountTransactionNumber",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 0,
-									"precision": 22
-								}
-							},
-							{
-								"source": {
-									"name": "TransactionID",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionID",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 0,
-									"precision": 22
-								}
-							},
-							{
-								"source": {
 									"name": "TransactionTypeCode",
 									"type": "String",
 									"physicalType": "String"
@@ -135,62 +93,6 @@
 									"name": "TransactionDescription",
 									"type": "String",
 									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "PrincipalAmount",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "PrincipalAmount",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 3,
-									"precision": 38
-								}
-							},
-							{
-								"source": {
-									"name": "PrincipalBalance",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "PrincipalBalance",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 3,
-									"precision": 38
-								}
-							},
-							{
-								"source": {
-									"name": "LoanInterestAmount",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "LoanInterestAmount",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 3,
-									"precision": 38
-								}
-							},
-							{
-								"source": {
-									"name": "CHECKNBR",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "CHECKNBR",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 0,
-									"precision": 22
 								}
 							}
 						],
