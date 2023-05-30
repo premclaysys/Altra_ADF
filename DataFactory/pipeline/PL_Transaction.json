@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select max(transactionid) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"oracleReaderQuery": "select max(transactionid) as TransID from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -286,7 +286,7 @@
 				"typeProperties": {
 					"variableName": "LastTransID",
 					"value": {
-						"value": "@string(activity('LastTransactionID').output.firstRow.value)",
+						"value": "@string(activity('LastTransactionID').output.firstRow.TransID)",
 						"type": "Expression"
 					}
 				}
