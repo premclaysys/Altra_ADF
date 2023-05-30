@@ -94,6 +94,20 @@
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
+							},
+							{
+								"source": {
+									"name": "AccountNumber",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AccountNumber",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
 							}
 						],
 						"typeConversion": true,
