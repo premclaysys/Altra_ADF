@@ -1,0 +1,62 @@
+{
+	"name": "PL_Transaction",
+	"properties": {
+		"activities": [
+			{
+				"name": "LastTransactionID",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set Last TransactionID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "Set Last TransactionID",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LastTransactionID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
+			}
+		],
+		"parameters": {
+			"LastTransID": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
