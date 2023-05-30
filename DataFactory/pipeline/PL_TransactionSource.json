@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select max(transactionid) as TransID from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE transactiondatetime >= TO_DATE('2023-05-26','YYYY-MM-DD')",
+						"oracleReaderQuery": "select min(transactionid) as TransID from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE transactiondatetime >= TO_DATE('2023-05-26','YYYY-MM-DD')",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
