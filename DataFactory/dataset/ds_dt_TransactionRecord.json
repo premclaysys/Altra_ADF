@@ -1,0 +1,92 @@
+{
+	"name": "ds_dt_TransactionRecord",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "aLTRATRANSACTION.csv",
+				"container": "adftest123"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "AccountNumber",
+				"type": "String"
+			},
+			{
+				"name": "AccountTransactionNumber",
+				"type": "String"
+			},
+			{
+				"name": "TransactionID",
+				"type": "String"
+			},
+			{
+				"name": "TransactionFiscalDate",
+				"type": "String"
+			},
+			{
+				"name": "TransactionDateTime",
+				"type": "String"
+			},
+			{
+				"name": "TransactionEffectiveDate",
+				"type": "String"
+			},
+			{
+				"name": "TransactionTypeCode",
+				"type": "String"
+			},
+			{
+				"name": "TransactionType",
+				"type": "String"
+			},
+			{
+				"name": "TransactionStatusCode",
+				"type": "String"
+			},
+			{
+				"name": "TransactionStatus",
+				"type": "String"
+			},
+			{
+				"name": "TransactionDescription",
+				"type": "String"
+			},
+			{
+				"name": "TransactionSortIndex",
+				"type": "String"
+			},
+			{
+				"name": "PrincipalAmount",
+				"type": "String"
+			},
+			{
+				"name": "PrincipalBalance",
+				"type": "String"
+			},
+			{
+				"name": "LoanInterestAmount",
+				"type": "String"
+			},
+			{
+				"name": "CURRRTXNSTATCD",
+				"type": "String"
+			},
+			{
+				"name": "CHECKNBR",
+				"type": "String"
+			}
+		]
+	}
+}
