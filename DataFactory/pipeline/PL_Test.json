@@ -37,66 +37,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "TransactionTypeCode",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionTypeCode",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TransactionType",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionType",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TransactionStatusCode",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionStatusCode",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TransactionStatus",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionStatus",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TransactionDescription",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "TransactionDescription",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
 									"name": "AccountNumber",
 									"type": "String",
 									"physicalType": "String"
@@ -104,9 +44,199 @@
 								"sink": {
 									"name": "AccountNumber",
 									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 0,
-									"precision": 22
+									"physicalType": "decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "AccountTransactionNumber",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AccountTransactionNumber",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionID",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionFiscalDate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionFiscalDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionDateTime",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionEffectiveDate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionEffectiveDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionDescription",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactionSortIndex",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactionSortIndex",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "PrincipalAmount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PrincipalAmount",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "PrincipalBalance",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PrincipalBalance",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanInterestAmount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LoanInterestAmount",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRRTXNSTATCD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CURRRTXNSTATCD",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CHECKNBR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CHECKNBR",
+									"type": "Decimal",
+									"physicalType": "decimal"
 								}
 							}
 						],
