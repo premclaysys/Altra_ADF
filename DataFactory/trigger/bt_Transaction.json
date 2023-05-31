@@ -1,0 +1,25 @@
+{
+	"name": "bt_Transaction",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_TransactionDestination",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/adftest123/blobs/",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/ALTRA-CU-PROD-MGT-RG/providers/Microsoft.Storage/storageAccounts/adfaltratest",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
