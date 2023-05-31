@@ -236,7 +236,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"filename": {
-								"value": "@concat(variables('sourcefilename'),'.csv')",
+								"value": "@pipeline().parameters.file",
 								"type": "Expression"
 							}
 						}
