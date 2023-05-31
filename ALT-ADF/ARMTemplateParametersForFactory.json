@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ALT-ADF"
+		},
+		"Altra_Test_Link_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"Claysys_Oracal_connectionString": {
+			"value": ""
+		},
+		"Is_transationdb1_connectionString": {
+			"value": ""
+		},
+		"ls_transactiondb_connectionString": {
+			"value": ""
+		},
+		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
+		}
+	}
+}

@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ALT-ADF"
+		},
+		"Altra_Test_Link_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"Claysys_Oracal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Claysys_Oracal'"
+		},
+		"Is_transationdb1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Is_transationdb1'"
+		},
+		"ls_transactiondb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_transactiondb'"
+		},
+		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ALT-ADF_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"ls_transactiondb_connectionString": {
+						"value": "[parameters('ls_transactiondb_connectionString')]"
+					},
+					"Altra_Test_Link_connectionString": {
+						"value": "[parameters('Altra_Test_Link_connectionString')]"
+					},
+					"Claysys_Oracal_connectionString": {
+						"value": "[parameters('Claysys_Oracal_connectionString')]"
+					},
+					"Is_transationdb1_connectionString": {
+						"value": "[parameters('Is_transationdb1_connectionString')]"
+					},
+					"ALTADFKeyVault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('ALTADFKeyVault_properties_typeProperties_baseUrl')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
