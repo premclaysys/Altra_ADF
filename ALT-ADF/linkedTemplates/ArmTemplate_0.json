@@ -11,25 +11,26 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
-		"ls_transactiondb_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_transactiondb'"
-		},
 		"Altra_Test_Link_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'"
+			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'",
+			"defaultValue": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
 		},
 		"Claysys_Oracal_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Claysys_Oracal'"
 		},
-		"Is_transationdb1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Is_transationdb1'"
-		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
+		},
+		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01RTTransactionsDev"
+		},
+		"Is_transationdb1_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01RTTransactionsDev"
 		}
 	},
 	"variables": {
@@ -58,19 +59,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ls_transactiondb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('ls_transactiondb_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -110,7 +98,15 @@
 				"annotations": [],
 				"type": "Oracle",
 				"typeProperties": {
-					"connectionString": "[parameters('Altra_Test_Link_connectionString')]"
+					"connectionString": "[parameters('Altra_Test_Link_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "nextlytransactionsRO"
+					}
 				},
 				"connectVia": {
 					"referenceName": "AltraOracleIntegrationRuntime",
@@ -118,7 +114,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		},
 		{
@@ -138,6 +135,28 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/On-prem-test')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_transactiondb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		},
 		{
@@ -178,7 +197,14 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('Is_transationdb1_connectionString')]"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('Is_transationdb1_properties_typeProperties_connectionString_secretName')]"
+					}
 				},
 				"connectVia": {
 					"referenceName": "ConnectionALTRAdevsql01",
@@ -186,7 +212,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/ConnectionALTRAdevsql01')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/ConnectionALTRAdevsql01')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		}
 	]
