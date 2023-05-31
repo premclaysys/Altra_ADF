@@ -295,6 +295,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"file": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"sourcefilename": {
 				"type": "String"
