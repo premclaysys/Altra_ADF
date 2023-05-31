@@ -1,16 +1,22 @@
 {
 	"name": "Is_transationdb1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=altradevsql01.database.windows.net;initial catalog=RT_TransactionsDev;user id=altraadm",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDM5MDI4QUUwLTEwRUEtNDUxNC1CNUMxLUZDNERENDA3RUNBOF9jNWEzMjUyMi0xMjE0LTQ0NmYtYjAxMS02ODAwNDlkZmU0NDMiDQp9"
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ALTDevsql01RTTransactionsDev"
+			}
 		},
 		"connectVia": {
 			"referenceName": "ConnectionALTRAdevsql01",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
