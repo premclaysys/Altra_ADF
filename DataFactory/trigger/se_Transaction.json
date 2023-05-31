@@ -8,6 +8,9 @@
 				"pipelineReference": {
 					"referenceName": "PL_TransactionDestination",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"file": "@trigger.filename"
 				}
 			}
 		],
