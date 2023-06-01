@@ -291,6 +291,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[SP_TransactionData]"
+				},
 				"linkedServiceName": {
 					"referenceName": "ls_transactiondb",
 					"type": "LinkedServiceReference"
