@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "cd_AltratoDigitalBankingTransfers",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Fetch the last TransId ",
+						"activity": "Set variable ",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -22,8 +22,24 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": {
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')}",
+							"type": "Expression"
+						},
+						"partitionOption": "None",
+						"convertDecimalToInteger": false,
+						"queryTimeout": "02:00:00"
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				]
 			},
 			{
 				"name": "Fetch the last TransId",
@@ -40,7 +56,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) FROM TRANSACTIONS",
+						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -49,8 +65,34 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Set variable",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Fetch the last TransId ",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "transid",
+					"value": {
+						"value": "@string(activity('Fetch the last TransId ').output.firstRow.MAXTRANSID)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"transid": {
+				"type": "String",
+				"defaultValue": "0"
+			}
+		},
 		"annotations": []
 	}
 }
