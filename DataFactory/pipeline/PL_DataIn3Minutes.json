@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\nWHERE transactiondatetime BETWEENTO_TIMESTAMP('2023-06-01 02:25:55.000','YYYY-MM-DD HH24:MI:SS.FF') and TO_TIMESTAMP('2023-06-01 02:28:55.000','YYYY-MM-DD HH24:MI:SS.FF')  ",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
