@@ -17,33 +17,13 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID=304322664",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID=304322665",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
-					}
-				}
-			},
-			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "RESULT",
-					"value": {
-						"value": "@activity('Lookup1').output.firstRow",
-						"type": "Expression"
 					}
 				}
 			}
