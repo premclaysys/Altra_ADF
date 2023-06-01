@@ -15,8 +15,20 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE transactiondatetime <= TO_DATE(2023-06-01 02:28:55','YYYY-MM-DD HH:mm:ss') and transactiondatetime >= TO_DATE(2023-06-01 02:25:55','YYYY-MM-DD HH:mm:ss')",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
