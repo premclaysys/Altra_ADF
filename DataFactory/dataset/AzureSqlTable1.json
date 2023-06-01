@@ -96,7 +96,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transactions_Staging"
+			"table": "Transaction_Staging"
 		}
 	}
 }
