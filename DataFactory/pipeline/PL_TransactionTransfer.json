@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Set variable ",
+						"activity": "Set variable",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -257,7 +257,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Fetch the last TransId ",
+						"activity": "Fetch the last TransId",
 						"dependencyConditions": [
 							"Succeeded"
 						]
