@@ -267,7 +267,7 @@
 				"typeProperties": {
 					"variableName": "transid",
 					"value": {
-						"value": "@string(activity('Fetch the last TransId ').output.firstRow.MAXTRANSID)",
+						"value": "@string(activity('Fetch the last TransId').output.firstRow.MAXTRANSID)",
 						"type": "Expression"
 					}
 				}
