@@ -24,6 +24,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": {
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')}",
+							"type": "Expression"
+						},
 						"partitionOption": "None",
 						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
