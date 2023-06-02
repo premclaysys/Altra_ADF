@@ -53,7 +53,7 @@
 				"     format: 'query') ~> TransactionSource",
 				"TransactionSource derive(TransactionDateTime = left(TransactionDateTime,23),",
 				"          TransactionFiscalDate = left(TransactionFiscalDate,10),",
-				"          AccountNumber = toInteger(AccountNumber),",
+				"          AccountNumber = toLong(AccountNumber),",
 				"          AccountTransactionNumber = toInteger(AccountTransactionNumber),",
 				"          TransactionID = toInteger(TransactionID),",
 				"          TransactionEffectiveDate = left(TransactionEffectiveDate,10),",
