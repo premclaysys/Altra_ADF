@@ -1,0 +1,44 @@
+{
+	"name": "df_TransactionTransfer",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_S_DigitalBankingConectivity",
+						"type": "DatasetReference"
+					},
+					"name": "Transaction"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          AccountNumber as string,",
+				"          AccountTransactionNumber as string,",
+				"          TransactionID as string,",
+				"          TransactionFiscalDate as string,",
+				"          TransactionDateTime as string,",
+				"          TransactionEffectiveDate as string,",
+				"          TransactionTypeCode as string,",
+				"          TransactionType as string,",
+				"          TransactionStatusCode as string,",
+				"          TransactionStatus as string,",
+				"          TransactionDescription as string,",
+				"          TransactionSortIndex as string,",
+				"          PrincipalAmount as string,",
+				"          PrincipalBalance as string,",
+				"          LoanInterestAmount as string,",
+				"          CURRRTXNSTATCD as string,",
+				"          CHECKNBR as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Transaction"
+			]
+		}
+	}
+}
