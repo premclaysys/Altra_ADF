@@ -49,7 +49,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'SELECT * FROM Transaction_staging where TransactionID> 304473028',",
+				"     query: 'SELECT top 1000 * FROM Transaction_staging where TransactionID> 304473028',",
 				"     format: 'query') ~> TransactionSource",
 				"TransactionSource derive(TransactionDateTime = left(TransactionDateTime,23),",
 				"          TransactionFiscalDate = left(TransactionFiscalDate,10),",
