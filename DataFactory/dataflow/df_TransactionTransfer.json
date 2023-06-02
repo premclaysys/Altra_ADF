@@ -58,7 +58,7 @@
 				"          TransactionID = toLong(TransactionID),",
 				"          TransactionEffectiveDate = left(TransactionEffectiveDate,10),",
 				"          PrincipalAmount = toLong(PrincipalAmount),",
-				"          PrincipalBalance = toInteger(PrincipalBalance),",
+				"          PrincipalBalance = toLong(PrincipalBalance),",
 				"          LoanInterestAmount = toLong(LoanInterestAmount),",
 				"          CHECKNBR = toLong(CHECKNBR)) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
