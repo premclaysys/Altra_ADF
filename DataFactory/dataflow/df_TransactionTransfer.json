@@ -18,7 +18,7 @@
 						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					},
-					"name": "TransactionSink"
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -51,7 +51,7 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> TransactionSource",
 				"TransactionSource derive(TransactionDateTime = left(TransactionDateTime,23)) ~> derivedColumn1",
-				"TransactionSource sink(allowSchemaDrift: true,",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          AccountNumber as decimal(22,0),",
@@ -96,7 +96,7 @@
 				"          PrincipalBalance,",
 				"          LoanInterestAmount,",
 				"          CHECKNBR",
-				"     )) ~> TransactionSink"
+				"     )) ~> sink1"
 			]
 		}
 	}
