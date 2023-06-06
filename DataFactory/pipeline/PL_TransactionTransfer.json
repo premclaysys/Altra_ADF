@@ -332,6 +332,7 @@
 				}
 			}
 		],
+		"concurrency": 1,
 		"variables": {
 			"transid": {
 				"type": "String",
