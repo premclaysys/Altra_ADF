@@ -17,9 +17,6 @@
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
-		"Is_transationdb1_properties_typeProperties_connectionString_secretName": {
-			"value": "ALTDevsql01RTTransactionsDev"
-		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"value": "ALTDevsql01RTTransactionsDev"
 		}
