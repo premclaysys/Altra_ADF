@@ -1,5 +1,5 @@
 {
-	"name": "ls_transactiondb",
+	"name": "Is_transationdb1",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
@@ -13,6 +13,10 @@
 				},
 				"secretName": "ALTDevsql01RTTransactionsDev"
 			}
+		},
+		"connectVia": {
+			"referenceName": "ConnectionALTRAdevsql01",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }
