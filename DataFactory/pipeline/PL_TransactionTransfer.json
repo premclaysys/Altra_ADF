@@ -229,7 +229,7 @@
 			},
 			{
 				"name": "Fetch the last TransId",
-				"description": "Fetch last transaction Id from database",
+				"description": "Fetch last transaction Id in database",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
