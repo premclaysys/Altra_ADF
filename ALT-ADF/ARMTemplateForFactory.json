@@ -707,7 +707,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Tr_Transaction')]",
+			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -727,7 +727,7 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 3,
-						"startTime": "2023-06-06T09:06:00Z",
+						"startTime": "2023-06-06T14:51:00Z",
 						"timeZone": "UTC"
 					}
 				}
