@@ -12,5 +12,6 @@
 			"schema": "DNACUSTOM",
 			"table": "VW_DIGITALBANKINGTRANSACTIONS"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
