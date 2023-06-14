@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "GetDateofbefore18months",
-				"type": "Lookup",
+				"name": "Delete Transactions above 18 months",
+				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,16 +15,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select DateADD(mm,-18,getdate())",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "ds_S_DigitalBankingTransactionRecord",
-						"type": "DatasetReference"
-					}
+					"storedProcedureName": "[dbo].[SP_DeleteRecordsBefore18Months]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
