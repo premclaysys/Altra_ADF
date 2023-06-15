@@ -45,7 +45,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: '\\nselect * from Transactions where TransactionDateTime <DateADd(mm,-18, CONVERT(date, GETDATE()))',",
+				"     query: 'select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where AccountNumber = 1712195444',",
 				"     format: 'query') ~> source1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
