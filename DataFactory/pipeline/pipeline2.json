@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dataflow1",
-				"type": "ExecuteDataFlow",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,16 +15,206 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "dataflow1",
-						"type": "DataFlowReference"
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where AccountNumber = 1712195444",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
-					"traceLevel": "Fine"
-				}
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCOUNTNUMBER",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AccountNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCOUNTTRANSACTIONNUMBER",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AccountTransactionNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONID",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "TransactionID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONFISCALDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "TransactionFiscalDate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONDATETIME",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "TransactionDateTime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONEFFECTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "TransactionEffectiveDate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONTYPECODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONTYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONSTATUSCODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONSTATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSACTIONDESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PRINCIPALAMOUNT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "PrincipalAmount",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PRINCIPALBALANCE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PrincipalBalance",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LOANINTERESTAMOUNT",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "LoanInterestAmount",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CHECKNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CHECKNBR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_TransactionHistory",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
