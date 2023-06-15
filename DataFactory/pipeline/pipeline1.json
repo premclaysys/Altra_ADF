@@ -24,7 +24,8 @@
 					"dataset": {
 						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
