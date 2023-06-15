@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select distinct TransactionType  into #temp from Transactions;\nSELECT STRING_AGG(TransactionType, ',') AS concatenated_values\nFROM #temp;",
+						"sqlReaderQuery": "select distinct TransactionType from Transactions\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
