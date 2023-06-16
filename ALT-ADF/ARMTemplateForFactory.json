@@ -242,6 +242,17 @@
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
+									},
+									{
+										"source": {
+											"name": "LOANESCROWAMOUNT",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "LoanESCrowAmount",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
 									}
 								],
 								"typeConversion": true,
@@ -304,6 +315,12 @@
 								]
 							}
 						],
+						"policy": {
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
 						"userProperties": [],
 						"typeProperties": {
 							"variableName": "transid",
@@ -385,7 +402,8 @@
 						"defaultValue": "0"
 					}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-06-07T09:17:41Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_O_AltraServerConnectivity')]",
