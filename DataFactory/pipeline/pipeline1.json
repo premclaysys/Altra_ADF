@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select LoanEscrowAmount from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where LoanEscrowAmount is not null",
+						"oracleReaderQuery": "select LoanEscrowAmount from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where LoanEscrowAmount is not null and TransactionDateTime = ''",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
