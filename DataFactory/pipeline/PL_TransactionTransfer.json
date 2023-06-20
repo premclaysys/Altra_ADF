@@ -350,7 +350,7 @@
 				}
 			},
 			{
-				"name": "TransferStagingData",
+				"name": "Transfer_StagingData_Alerts",
 				"type": "Copy",
 				"dependsOn": [
 					{
