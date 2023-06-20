@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "ds_O_InsertDataToAlerts",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
