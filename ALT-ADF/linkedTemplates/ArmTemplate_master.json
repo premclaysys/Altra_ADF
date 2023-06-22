@@ -16,6 +16,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"BusinessDataDev_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
+		},
 		"Claysys_Oracal_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Claysys_Oracal'"
@@ -57,6 +61,9 @@
 					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"BusinessDataDev_connectionString": {
+						"value": "[parameters('BusinessDataDev_connectionString')]"
 					},
 					"Altra_Test_Link_connectionString": {
 						"value": "[parameters('Altra_Test_Link_connectionString')]"
