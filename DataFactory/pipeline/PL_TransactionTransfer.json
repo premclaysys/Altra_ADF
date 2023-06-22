@@ -371,7 +371,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from [dbo].[Transaction_Staging]",
+						"sqlReaderQuery": "select *,'CoreAPI - Pending' as Status from [dbo].[Transaction_Staging]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
