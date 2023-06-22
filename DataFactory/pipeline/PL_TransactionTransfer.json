@@ -543,7 +543,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_O_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlerts",
 						"type": "DatasetReference"
 					}
 				]

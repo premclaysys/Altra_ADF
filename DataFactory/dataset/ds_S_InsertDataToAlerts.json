@@ -1,5 +1,5 @@
 {
-	"name": "ds_O_InsertDataToAlerts",
+	"name": "ds_S_InsertDataToAlerts",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
