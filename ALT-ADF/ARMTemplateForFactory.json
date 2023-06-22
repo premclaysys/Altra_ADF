@@ -416,7 +416,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select * from [dbo].[Transaction_Staging]",
+								"sqlReaderQuery": "select *,'CoreAPI - Pending' as Status from [dbo].[Transaction_Staging]",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -432,6 +432,7 @@
 									{
 										"source": {
 											"name": "AccountNumber",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -443,6 +444,7 @@
 									{
 										"source": {
 											"name": "AccountTransactionNumber",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -454,6 +456,7 @@
 									{
 										"source": {
 											"name": "TransactionID",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -465,6 +468,7 @@
 									{
 										"source": {
 											"name": "TransactionFiscalDate",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -476,6 +480,7 @@
 									{
 										"source": {
 											"name": "TransactionDateTime",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -487,6 +492,7 @@
 									{
 										"source": {
 											"name": "TransactionEffectiveDate",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -498,6 +504,7 @@
 									{
 										"source": {
 											"name": "TransactionTypeCode",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -509,6 +516,7 @@
 									{
 										"source": {
 											"name": "TransactionType",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -520,6 +528,7 @@
 									{
 										"source": {
 											"name": "TransactionStatus",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -531,6 +540,7 @@
 									{
 										"source": {
 											"name": "TransactionSortIndex",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -542,6 +552,7 @@
 									{
 										"source": {
 											"name": "PrincipalAmount",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -553,6 +564,7 @@
 									{
 										"source": {
 											"name": "PrincipalBalance",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
@@ -564,10 +576,23 @@
 									{
 										"source": {
 											"name": "LoanInterestAmount",
+											"type": "String",
 											"physicalType": "nvarchar"
 										},
 										"sink": {
 											"name": "LoanInterestAmount",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Status",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
