@@ -51,7 +51,41 @@
 					"dataset": {
 						"referenceName": "ds_O_GetTransactionSp",
 						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Lookup",
+						"dependencyConditions": [
+							"Completed"
+						]
 					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "DECLARE @MaxTranId BIGINT;\n\nSELECT @MaxTranId = MAX(TransactionId)\nFROM Transactions\nWHERE TransactionFiscalDate = DATEADD(mm, -18, CONVERT(date, GETDATE()));\n\nWITH CTE AS\n(\n    SELECT  transactionId, TransactionFiscalDate, TransactionDateTime\n    FROM Transactions\n    WHERE transactionID <= @MaxTranId\n    AND TransactionFiscalDate <= DATEADD(mm, -18, CONVERT(date, GETDATE()))\n    ORDER BY TransactionID\n)\n\nSELECT COUNT(*) AS RecordCount\nFROM CTE;\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_O_GetTransactionSp",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
