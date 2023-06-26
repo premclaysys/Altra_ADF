@@ -2,7 +2,7 @@
 	"name": "ds_O_GetTransactionSp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase1",
+			"referenceName": "ls_transactiondb",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
