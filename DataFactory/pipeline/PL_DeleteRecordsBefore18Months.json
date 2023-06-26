@@ -1,0 +1,28 @@
+{
+	"name": "PL_DeleteRecordsBefore18Months",
+	"properties": {
+		"activities": [
+			{
+				"name": "DeleteRecordsBefore18Months",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[SP_DeleteRecordsBefore18Months]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
