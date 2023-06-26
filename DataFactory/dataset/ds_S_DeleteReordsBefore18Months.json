@@ -1,5 +1,5 @@
 {
-	"name": "ds_O_GetTransactionSp",
+	"name": "ds_S_DeleteReordsBefore18Months",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_transactiondb",
