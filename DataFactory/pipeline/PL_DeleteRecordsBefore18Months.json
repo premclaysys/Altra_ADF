@@ -51,7 +51,8 @@
 					"dataset": {
 						"referenceName": "ds_O_GetTransactionSp",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
