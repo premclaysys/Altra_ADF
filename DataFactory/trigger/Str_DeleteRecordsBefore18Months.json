@@ -1,0 +1,24 @@
+{
+	"name": "Str_DeleteRecordsBefore18Months",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_DeleteRecordsBefore18Months",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-06-27T08:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
