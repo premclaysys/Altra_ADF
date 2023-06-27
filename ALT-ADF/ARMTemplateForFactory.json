@@ -16,6 +16,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"BusinessDataDev_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
@@ -37,6 +41,188 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_DeleteRecordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteRecordsBefore18Months",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[SP_DeleteRecordsBefore18Months]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_InactiveEAgreementNumberDataTransfer')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DNA Active Agreement Data Transfor",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the DNAActiveAgrmntData table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "AGREENBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "AGREENBR",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PERSNBR",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "BYORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "BYORGNBR",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_Connectivity_InactiveEagreement",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Truncate the DNAActiveAgrmntData table",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE dbo.DNAActiveAgrmntData;\nSELECT COUNT(*) FROM dbo.DNAActiveAgrmntData",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_O_Connectivity_InactiveEagreement')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToActiveAgrmnt')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_TransactionTransfer')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -633,7 +819,7 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-06-07T09:17:41Z"
+				"lastPublishTime": "2023-06-22T14:14:50Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_O_AltraServerConnectivity')]",
@@ -661,6 +847,48 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_Connectivity_InactiveEagreement')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKINGINACTIVEEAGREEMENTS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DeleteReordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
 			]
 		},
 		{
@@ -861,6 +1089,51 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToActiveAgrmnt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "varchar"
+					},
+					{
+						"name": "PERSNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "DATELASTMAINT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DNAActiveAgrmntData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlerts')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1022,6 +1295,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BusinessDataDev')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1103,6 +1389,79 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_DeleteRecordsBefore18Months",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-27T08:00:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"hours": [
+								8
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Tr_DataTransfer')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-26T12:02:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								9
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer')]"
 			]
 		},
 		{

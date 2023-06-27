@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"BusinessDataDev_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
@@ -64,6 +68,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BusinessDataDev')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -102,6 +119,51 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToActiveAgrmnt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "varchar"
+					},
+					{
+						"name": "PERSNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "DATELASTMAINT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DNAActiveAgrmntData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlerts')]",
@@ -310,6 +372,43 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_DeleteRecordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteRecordsBefore18Months",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[SP_DeleteRecordsBefore18Months]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_O_AltraServerConnectivity')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -328,6 +427,48 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_Connectivity_InactiveEagreement')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKINGINACTIVEEAGREEMENTS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DeleteReordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
 			]
 		},
 		{
@@ -528,17 +669,17 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_TransactionTransfer')]",
+			"name": "[concat(parameters('factoryName'), '/PL_InactiveEAgreementNumberDataTransfer')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "cd_AltratoDigitalBankingTransfers",
+						"name": "DNA Active Agreement Data Transfor",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Truncate the staging table",
+								"activity": "Truncate the DNAActiveAgrmntData table",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -555,12 +696,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": {
-									"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')}",
-									"type": "Expression"
-								},
 								"partitionOption": "None",
-								"convertDecimalToInteger": false,
 								"queryTimeout": "02:00:00"
 							},
 							"sink": {
@@ -574,178 +710,46 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "ACCOUNTNUMBER",
+											"name": "AGREENBR",
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "AccountNumber",
+											"name": "AGREENBR",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "ACCOUNTTRANSACTIONNUMBER",
+											"name": "PERSNBR",
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "AccountTransactionNumber",
+											"name": "PERSNBR",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "TRANSACTIONID",
+											"name": "BYORGNBR",
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "TransactionID",
+											"name": "BYORGNBR",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "TRANSACTIONFISCALDATE",
+											"name": "DATELASTMAINT",
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "TransactionFiscalDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONDATETIME",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "TransactionDateTime",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONEFFECTIVEDATE",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "TransactionEffectiveDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONTYPECODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionTypeCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONTYPE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONSTATUSCODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionStatusCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONSTATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONDESCRIPTION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionDescription",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PRINCIPALAMOUNT",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "PrincipalAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PRINCIPALBALANCE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "PrincipalBalance",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "LOANINTERESTAMOUNT",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "LoanInterestAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CHECKNBR",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "CHECKNBR",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "LOANESCROWAMOUNT",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "LoanESCrowAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "DATELASTMAINT",
+											"type": "DateTime",
+											"physicalType": "datetime"
 										}
 									}
 								],
@@ -758,22 +762,21 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_O_AltraServerConnectivity",
+								"referenceName": "ds_O_Connectivity_InactiveEagreement",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_S_DigitalBankingConectivity",
+								"referenceName": "ds_S_InsertDataToActiveAgrmnt",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "Fetch the last TransId",
-						"description": "Fetch last transaction Id in database",
+						"name": "Truncate the DNAActiveAgrmntData table",
 						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
@@ -787,379 +790,27 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS",
+								"sqlReaderQuery": "TRUNCATE TABLE dbo.DNAActiveAgrmntData;\nSELECT COUNT(*) FROM dbo.DNAActiveAgrmntData",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "ds_S_DigitalBankingConectivity",
+								"referenceName": "ds_S_InsertDataToActiveAgrmnt",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						}
-					},
-					{
-						"name": "Set variable",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Fetch the last TransId",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "transid",
-							"value": {
-								"value": "@string(activity('Fetch the last TransId').output.firstRow.MAXTRANSID)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "sp_InsertTransaction",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "cd_AltratoDigitalBankingTransfers",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[SP_TransactionData]"
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_transactiondb",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Truncate the staging table",
-						"type": "Lookup",
-						"dependsOn": [
-							{
-								"activity": "Set variable",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "TRUNCATE TABLE Transaction_Staging;\nselect count(*) from Transaction_Staging",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "ds_S_DigitalBankingConectivity",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Transfer_StagingData_Alerts",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "cd_AltratoDigitalBankingTransfers",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select *,'CoreAPI - Pending' as Status from [dbo].[Transaction_Staging]",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "AccountNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "AccountNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "AccountTransactionNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "AccountTransactionNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionFiscalDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionFiscalDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionDateTime",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionDateTime",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionEffectiveDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionEffectiveDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionTypeCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionTypeCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionSortIndex",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "TransactionSortIndex",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PrincipalAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "PrincipalAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PrincipalBalance",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "PrincipalBalance",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "LoanInterestAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "LoanInterestAmount",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Status",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Status",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ds_S_DigitalBankingConectivity",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ds_S_InsertDataToAlerts",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
 					}
 				],
-				"concurrency": 1,
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"variables": {
-					"transid": {
-						"type": "String",
-						"defaultValue": "0"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-06-07T09:17:41Z"
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_O_AltraServerConnectivity')]",
-				"[concat(variables('factoryId'), '/datasets/ds_S_DigitalBankingConectivity')]",
-				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]",
-				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToAlerts')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 3,
-						"startTime": "2023-06-06T14:51:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
+				"[concat(variables('factoryId'), '/datasets/ds_O_Connectivity_InactiveEagreement')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToActiveAgrmnt')]"
 			]
 		}
 	]
