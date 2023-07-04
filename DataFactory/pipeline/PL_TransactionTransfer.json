@@ -385,7 +385,9 @@
 						"mappings": [
 							{
 								"source": {
-									"name": ""
+									"name": "AccountNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "AccountNumber",
@@ -395,7 +397,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "AccountTransactionNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "AccountTransactionNumber",
@@ -405,7 +409,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionID",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionId",
@@ -415,7 +421,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionFiscalDate",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionFiscalDate",
@@ -425,7 +433,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionDateTime",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionDateTime",
@@ -435,7 +445,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionEffectiveDate",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionEffectiveDate",
@@ -445,7 +457,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionTypeCode",
@@ -455,7 +469,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionType",
@@ -465,7 +481,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionStatus",
@@ -475,7 +493,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "TransactionSortIndex",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionSortIndex",
@@ -485,7 +505,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "PrincipalAmount",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "PrincipalAmount",
@@ -495,7 +517,9 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "PrincipalBalance",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "PrincipalBalance",
@@ -505,20 +529,12 @@
 							},
 							{
 								"source": {
-									"name": ""
-								},
-								"sink": {
 									"name": "LoanInterestAmount",
 									"type": "String",
 									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": ""
 								},
 								"sink": {
-									"name": "Status",
+									"name": "LoanInterestAmount",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
