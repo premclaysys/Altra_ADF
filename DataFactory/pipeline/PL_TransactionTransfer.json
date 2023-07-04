@@ -612,7 +612,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[InsertFromStagingToTransactionAlert]"
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
 				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataDev",
