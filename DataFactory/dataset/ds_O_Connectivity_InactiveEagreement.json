@@ -12,5 +12,6 @@
 			"schema": "DNACUSTOM",
 			"table": "VW_DIGITALBANKINGINACTIVEEAGREEMENTS"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
