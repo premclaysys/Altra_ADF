@@ -96,7 +96,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transaction_Alert"
+			"table": "Transaction_AlertStaging"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
