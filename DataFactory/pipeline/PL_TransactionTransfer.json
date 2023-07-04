@@ -611,6 +611,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertFromStagingToTransactionAlert]"
+				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
