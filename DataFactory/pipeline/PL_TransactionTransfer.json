@@ -354,9 +354,9 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransfers",
+						"activity": "TruncateAlertStaging",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -572,6 +572,38 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "TruncateAlertStaging",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "cd_AltratoDigitalBankingTransfers",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_InsertDataToAlerts",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"concurrency": 1,
