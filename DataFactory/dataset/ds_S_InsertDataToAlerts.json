@@ -64,39 +64,11 @@
 			{
 				"name": "LoanInterestAmount",
 				"type": "nvarchar"
-			},
-			{
-				"name": "MemberNumber",
-				"type": "nvarchar"
-			},
-			{
-				"name": "isPsuedoUser",
-				"type": "bit"
-			},
-			{
-				"name": "MemberUserName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "MemberGUID",
-				"type": "nvarchar"
-			},
-			{
-				"name": "IncidentId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Data",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Status",
-				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transaction_Alert"
+			"table": "Transaction_AlertStaging"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
