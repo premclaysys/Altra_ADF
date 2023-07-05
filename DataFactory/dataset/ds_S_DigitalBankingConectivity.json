@@ -75,10 +75,6 @@
 			{
 				"name": "CHECKNBR",
 				"type": "nvarchar"
-			},
-			{
-				"name": "LoanESCrowAmount",
-				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
