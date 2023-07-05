@@ -354,9 +354,9 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransfers",
+						"activity": "TruncateAlertStaging",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -371,7 +371,6 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select *,'CoreAPI - Pending' as Status from [dbo].[Transaction_Staging]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -539,18 +538,6 @@
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
-							},
-							{
-								"source": {
-									"name": "Status",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "Status",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
 							}
 						],
 						"typeConversion": true,
@@ -572,6 +559,65 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "TruncateAlertStaging",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "cd_AltratoDigitalBankingTransfers",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_InsertDataToAlerts",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Insert to AlertTransaction",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Transfer_StagingData_Alerts",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"concurrency": 1,
