@@ -359,7 +359,14 @@
 			{
 				"name": "CopyCampaignShareServices",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "TruncateCampaignShareServicesStaging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -417,7 +424,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembersStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembersStaging;\nselect count(*) from CampaignMembersStaging\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -442,7 +449,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\nselect count(*) from CampaignLoanStaging\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -467,7 +474,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\nselect count(*) from CampaignLoanServicesStaging\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -492,7 +499,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\nselect count(*) from CampaignShareStaging\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -517,7 +524,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\nselect count(*) from CampaignShareServicesStaging\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
