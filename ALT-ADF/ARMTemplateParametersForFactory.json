@@ -11,6 +11,12 @@
 		"BusinessDataDev_connectionString": {
 			"value": ""
 		},
+		"Oracle1_connectionString": {
+			"value": ""
+		},
+		"Dynamic Campaigns_connectionString": {
+			"value": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
