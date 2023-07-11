@@ -633,7 +633,14 @@
 			{
 				"name": "TruncateCampaignShare",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CopyCampaignshare",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -651,6 +658,31 @@
 					},
 					"dataset": {
 						"referenceName": "ds_S_MainCampaignShare",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "TruncateCampaignShareServices",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MainCampaignShareServices",
 						"type": "DatasetReference"
 					}
 				}
