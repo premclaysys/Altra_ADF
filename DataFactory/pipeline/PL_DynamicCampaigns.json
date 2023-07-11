@@ -537,7 +537,14 @@
 			{
 				"name": "TruncateCampaignMember",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CopyCampaignMembers",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -555,6 +562,31 @@
 					},
 					"dataset": {
 						"referenceName": "ds_S_MainCampaignMember",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "TruncateCampaignLoan",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoan",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MainCampaignLoan",
 						"type": "DatasetReference"
 					}
 				}
