@@ -601,7 +601,14 @@
 			{
 				"name": "TruncateCampaignLoanServices",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CopyCampaignLoanServices",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -619,6 +626,31 @@
 					},
 					"dataset": {
 						"referenceName": "ds_S_MaincampaignLoanServices",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "TruncateCampaignShare",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MainCampaignShare",
 						"type": "DatasetReference"
 					}
 				}
