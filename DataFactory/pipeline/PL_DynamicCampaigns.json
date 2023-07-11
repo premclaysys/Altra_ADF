@@ -44,7 +44,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_SS_DynamicCampaignsMembers",
+						"referenceName": "ds_SS_DynamicCampaignMembers",
 						"type": "DatasetReference"
 					}
 				],
@@ -533,6 +533,19 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "TruncateCampaignMembers",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"annotations": []

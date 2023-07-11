@@ -1,13 +1,18 @@
 {
-	"name": "ds_SS_DynamicCampaignMembers",
+	"name": "ds_S_MainCampaignMember",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Dynamic Campaigns",
+			"referenceName": "BusinessDataDev",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "SqlServerTable",
+		"type": "AzureSqlTable",
 		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
 			{
 				"name": "PartyCode",
 				"type": "varchar"
@@ -29,19 +34,6 @@
 				"type": "varchar"
 			},
 			{
-				"name": "Region",
-				"type": "varchar"
-			},
-			{
-				"name": "BranchNumber",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "BranchName",
-				"type": "varchar"
-			},
-			{
 				"name": "ZIPCode",
 				"type": "varchar"
 			},
@@ -51,10 +43,6 @@
 			},
 			{
 				"name": "State",
-				"type": "varchar"
-			},
-			{
-				"name": "CountryCode",
 				"type": "varchar"
 			},
 			{
@@ -104,15 +92,11 @@
 			{
 				"name": "MobileWalletUserFlag",
 				"type": "bit"
-			},
-			{
-				"name": "AFAMemberFlag",
-				"type": "bit"
 			}
 		],
 		"typeProperties": {
-			"schema": "mktg",
-			"table": "Member"
+			"schema": "dbo",
+			"table": "CampaignMember"
 		}
 	}
 }
