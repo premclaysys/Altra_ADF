@@ -695,7 +695,7 @@
 				}
 			},
 			{
-				"name": "SP_InsertMemberStagingToMember",
+				"name": "Sp_InsertMemberStagingToMember",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
