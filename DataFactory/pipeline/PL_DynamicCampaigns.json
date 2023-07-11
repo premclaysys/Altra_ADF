@@ -693,6 +693,141 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "SP_InsertMemberStagingToMember",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TruncateCampaignMember",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertFromCampaignMemberStagingToCampaignMember]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_InsertLoanStagingToLoan",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TruncateCampaignLoan",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertFromCampaignLoanStagingToCampaignLoan]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_InsertLoanServicesStagingToLoanServices",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TruncateCampaignLoanServices",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertFromCampaignLoanServicesStagingToCampaignLoanServices]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_InsertShareStagingToShare",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TruncateCampaignShare",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertFromCampaignShareStagingToCampaignShare]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Sp_InsertShareServicesStagingToShareServices",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TruncateCampaignShareServices",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertFromcampaignShareServicesStagingToCampaignShareServices]"
+				},
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
