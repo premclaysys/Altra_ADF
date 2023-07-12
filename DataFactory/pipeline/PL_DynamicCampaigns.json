@@ -283,6 +283,80 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AsOfDate"
+								},
+								"sink": {
+									"name": "AsOfDate"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanFamilyCode"
+								},
+								"sink": {
+									"name": "LoanFamilyCode"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanTypeCode"
+								},
+								"sink": {
+									"name": "LoanTypeCode"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanTypeDescription"
+								},
+								"sink": {
+									"name": "LoanTypeDescription"
+								}
+							},
+							{
+								"source": {
+									"name": "BusinessLoanFlag"
+								},
+								"sink": {
+									"name": "BusinessLoanFlag"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanGroup1"
+								},
+								"sink": {
+									"name": "LoanGroup1"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanGroup2"
+								},
+								"sink": {
+									"name": "LoanGroup2"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanGroup3"
+								},
+								"sink": {
+									"name": "LoanGroup3"
+								}
+							},
+							{
+								"source": {
+									"name": "LoanGroup4"
+								},
+								"sink": {
+									"name": "LoanGroup4"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
