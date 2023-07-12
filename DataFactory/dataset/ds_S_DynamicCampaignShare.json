@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_MainCampaignShare",
+	"name": "ds_S_DynamicCampaignShare",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",

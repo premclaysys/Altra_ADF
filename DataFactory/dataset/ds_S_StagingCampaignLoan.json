@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_DynamicCampaignLoan",
+	"name": "ds_S_StagingCampaignLoan",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
