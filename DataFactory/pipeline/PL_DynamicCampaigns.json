@@ -556,7 +556,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;\nselect count(*) from CampaignMember",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
