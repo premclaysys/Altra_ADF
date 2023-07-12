@@ -976,7 +976,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembersStaging;\nselect count(*) from CampaignMembersStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembersStaging;\nselect count(*) from CampaignMembersStaging\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1001,7 +1001,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\nselect count(*) from CampaignLoanStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\nselect count(*) from CampaignLoanStaging\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1026,7 +1026,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\nselect count(*) from CampaignLoanServicesStaging;\n\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\nselect count(*) from CampaignLoanServicesStaging\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1051,7 +1051,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\nselect count(*) from CampaignShareStaging;\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\nselect count(*) from CampaignShareStaging\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1076,7 +1076,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\nselect count(*) from CampaignShareServicesStaging;\n\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\nselect count(*) from CampaignShareServicesStaging\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1108,7 +1108,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;\nselect count(*) from CampaignMember;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;\nselect count(*) from CampaignMember",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1140,7 +1140,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoan;\nselect count(*) from CampaignLoan;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoan;\nselect count(*) from CampaignLoan",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1172,7 +1172,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServices;\nselect count(*) from CampaignLoanServices;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServices;\nselect count(*) from CampaignLoanServices",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1204,7 +1204,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;\nselect count(*) from CampaignShare;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;\nselect count(*) from CampaignShare",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -1236,7 +1236,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;\nselect count(*) from CampaignShareServices;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;\nselect count(*) from CampaignShareServices",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
