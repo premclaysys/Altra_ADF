@@ -35,6 +35,248 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PartyCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PartyCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AsOfDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "AsOfDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "MemberStatusGroup",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "MemberStatusGroup",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MembershipOpenDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "MembershipOpenDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "MembershipType",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "MembershipType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZIPCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ZIPCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "City",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "City",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "State",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "State",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BirthDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "BirthDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "MarketingOptOut",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "MarketingOptOut",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "NewMemberFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "NewMemberFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "OnlineBankingUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "OnlineBankingUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "MobileAppUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "MobileAppUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "QuickAccessUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "QuickAccessUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "EStatementsUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "EStatementsUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "BillPayUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "BillPayUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "ScheduledTransferUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "ScheduledTransferUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "RemoteDepositUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "RemoteDepositUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "SendMoneyUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "SendMoneyUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "MobileWalletUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "MobileWalletUserFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -410,6 +652,132 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ShareID",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AsOfDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "AsOfDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "PartyCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PartyCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareStatusGroup",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareStatusGroup",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareTypeGroupCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareTypeGroupCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareTypeCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareTypeCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareOpenDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "ShareOpenDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareCloseDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "ShareCloseDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CurrentBalance",
+									"type": "Decimal",
+									"physicalType": "money",
+									"scale": 4,
+									"precision": 19
+								},
+								"sink": {
+									"name": "CurrentBalance",
+									"type": "Decimal",
+									"physicalType": "money",
+									"scale": 4,
+									"precision": 19
+								}
+							},
+							{
+								"source": {
+									"name": "ShareMaturityDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "ShareMaturityDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -463,6 +831,116 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AsOfDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "AsOfDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareTypeGroupCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareTypeGroupCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareTypeCode",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareTypeCode",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareTypeDescription",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareTypeDescription",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BusinessShareFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "BusinessShareFlag",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareGroup1",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareGroup1",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareGroup2",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareGroup2",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareGroup3",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareGroup3",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ShareGroup4",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ShareGroup4",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -498,7 +976,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembersStaging;\nselect count(*) from CampaignMembersStaging\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembersStaging;\nselect count(*) from CampaignMembersStaging;\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -523,7 +1001,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\nselect count(*) from CampaignLoanStaging\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\nselect count(*) from CampaignLoanStaging;\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -548,7 +1026,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\nselect count(*) from CampaignLoanServicesStaging\n\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\nselect count(*) from CampaignLoanServicesStaging;\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -573,7 +1051,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\nselect count(*) from CampaignShareStaging\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\nselect count(*) from CampaignShareStaging;\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -598,7 +1076,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\nselect count(*) from CampaignShareServicesStaging\n\n",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\nselect count(*) from CampaignShareServicesStaging;\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -630,7 +1108,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;\nselect count(*) from CampaignMember",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;\nselect count(*) from CampaignMember;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -726,7 +1204,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;\nselect count(*) from CampaignShare;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -758,7 +1236,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;\nselect count(*) from CampaignShareServices;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
