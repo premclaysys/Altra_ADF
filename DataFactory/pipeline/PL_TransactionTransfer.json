@@ -163,54 +163,12 @@
 								}
 							},
 							{
-								"sink": {
-									"name": "TransactionSortIndex",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "PrincipalAmount",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "PrincipalBalance",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "LoanInterestAmount",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "CURRRTXNSTATCD",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
 								"source": {
 									"name": "CHECKNBR",
 									"type": "Decimal"
 								},
 								"sink": {
 									"name": "CHECKNBR",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "LoanESCrowAmount",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
