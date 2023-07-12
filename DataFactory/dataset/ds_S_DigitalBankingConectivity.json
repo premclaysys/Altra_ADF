@@ -75,6 +75,26 @@
 			{
 				"name": "CHECKNBR",
 				"type": "nvarchar"
+			},
+			{
+				"name": "LoanESCrowAmount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TRANAMT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TRACENBR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BalanceDescription",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {

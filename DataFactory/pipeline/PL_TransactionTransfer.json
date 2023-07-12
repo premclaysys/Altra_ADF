@@ -163,10 +163,13 @@
 								}
 							},
 							{
-								"source": {
-									"name": "PRINCIPALAMOUNT",
-									"type": "Double"
-								},
+								"sink": {
+									"name": "TransactionSortIndex",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
 								"sink": {
 									"name": "PrincipalAmount",
 									"type": "String",
@@ -174,10 +177,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "PRINCIPALBALANCE",
-									"type": "String"
-								},
 								"sink": {
 									"name": "PrincipalBalance",
 									"type": "String",
@@ -185,10 +184,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "LOANINTERESTAMOUNT",
-									"type": "Decimal"
-								},
 								"sink": {
 									"name": "LoanInterestAmount",
 									"type": "String",
@@ -196,6 +191,13 @@
 								}
 							},
 							{
+								"sink": {
+									"name": "CURRRTXNSTATCD",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
 								"source": {
 									"name": "CHECKNBR",
 									"type": "Decimal"
@@ -207,12 +209,52 @@
 								}
 							},
 							{
-								"source": {
-									"name": "LOANESCROWAMOUNT",
-									"type": "Decimal"
-								},
 								"sink": {
 									"name": "LoanESCrowAmount",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AMOUNT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Amount",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANAMT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "TRANAMT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRACENBR",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TRACENBR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BALANCEDESCRIPTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BalanceDescription",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
@@ -276,8 +318,6 @@
 					}
 				],
 				"policy": {
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
 				},
