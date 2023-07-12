@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_MaincampaignLoanServices",
+	"name": "ds_S_DynamicCampaignLoanServices",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
@@ -52,7 +52,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignLoanServices"
+			"table": "CampaignLoanServicesStaging"
 		}
 	}
 }

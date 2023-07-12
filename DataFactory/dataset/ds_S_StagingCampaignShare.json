@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_MaincampaignLoanServices",
+	"name": "ds_S_DynamicCampaignShare",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
@@ -14,45 +14,51 @@
 				"precision": 10
 			},
 			{
+				"name": "ShareID",
+				"type": "varchar"
+			},
+			{
 				"name": "AsOfDate",
 				"type": "date"
 			},
 			{
-				"name": "LoanFamilyCode",
+				"name": "PartyCode",
 				"type": "varchar"
 			},
 			{
-				"name": "LoanTypeCode",
+				"name": "ShareStatusGroup",
 				"type": "varchar"
 			},
 			{
-				"name": "LoanTypeDescription",
+				"name": "ShareTypeGroupCode",
 				"type": "varchar"
 			},
 			{
-				"name": "BusinessLoanFlag",
-				"type": "bit"
-			},
-			{
-				"name": "LoanGroup1",
+				"name": "ShareTypeCode",
 				"type": "varchar"
 			},
 			{
-				"name": "LoanGroup2",
-				"type": "varchar"
+				"name": "ShareOpenDate",
+				"type": "date"
 			},
 			{
-				"name": "LoanGroup3",
-				"type": "varchar"
+				"name": "ShareCloseDate",
+				"type": "date"
 			},
 			{
-				"name": "LoanGroup4",
-				"type": "varchar"
+				"name": "CurrentBalance",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "ShareMaturityDate",
+				"type": "date"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignLoanServices"
+			"table": "CampaignShareStaging"
 		}
 	}
 }

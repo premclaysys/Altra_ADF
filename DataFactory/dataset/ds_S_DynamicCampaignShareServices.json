@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_DynamicCampaignShareServices",
+	"name": "ds_S_MainCampaignShareServices",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
@@ -52,7 +52,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignShareServicesStaging"
+			"table": "CampaignShareServices"
 		}
 	}
 }
