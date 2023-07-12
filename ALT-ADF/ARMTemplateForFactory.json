@@ -16,14 +16,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
 		},
-		"Oracle1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Oracle1'"
-		},
 		"Dynamic Campaigns_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
 			"defaultValue": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
+		},
+		"Oracle1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Oracle1'"
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -1312,6 +1312,34 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Dynamic Campaigns')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('Dynamic Campaigns_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "NextlyMarketing"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AltraOracleIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Oracle1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1368,6 +1396,7 @@
 						"frequency": "Minute",
 						"interval": 3,
 						"startTime": "2023-06-06T14:51:00Z",
+						"endTime": "2023-07-12T07:30:24Z",
 						"timeZone": "UTC"
 					}
 				}
@@ -1495,34 +1524,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Dynamic Campaigns')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('Dynamic Campaigns_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "NextlyMarketing"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AltraOracleIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]",
-				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
-			]
 		}
 	]
 }
