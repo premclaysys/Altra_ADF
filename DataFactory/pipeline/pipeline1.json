@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select transactionid,count(subactnbr)  from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS group by transactionId ",
+						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS ",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
