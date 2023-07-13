@@ -1,0 +1,22 @@
+{
+	"name": "PromoCode",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "NextlyUser"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AltraOracleIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
