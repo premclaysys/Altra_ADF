@@ -17,9 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \nWHERE TRANSACTIONID=185466294.0 ORDER BY SUBACCTNBR DESC",
+						"oracleReaderQuery": "WITH max_subacctnbr AS (\n  SELECT TRANSACTIONID, MAX(SUBACCTNBR) AS MAX_SUBACCTNBR\n  FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\n  GROUP BY TRANSACTIONID\n), max_count_subacctnbr AS (\n  SELECT TRANSACTIONID, COUNT(*) AS COUNT_SUBACCTNBR\n  FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\n  GROUP BY TRANSACTIONID\n  ORDER BY COUNT_SUBACCTNBR DESC\n  FETCH FIRST 1 ROW ONLY\n)\nSELECT t1.*\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS t1\nJOIN max_subacctnbr t2 ON t1.TRANSACTIONID = t2.TRANSACTIONID AND t1.SUBACCTNBR = t2.MAX_SUBACCTNBR\nJOIN max_count_subacctnbr t3 ON t1.TRANSACTIONID = t3.TRANSACTIONID;\n",
 						"partitionOption": "None",
-						"queryTimeout": "02:00:00"
+						"convertDecimalToInteger": false,
+						"queryTimeout": "24:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
@@ -27,19 +28,6 @@
 					},
 					"firstRowOnly": false
 				}
-			},
-			{
-				"name": "Lookup2",
-				"type": "Lookup",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
 			}
 		],
 		"annotations": []
