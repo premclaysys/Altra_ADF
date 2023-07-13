@@ -21,10 +21,6 @@
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
 			"defaultValue": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
 		},
-		"Oracle1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Oracle1'"
-		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
@@ -62,9 +58,6 @@
 					},
 					"BusinessDataDev_connectionString": {
 						"value": "[parameters('BusinessDataDev_connectionString')]"
-					},
-					"Oracle1_connectionString": {
-						"value": "[parameters('Oracle1_connectionString')]"
 					},
 					"Altra_Test_Link_connectionString": {
 						"value": "[parameters('Altra_Test_Link_connectionString')]"
