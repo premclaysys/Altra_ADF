@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select TRANSACTIONID,COUNT(SUBACCTNBR) AS Counta from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS GROUP BY SUBACCTNBR ORDER BY SUBACCTNBR DESC fetch first 10 rows only",
+						"oracleReaderQuery": "select TRANSACTIONID,COUNT(SUBACCTNBR)  from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS GROUP BY SUBACCTNBR ORDER BY SUBACCTNBR DESC fetch first 10 rows only",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
