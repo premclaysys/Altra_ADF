@@ -17,14 +17,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select TRANSACTIONID,SUBACCTNBR from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS fetch first 10 rows only",
+						"oracleReaderQuery": "select TRANSACTIONID,SUBACCTNBR from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS ORDER BY SUBACCTNBR fetch first 10 rows only",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
