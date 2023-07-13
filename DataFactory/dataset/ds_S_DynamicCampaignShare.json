@@ -60,5 +60,6 @@
 			"schema": "dbo",
 			"table": "CampaignShare"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

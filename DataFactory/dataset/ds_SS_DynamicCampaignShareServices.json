@@ -49,5 +49,6 @@
 			"schema": "mktg",
 			"table": "ShareServices"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
