@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS ",
+						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS Fetch only 10 rows",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
