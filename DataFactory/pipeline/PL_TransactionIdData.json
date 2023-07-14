@@ -25,7 +25,7 @@
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": true
+					"firstRowOnly": false
 				}
 			},
 			{
