@@ -33,7 +33,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Max_data_Lookup",
+						"activity": "Set variable1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -50,7 +50,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID IN '@{activity('Max_data_Lookup').output.TRANSACTIONID}'\nORDER BY SUBACCTNBR",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID IN '@{item().TRANSACTIONID}'\nORDER BY SUBACCTNBR",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -65,7 +65,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "SelectAll_Records",
+						"activity": "Set variable2",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -82,8 +82,9 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = '@{activity('Max_data_Lookup').output.TRANSACTIONID}'\nGROUP BY TRANSACTIONID",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = '@{item().TRANSACTIONID}'\nGROUP BY TRANSACTIONID\n\n",
 						"partitionOption": "None",
+						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
@@ -91,11 +92,57 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Max_data_Lookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TRANSACTIONID",
+					"value": [
+						"@json(activity('Max_data_Lookup').output.value)"
+					]
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "SelectAll_Records",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TRANSACTIONID",
+					"value": [
+						"@json(activity('Max_data_Lookup').output.value)"
+					]
+				}
 			}
 		],
 		"variables": {
 			"TRANSACTIONID": {
-				"type": "String",
+				"type": "Array",
 				"defaultValue": "0"
 			}
 		},
