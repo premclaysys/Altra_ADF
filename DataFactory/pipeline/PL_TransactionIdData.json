@@ -51,7 +51,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS TRANSACTION_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = '@{activity('Get_Lookup').output.TRANSACTIONID}'\nGROUP BY TRANSACTIONID\nORDER BY TRANSACTION_COUNT DESC;",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS TRANSACTION_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID ='@{variables('TRANSACTIONID')}'\nGROUP BY TRANSACTIONID",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -80,13 +80,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TRANSACTIONID",
-					"value": "@activity('Get_Lookup').output.vaule"
+					"value": [
+						"@activity('Get_Lookup').output.value"
+					]
 				}
 			}
 		],
 		"variables": {
 			"TRANSACTIONID": {
-				"type": "String",
+				"type": "Array",
 				"defaultValue": "0"
 			}
 		},
