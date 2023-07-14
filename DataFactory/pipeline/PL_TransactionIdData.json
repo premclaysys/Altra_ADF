@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, count(SUBACCTNBR) AS MAX_SUBACCTNBR, max(SUBACCTNBR) as MAXSUBACC\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nGROUP BY TRANSACTIONID\nORDER BY MAXSUBACC DESC\n",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, count(SUBACCTNBR) AS MAX_SUBACCTNBR, max(SUBACCTNBR) as subacc\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \nGROUP BY TRANSACTIONID\nORDER BY subacc desc\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
