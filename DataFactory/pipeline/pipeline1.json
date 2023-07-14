@@ -51,7 +51,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TransactionId=@activity('Lookup1').output.firstRow[\"TransactionId\"]",
+							"value": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TransactionId=@activity('Lookup1').output.firstRow.TransactionId",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
