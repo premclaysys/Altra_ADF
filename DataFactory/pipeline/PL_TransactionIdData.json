@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, MAX(SUBACCTNBR) AS MAX_SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nGROUP BY TRANSACTIONID\nORDER BY MAX_SUBACCTNBR DESC",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, count(SUBACCTNBR) AS MAX_SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nGROUP BY TRANSACTIONID\nORDER BY MAX_SUBACCTNBR DESC\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -25,7 +25,7 @@
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
 				}
 			},
 			{
@@ -50,7 +50,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID IN '@{item().TRANSACTIONID}'\nORDER BY SUBACCTNBR",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}\nORDER BY SUBACCTNBR",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -65,7 +65,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable2",
+						"activity": "SelectAll_Records",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -82,7 +82,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = '@{item().TRANSACTIONID}'\nGROUP BY TRANSACTIONID\n\n",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}\nGROUP BY TRANSACTIONID\n\n",
 						"partitionOption": "None",
 						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
@@ -110,39 +110,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "TRANSACTIONID",
-					"value": [
-						"@json(activity('Max_data_Lookup').output.value)"
-					]
-				}
-			},
-			{
-				"name": "Set variable2",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "SelectAll_Records",
-						"dependencyConditions": [
-							"Succeeded"
-						]
+					"variableName": "Transid",
+					"value": {
+						"value": "@string(activity('Max_data_Lookup').output.firstRow.TRANSACTIONID)",
+						"type": "Expression"
 					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "TRANSACTIONID",
-					"value": [
-						"@json(activity('Max_data_Lookup').output.value)"
-					]
 				}
 			}
 		],
+		"concurrency": 1,
 		"variables": {
-			"TRANSACTIONID": {
-				"type": "Array",
+			"Transid": {
+				"type": "String",
 				"defaultValue": "0"
 			}
 		},
