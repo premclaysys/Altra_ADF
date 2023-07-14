@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get_Lookup",
+				"name": "Max_data_Lookup",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -17,10 +17,9 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID,SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE SUBACCTNBR = (\n    SELECT MAX(SUBACCTNBR)\n    FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n)",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, MAX(SUBACCTNBR) AS MAX_SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nGROUP BY TRANSACTIONID\nORDER BY MAX_SUBACCTNBR DESC",
 						"partitionOption": "None",
-						"convertDecimalToInteger": false,
-						"queryTimeout": "02:30:00"
+						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
@@ -30,11 +29,11 @@
 				}
 			},
 			{
-				"name": "Getdata_fromlookup",
+				"name": "SelectAll_Records",
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "Max_data_Lookup",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -51,44 +50,52 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS TRANSACTION_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID ='@{variables('TRANSACTIONID')}'\nGROUP BY TRANSACTIONID",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID IN '@{activity('Max_data_Lookup').output.TRANSACTIONID}'\nORDER BY SUBACCTNBR",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
-					},
-					"firstRowOnly": false
+					}
 				}
 			},
 			{
-				"name": "Set variable1",
-				"type": "SetVariable",
+				"name": "Count_Records",
+				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Get_Lookup",
+						"activity": "SelectAll_Records",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					}
 				],
 				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "TRANSACTIONID",
-					"value": [
-						"@activity('Get_Lookup').output.value"
-					]
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = '@{activity('Max_data_Lookup').output.TRANSACTIONID}'\nGROUP BY TRANSACTIONID",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
 		"variables": {
 			"TRANSACTIONID": {
-				"type": "Array",
+				"type": "String",
 				"defaultValue": "0"
 			}
 		},
