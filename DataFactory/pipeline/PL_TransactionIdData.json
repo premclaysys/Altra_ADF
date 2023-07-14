@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, count(SUBACCTNBR) AS MAX_SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nGROUP BY TRANSACTIONID\nORDER BY MAX_SUBACCTNBR DESC\n",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, count(SUBACCTNBR) AS MAX_SUBACCTNBR, max(SUBACCTNBR) as MAXSUBACC\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nGROUP BY TRANSACTIONID\nORDER BY MAXSUBACC DESC\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -116,6 +116,19 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"concurrency": 1,
