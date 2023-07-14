@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE SUBACCTNBR = (\n    SELECT MAX(SUBACCTNBR)\n    FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n)",
+						"oracleReaderQuery": "SELECT TRANSACTIONID,SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE SUBACCTNBR = (\n    SELECT MAX(SUBACCTNBR)\n    FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n)",
 						"partitionOption": "None",
 						"convertDecimalToInteger": false,
 						"queryTimeout": "02:30:00"
@@ -34,7 +34,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Get_Lookup",
+						"activity": "Set variable1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -61,8 +61,35 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get_Lookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TRANSACTIONID",
+					"value": "@activity('Get_Lookup').output.vaule"
+				}
 			}
 		],
+		"variables": {
+			"TRANSACTIONID": {
+				"type": "String",
+				"defaultValue": "0"
+			}
+		},
 		"annotations": []
 	}
 }
