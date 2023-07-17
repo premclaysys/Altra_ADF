@@ -32,7 +32,7 @@
 		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
-			"defaultValue": "ALTDevsql01RTTransactionsDev"
+			"defaultValue": "ALTDevsql01TransactionsDev"
 		}
 	},
 	"variables": {
@@ -3900,6 +3900,34 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PromoCode')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('PromoCode_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "NextlyUser"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AltraOracleIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_transactiondb')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -4109,34 +4137,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PromoCode')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('PromoCode_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "NextlyUser"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AltraOracleIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]",
-				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
-			]
 		}
 	]
 }

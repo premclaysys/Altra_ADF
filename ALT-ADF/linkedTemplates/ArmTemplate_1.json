@@ -6,11 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "ALT-ADF"
-		},
-		"PromoCode_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
-			"defaultValue": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
 		}
 	},
 	"variables": {
@@ -18,26 +13,29 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/PromoCode')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/ConnectionALTRAdevsql01')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
+				"type": "Managed",
 				"typeProperties": {
-					"connectionString": "[parameters('PromoCode_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
+					"computeProperties": {
+						"location": "Central US",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10,
+							"cleanup": false,
+							"customProperties": []
 						},
-						"secretName": "NextlyUser"
+						"pipelineExternalComputeScaleProperties": {
+							"timeToLive": 60
+						}
 					}
 				},
-				"connectVia": {
-					"referenceName": "AltraOracleIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
+				"managedVirtualNetwork": {
+					"type": "ManagedVirtualNetworkReference",
+					"referenceName": "default"
 				}
 			},
 			"dependsOn": []

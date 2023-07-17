@@ -21,13 +21,18 @@
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
 			"defaultValue": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
 		},
+		"PromoCode_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
+			"defaultValue": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
-			"defaultValue": "ALTDevsql01RTTransactionsDev"
+			"defaultValue": "ALTDevsql01TransactionsDev"
 		}
 	},
 	"variables": {
@@ -1012,6 +1017,34 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PromoCode')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('PromoCode_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "NextlyUser"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AltraOracleIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AltraOracleIntegrationRuntime')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_transactiondb')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1031,36 +1064,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ConnectionALTRAdevsql01')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "Central US",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 10,
-							"cleanup": false,
-							"customProperties": []
-						},
-						"pipelineExternalComputeScaleProperties": {
-							"timeToLive": 60
-						}
-					}
-				},
-				"managedVirtualNetwork": {
-					"type": "ManagedVirtualNetworkReference",
-					"referenceName": "default"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
 			]
 		}
 	]

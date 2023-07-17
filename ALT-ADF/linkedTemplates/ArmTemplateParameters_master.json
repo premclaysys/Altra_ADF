@@ -21,7 +21,7 @@
 			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
-			"value": "ALTDevsql01RTTransactionsDev"
+			"value": "ALTDevsql01TransactionsDev"
 		},
 		"containerUri": {
 			"value": ""
