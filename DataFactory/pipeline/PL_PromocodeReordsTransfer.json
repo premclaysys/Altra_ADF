@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy Source to Staging_Maintenance",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -834,7 +834,7 @@
 				}
 			},
 			{
-				"name": "Copy Source to Staging",
+				"name": "Copy Source to Staging_Static",
 				"type": "Copy",
 				"dependsOn": [
 					{
