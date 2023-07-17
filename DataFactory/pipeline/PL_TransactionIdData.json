@@ -50,14 +50,18 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}\nORDER BY SUBACCTNBR",
+						"oracleReaderQuery": {
+							"value": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}\nORDER BY SUBACCTNBR",
+							"type": "Expression"
+						},
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -82,7 +86,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}\nGROUP BY TRANSACTIONID\n\n",
+						"oracleReaderQuery": {
+							"value": "SELECT TRANSACTIONID, COUNT(*) AS RECORD_COUNT\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}\nGROUP BY TRANSACTIONID\n\n",
+							"type": "Expression"
+						},
 						"partitionOption": "None",
 						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
