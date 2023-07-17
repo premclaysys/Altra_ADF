@@ -1,6 +1,5 @@
 {
 	"name": "ls_transactiondb",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
@@ -11,8 +10,9 @@
 					"referenceName": "ALTADFKeyVault",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "ALTDevsql01RTTransactionsDev"
+				"secretName": "ALTDevsql01TransactionsDev"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
