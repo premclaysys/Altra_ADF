@@ -5,6 +5,8 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -30,6 +32,8 @@
 			{
 				"name": "Lookup2",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -63,6 +67,8 @@
 			{
 				"name": "Lookup3",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup2",
@@ -108,7 +114,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where AccountNumber=4102561182 and TransactionFiscalDate = 2023-07-03",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where AccountNumber=4102561182 and TransactionFiscalDate = '2023-07-03T00:00:00'",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
