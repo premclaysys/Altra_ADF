@@ -444,73 +444,85 @@
 							{
 								"source": {
 									"name": "AccountNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "AccountNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
 									"name": "AccountTransactionNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "AccountTransactionNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
 									"name": "TransactionID",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
-									"name": "TransactionId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"name": "TransactionID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
 									"name": "TransactionFiscalDate",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "DateTime",
+									"physicalType": "date"
 								},
 								"sink": {
 									"name": "TransactionFiscalDate",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							},
 							{
 								"source": {
 									"name": "TransactionDateTime",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "DateTime",
+									"physicalType": "datetime"
 								},
 								"sink": {
 									"name": "TransactionDateTime",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							},
 							{
 								"source": {
 									"name": "TransactionEffectiveDate",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "DateTime",
+									"physicalType": "date"
 								},
 								"sink": {
 									"name": "TransactionEffectiveDate",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							},
 							{
@@ -539,6 +551,18 @@
 							},
 							{
 								"source": {
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
 									"name": "TransactionStatus",
 									"type": "String",
 									"physicalType": "nvarchar"
@@ -551,48 +575,140 @@
 							},
 							{
 								"source": {
-									"name": "TransactionSortIndex",
+									"name": "TransactionDescription",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "TransactionSortIndex",
+									"name": "TransactionDescription",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "PrincipalAmount",
+									"name": "SubAcctNbr",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								},
+								"sink": {
+									"name": "SubAcctNbr",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "BalCatCd",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "PrincipalAmount",
+									"name": "BalCatCd",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "PrincipalBalance",
+									"name": "BalTypCd",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "PrincipalBalance",
+									"name": "BalTypCd",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "LoanInterestAmount",
+									"name": "BalanceDescription",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "LoanInterestAmount",
+									"name": "BalanceDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Amount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
+								},
+								"sink": {
+									"name": "Amount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
+								}
+							},
+							{
+								"source": {
+									"name": "TranAmt",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
+								},
+								"sink": {
+									"name": "TranAmt",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
+								}
+							},
+							{
+								"source": {
+									"name": "Balance",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
+								},
+								"sink": {
+									"name": "Balance",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
+								}
+							},
+							{
+								"source": {
+									"name": "CheckNbr",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								},
+								"sink": {
+									"name": "CheckNbr",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
+								}
+							},
+							{
+								"source": {
+									"name": "TraceNbr",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "TraceNbr",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
