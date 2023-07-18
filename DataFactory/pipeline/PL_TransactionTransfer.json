@@ -844,7 +844,7 @@
 				"typeProperties": {
 					"variableName": "subacctnbr",
 					"value": {
-						"value": "@string(activity('Fetch Latest SubACctnum').output.firstRow.SubACctnum)",
+						"value": "@string(activity('Fetch Latest SubACctnum').output.firstRow.MAXSUBACTNBR)",
 						"type": "Expression"
 					}
 				}
