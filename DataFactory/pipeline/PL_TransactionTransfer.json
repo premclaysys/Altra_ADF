@@ -259,7 +259,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					}
 				}
