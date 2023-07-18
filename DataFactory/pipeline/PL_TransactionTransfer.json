@@ -337,7 +337,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transaction_Staging;\nselect count(*) from Transaction_Staging",
+						"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
