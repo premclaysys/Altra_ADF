@@ -79,7 +79,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transactions_Staging"
+			"table": "Transactions"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
