@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TRANSACTIONDATETIME = MIN(TRANSACTIONDATETIME)",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TRANSACTIONDATETIME = (SELECT MIN(TRANSACTIONDATETIME) FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS)",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
