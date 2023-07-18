@@ -25,7 +25,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} and SUBACCTNBR > @{variables('subacctnbr')}",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} ",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
@@ -380,7 +380,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable for subacctnum",
+						"activity": "Set variable",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -791,62 +791,6 @@
 				"linkedServiceName": {
 					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Fetch Latest SubACctnum",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "Set variable",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT MAX(SubAcctNbr) AS MAXSUBACTNBR FROM TRANSACTIONS\nWHERE TRANSACTIONID = @{variables('transid')}",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "ds_S_DigitalBankingTransactionRecord",
-						"type": "DatasetReference"
-					}
-				}
-			},
-			{
-				"name": "Set variable for subacctnum",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Fetch Latest SubACctnum",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "subacctnbr",
-					"value": {
-						"value": "@string(activity('Fetch Latest SubACctnum').output.firstRow.MAXSUBACTNBR)",
-						"type": "Expression"
-					}
 				}
 			}
 		],
