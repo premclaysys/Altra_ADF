@@ -840,7 +840,7 @@
 					{
 						"activity": "Truncate MiniOAOPromoStaticData_Staging",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
