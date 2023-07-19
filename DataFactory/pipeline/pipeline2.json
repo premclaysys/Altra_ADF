@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select Max(TransactionId) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"oracleReaderQuery": "select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where ACCOUNTNUMBER='4102567015' and ACCOUNTTRANSACTIONNUMBER ='2575'",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
