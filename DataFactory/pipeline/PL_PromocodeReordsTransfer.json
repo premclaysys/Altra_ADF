@@ -9,7 +9,7 @@
 					{
 						"activity": "Truncate MiniOAOPromocodeMaintenance_Staging",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
