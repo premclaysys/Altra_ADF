@@ -16,8 +16,16 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2023-07-20T13:00:00",
-				"timeZone": "India Standard Time"
+				"startTime": "2023-07-20T13:30:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						30
+					],
+					"hours": [
+						13
+					]
+				}
 			}
 		}
 	}
