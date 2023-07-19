@@ -980,7 +980,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_MiniOAOPromoMaintenanceStagingInserttoMiniOAOPromoMaintenance]]"
+					"storedProcedureName": "[dbo].[sp_MiniOAOPromoMaintenanceStagingInserttoMiniOAOPromoMaintenance]"
 				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataDev",
