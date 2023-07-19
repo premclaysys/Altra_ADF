@@ -114,7 +114,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS order by TRANSACTIONID DESC",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS ORDER BY TRANSACTIONID DESC",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
