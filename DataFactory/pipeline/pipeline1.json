@@ -19,7 +19,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select Max(TransactionId) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"oracleReaderQuery": "select Min(TransactionId) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
