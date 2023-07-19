@@ -1141,7 +1141,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivityQA",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				],
@@ -1171,6 +1171,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
+				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
