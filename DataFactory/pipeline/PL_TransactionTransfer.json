@@ -820,7 +820,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				}
@@ -1141,13 +1141,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_DigitalBankingConectivityQA",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				]
@@ -1171,11 +1171,8 @@
 					"secureInput": false
 				},
 				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
-				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
+					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
 				}
 			}
