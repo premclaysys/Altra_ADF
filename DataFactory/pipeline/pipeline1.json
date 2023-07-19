@@ -51,7 +51,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE ACCOUNTNUMBER='4100761107' and ACCOUNTTRANSACTIONNUMBER=7996",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TransactionDateTime > TO_DAte('2023-07-18','YYYY-MM-dd') and TransactionDateTime < TO_DAte('2023-07-20','YYYY-MM-dd')",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
