@@ -5,6 +5,8 @@
 			{
 				"name": "cd_AltratoDigitalBankingTransfers",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging table",
@@ -302,6 +304,8 @@
 				"name": "Fetch the last TransId",
 				"description": "Fetch last transaction Id in database",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -327,6 +331,8 @@
 			{
 				"name": "Set variable",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Fetch the last TransId",
@@ -378,6 +384,8 @@
 			{
 				"name": "Truncate the staging table",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Set variable",
@@ -410,6 +418,8 @@
 			{
 				"name": "Transfer_StagingData_Alerts",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "TruncateAlertStaging",
@@ -737,6 +747,8 @@
 			{
 				"name": "TruncateAlertStaging",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "cd_AltratoDigitalBankingTransfers",
@@ -769,6 +781,8 @@
 			{
 				"name": "Insert to AlertTransaction",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Transfer_StagingData_Alerts",
@@ -796,6 +810,8 @@
 			{
 				"name": "TruncateAlertStagingQA",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "cd_AltratoDigitalBankingTransfers",
@@ -828,6 +844,8 @@
 			{
 				"name": "Transfer_StagingData_AlertsQA",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "TruncateAlertStagingQA",
@@ -1155,6 +1173,8 @@
 			{
 				"name": "Insert to AlertTransactionQA",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Transfer_StagingData_AlertsQA",
