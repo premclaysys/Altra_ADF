@@ -51,7 +51,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TransactionDateTime = TO_DAte('2023-07-19','YYYY-MM-dd')",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS Order BY TransactionID desc fetch first 10 rows only;",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
