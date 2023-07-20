@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_DigitalBankingConectivity",
+	"name": "AzureSqlTable1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_transactiondb",
@@ -10,27 +10,35 @@
 		"schema": [
 			{
 				"name": "AccountNumber",
-				"type": "nvarchar"
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
 			},
 			{
 				"name": "AccountTransactionNumber",
-				"type": "nvarchar"
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
 			},
 			{
 				"name": "TransactionID",
-				"type": "nvarchar"
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
 			},
 			{
 				"name": "TransactionFiscalDate",
-				"type": "nvarchar"
+				"type": "date"
 			},
 			{
 				"name": "TransactionDateTime",
-				"type": "nvarchar"
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			},
 			{
 				"name": "TransactionEffectiveDate",
-				"type": "nvarchar"
+				"type": "date"
 			},
 			{
 				"name": "TransactionTypeCode",
@@ -53,34 +61,55 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "TransactionSortIndex",
+				"name": "SubAcctNbr",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "BalCatCd",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PrincipalAmount",
+				"name": "BalTypCd",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PrincipalBalance",
+				"name": "BalanceDescription",
 				"type": "nvarchar"
 			},
 			{
-				"name": "LoanInterestAmount",
-				"type": "nvarchar"
+				"name": "Amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
 			},
 			{
-				"name": "CURRRTXNSTATCD",
-				"type": "nvarchar"
+				"name": "TranAmt",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
 			},
 			{
-				"name": "CHECKNBR",
+				"name": "Balance",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "CheckNbr",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TraceNbr",
 				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transactions_Staging"
+			"table": "TransactionsDup"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }
