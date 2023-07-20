@@ -70,14 +70,8 @@
 					"Dynamic Campaigns_connectionString": {
 						"value": "[parameters('Dynamic Campaigns_connectionString')]"
 					},
-					"PromoCode_connectionString": {
-						"value": "[parameters('PromoCode_connectionString')]"
-					},
 					"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('ALTADFKeyVault_properties_typeProperties_baseUrl')]"
-					},
-					"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
@@ -96,11 +90,37 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"PromoCode_connectionString": {
+						"value": "[parameters('PromoCode_connectionString')]"
+					},
+					"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ALT-ADF_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ALT-ADF_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ALT-ADF_ArmTemplate_1')]"
 			]
 		}
 	]
