@@ -2,7 +2,7 @@
 	"name": "Str_DeleteRecordsBefore18Months",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
