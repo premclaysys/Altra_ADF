@@ -45,7 +45,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "Select * from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TransactionFiscalDate= TO_DATE('2022-01-19','YYYY-MM-DD') ORDER BY TRANSACTIONID DESC",
+						"oracleReaderQuery": "Select COUNT(*) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where TransactionFiscalDate= TO_DATE('2022-01-20','YYYY-MM-DD')",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
