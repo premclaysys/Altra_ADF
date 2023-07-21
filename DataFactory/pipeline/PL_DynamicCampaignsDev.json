@@ -1141,7 +1141,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShareServices",
+						"referenceName": "ds_S_StagingCampaignShareServices_DEV",
 						"type": "DatasetReference"
 					}
 				}
