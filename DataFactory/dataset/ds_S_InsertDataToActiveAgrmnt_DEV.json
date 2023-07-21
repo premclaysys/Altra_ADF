@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_InsertDataToActiveAgrmnt_copy1",
+	"name": "ds_S_InsertDataToActiveAgrmnt_DEV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDataDev",
