@@ -2,7 +2,7 @@
 	"name": "ds_S_StagingCampaignLoanServices",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "BusinessDataDev",
+			"referenceName": "BusinessData",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
