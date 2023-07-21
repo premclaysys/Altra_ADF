@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE BALANCE IS NOT NULL",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE BALANCE IS NOT NULL Fetch First 100 rows only;\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
