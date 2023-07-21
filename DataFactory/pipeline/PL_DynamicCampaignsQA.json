@@ -1329,7 +1329,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignMemberStagingToCampaignMember]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
+					"referenceName": "BusinessData",
 					"type": "LinkedServiceReference"
 				}
 			},
