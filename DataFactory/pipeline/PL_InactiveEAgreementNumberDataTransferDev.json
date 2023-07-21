@@ -96,7 +96,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -121,7 +121,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_DEV",
 						"type": "DatasetReference"
 					}
 				}
