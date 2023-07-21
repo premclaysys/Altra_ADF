@@ -1356,7 +1356,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignLoanStagingToCampaignLoan]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
+					"referenceName": "BusinessData",
 					"type": "LinkedServiceReference"
 				}
 			},
