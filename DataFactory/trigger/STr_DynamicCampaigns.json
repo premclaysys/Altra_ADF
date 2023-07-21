@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_DynamicCampaigns",
+					"referenceName": "PL_DynamicCampaignsDev",
 					"type": "PipelineReference"
 				}
 			},

@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
+					"referenceName": "PL_InactiveEAgreementNumberDataTransferDev",
 					"type": "PipelineReference"
 				}
 			},
