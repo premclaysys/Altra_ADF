@@ -12,7 +12,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_DynamicCampaignsQA",
+					"referenceName": "PL_DynamicCampaigns",
 					"type": "PipelineReference"
 				}
 			}

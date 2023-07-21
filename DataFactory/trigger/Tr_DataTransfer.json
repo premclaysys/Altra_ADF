@@ -12,7 +12,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_InactiveEAgreementNumberDataTransferQA",
+					"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
 					"type": "PipelineReference"
 				}
 			}

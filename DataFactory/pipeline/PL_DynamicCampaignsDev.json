@@ -1041,7 +1041,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampignMembers",
+						"referenceName": "ds_S_StagingCampignMembers_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1066,7 +1066,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoan",
+						"referenceName": "ds_S_StagingCampaignLoan_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1091,7 +1091,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoanServices",
+						"referenceName": "ds_S_StagingCampaignLoanServices_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1116,7 +1116,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShare",
+						"referenceName": "ds_S_StagingCampaignShare_DEV",
 						"type": "DatasetReference"
 					}
 				}
