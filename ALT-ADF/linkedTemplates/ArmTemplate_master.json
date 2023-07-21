@@ -12,6 +12,10 @@
 			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'",
 			"defaultValue": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
 		},
+		"BusinessData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessData'"
+		},
 		"BusinessDataDev_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
@@ -64,6 +68,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"BusinessData_connectionString": {
+						"value": "[parameters('BusinessData_connectionString')]"
 					},
 					"BusinessDataDev_connectionString": {
 						"value": "[parameters('BusinessDataDev_connectionString')]"
@@ -128,6 +135,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ALT-ADF_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ALT-ADF_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ALT-ADF_ArmTemplate_2')]"
 			]
 		}
 	]

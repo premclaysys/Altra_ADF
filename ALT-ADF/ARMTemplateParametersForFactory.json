@@ -8,6 +8,9 @@
 		"Altra_Test_Link_connectionString": {
 			"value": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
 		},
+		"BusinessData_connectionString": {
+			"value": ""
+		},
 		"BusinessDataDev_connectionString": {
 			"value": ""
 		},
