@@ -9,6 +9,12 @@
 					"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "PL_InactiveEAgreementNumberDataTransferQA",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
