@@ -2,7 +2,7 @@
 	"name": "ds_S_MiniOAOPromoStaticData_Staging",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "BusinessDataDev",
+			"referenceName": "BusinessData",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

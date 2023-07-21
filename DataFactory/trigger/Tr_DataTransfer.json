@@ -6,6 +6,12 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
+					"referenceName": "PL_InactiveEAgreementNumberDataTransferDev",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
 					"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
 					"type": "PipelineReference"
 				}

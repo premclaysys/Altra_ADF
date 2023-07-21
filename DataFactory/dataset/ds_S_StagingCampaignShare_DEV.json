@@ -1,8 +1,8 @@
 {
-	"name": "ds_S_StagingCampaignShare",
+	"name": "ds_S_StagingCampaignShare_DEV",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "BusinessData",
+			"referenceName": "BusinessDataDev",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

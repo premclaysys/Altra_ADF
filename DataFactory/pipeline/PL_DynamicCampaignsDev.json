@@ -1,5 +1,5 @@
 {
-	"name": "PL_DynamicCampaigns",
+	"name": "PL_DynamicCampaignsDev",
 	"properties": {
 		"activities": [
 			{
@@ -352,7 +352,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampignMembers",
+						"referenceName": "ds_S_StagingCampignMembers_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -547,7 +547,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignLoan",
+						"referenceName": "ds_S_StagingCampaignLoan_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -674,7 +674,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignLoanServices",
+						"referenceName": "ds_S_StagingCampaignLoanServices_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -853,7 +853,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignShare",
+						"referenceName": "ds_S_StagingCampaignShare_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -1016,7 +1016,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignShareServices",
+						"referenceName": "ds_S_StagingCampaignShareServices_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -1041,7 +1041,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampignMembers",
+						"referenceName": "ds_S_StagingCampignMembers_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1066,7 +1066,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoan",
+						"referenceName": "ds_S_StagingCampaignLoan_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1091,7 +1091,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoanServices",
+						"referenceName": "ds_S_StagingCampaignLoanServices_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1116,7 +1116,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShare",
+						"referenceName": "ds_S_StagingCampaignShare_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1141,7 +1141,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShareServices",
+						"referenceName": "ds_S_StagingCampaignShareServices_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1173,7 +1173,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignMember",
+						"referenceName": "ds_S_DynamicCampaignMember_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1205,7 +1205,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignLoan",
+						"referenceName": "ds_S_DynamicCampaignLoan_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1237,7 +1237,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignLoanServices",
+						"referenceName": "ds_S_DynamicCampaignLoanServices_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1269,7 +1269,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignShare",
+						"referenceName": "ds_S_DynamicCampaignShare_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1301,7 +1301,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignShareServices",
+						"referenceName": "ds_S_DynamicCampaignShareServices_DEV",
 						"type": "DatasetReference"
 					}
 				}
@@ -1329,7 +1329,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignMemberStagingToCampaignMember]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1356,7 +1356,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignLoanStagingToCampaignLoan]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1383,7 +1383,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignLoanServicesStagingToCampaignLoanServices]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1410,7 +1410,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignShareStagingToCampaignShare]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1437,7 +1437,7 @@
 					"storedProcedureName": "[dbo].[InsertFromcampaignShareServicesStagingToCampaignShareServices]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			}

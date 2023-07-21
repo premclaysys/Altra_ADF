@@ -1,8 +1,8 @@
 {
-	"name": "ds_S_StagingCampaignShare",
+	"name": "ds_S_DynamicCampaignShare_DEV",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "BusinessData",
+			"referenceName": "BusinessDataDev",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -58,7 +58,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignShareStaging"
+			"table": "CampaignShare"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

@@ -1,5 +1,5 @@
 {
-	"name": "PL_PromocodeReordsTransfer",
+	"name": "PL_PromocodeReordsTransferDev",
 	"properties": {
 		"activities": [
 			{
@@ -776,7 +776,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -801,7 +801,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging_DEV",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -827,7 +827,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging_DEV",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -955,7 +955,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -983,7 +983,7 @@
 					"storedProcedureName": "[dbo].[sp_MiniOAOPromoMaintenanceStagingInserttoMiniOAOPromoMaintenance]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1010,7 +1010,7 @@
 					"storedProcedureName": "[dbo].[sp_MiniOAOPromoStaticDataStagingInserttoMiniOAOPromoStaticData]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			}

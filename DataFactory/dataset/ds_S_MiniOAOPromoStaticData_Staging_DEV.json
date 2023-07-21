@@ -1,8 +1,8 @@
 {
-	"name": "ds_S_InsertDataToActiveAgrmnt",
+	"name": "ds_S_MiniOAOPromoStaticData_Staging_DEV",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "BusinessData",
+			"referenceName": "BusinessDataDev",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -14,28 +14,30 @@
 				"precision": 10
 			},
 			{
-				"name": "AGREENBR",
+				"name": "Display Value",
 				"type": "varchar"
 			},
 			{
-				"name": "PERSNBR",
+				"name": "Type",
 				"type": "varchar"
 			},
 			{
-				"name": "BYORGNBR",
+				"name": "Group",
 				"type": "varchar"
 			},
 			{
-				"name": "DATELASTMAINT",
-				"type": "datetime",
-				"precision": 23,
-				"scale": 3
+				"name": "Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Is Active",
+				"type": "int",
+				"precision": 10
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "DNAActiveAgrmntData"
+			"table": "MiniOAOPromoStaticData_Staging"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

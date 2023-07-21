@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_PromocodeReordsTransfer",
+					"referenceName": "PL_PromocodeReordsTransferDev",
 					"type": "PipelineReference"
 				}
 			}
