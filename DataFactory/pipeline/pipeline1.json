@@ -30,7 +30,7 @@
 				}
 			},
 			{
-				"name": "Lookup2",
+				"name": "Null BranchName",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -55,7 +55,7 @@
 				}
 			},
 			{
-				"name": "Lookup2_copy1",
+				"name": "NullRegion",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -80,7 +80,7 @@
 				}
 			},
 			{
-				"name": "Lookup2_copy2",
+				"name": "Null BranchNumber",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
