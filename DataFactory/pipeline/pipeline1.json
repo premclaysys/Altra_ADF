@@ -32,6 +32,8 @@
 			{
 				"name": "Null BranchName",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -58,6 +60,8 @@
 			{
 				"name": "NullRegion",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -84,6 +88,8 @@
 			{
 				"name": "Null BranchNumber",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -108,7 +114,7 @@
 				}
 			},
 			{
-				"name": "Lookup2",
+				"name": "ShareGroups",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
