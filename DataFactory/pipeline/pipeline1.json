@@ -135,7 +135,8 @@
 					"dataset": {
 						"referenceName": "ds_SS_DynamicCampaignShareServices",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
