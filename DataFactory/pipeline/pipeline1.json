@@ -51,7 +51,8 @@
 					"dataset": {
 						"referenceName": "ds_SS_DynamicCampaignMembers",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -76,7 +77,8 @@
 					"dataset": {
 						"referenceName": "ds_SS_DynamicCampaignMembers",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -101,7 +103,8 @@
 					"dataset": {
 						"referenceName": "ds_SS_DynamicCampaignMembers",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
