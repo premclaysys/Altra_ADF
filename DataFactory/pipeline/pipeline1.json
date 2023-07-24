@@ -106,6 +106,31 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "Lookup2",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select partyCode,sharegroup1,sharegroup2,sharegroup3,sharegroup4 from mktg.ShareServices\nwhere sharegroup1 is null and sharegroup2 is null and sharegroup3 is null and sharegroup4 is null",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_SS_DynamicCampaignShareServices",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"annotations": []
