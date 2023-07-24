@@ -44,7 +44,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select * from mktg.Member where Branchname is null",
+						"sqlReaderQuery": "Select PartyCode from mktg.Member where Branchname is null",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -70,7 +70,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select * from mktg.Member where Region is null",
+						"sqlReaderQuery": "Select PartyCode from mktg.Member where Region is null",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -96,7 +96,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select * from mktg.Member where BranchNumber is null",
+						"sqlReaderQuery": "Select PartyCode from mktg.Member where BranchNumber is null",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
