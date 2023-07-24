@@ -128,7 +128,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select partyCode,sharegroup1,sharegroup2,sharegroup3,sharegroup4 from mktg.ShareServices\nwhere sharegroup1 is null and sharegroup2 is null and sharegroup3 is null and sharegroup4 is null",
+						"sqlReaderQuery": "select sharegroup1,sharegroup2,sharegroup3,sharegroup4 from mktg.ShareServices\nwhere ShareGroup1 is null and\nShareGroup2 is null and\nShareGroup3 is null and\nShareGroup4 =''",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
