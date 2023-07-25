@@ -9,6 +9,12 @@
 					"referenceName": "PL_PromocodeReordsTransferDev",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "PL_PromocodeReordsTransfer",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
