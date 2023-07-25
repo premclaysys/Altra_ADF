@@ -156,7 +156,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select count(*) from mktg.Member",
+						"sqlReaderQuery": "Select count(*) from mktg.Member where partcode='O100632'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
