@@ -1,0 +1,6 @@
+{
+	"name": "PRODUATSQLConnection",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
