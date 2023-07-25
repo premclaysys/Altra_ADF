@@ -156,7 +156,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select count(*) from mktg.Member where Branchname is null",
+						"sqlReaderQuery": "Select count(*) from mktg.Member",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
