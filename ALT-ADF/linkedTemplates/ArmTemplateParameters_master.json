@@ -23,11 +23,20 @@
 		"PromoCode_connectionString": {
 			"value": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
 		},
+		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"value": "ALTDevsql01TransactionsDev"
+		},
+		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
+			"value": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/altra-cu-prod-srv-rg/providers/Microsoft.Sql/managedInstances/altraprodsql01"
+		},
+		"AzureSqlMIPRODUAT_properties_groupId": {
+			"value": "managedInstance"
 		},
 		"containerUri": {
 			"value": ""

@@ -34,6 +34,11 @@
 			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
 			"defaultValue": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
 		},
+		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
@@ -41,6 +46,14 @@
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "ALTDevsql01TransactionsDev"
+		},
+		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/altra-cu-prod-srv-rg/providers/Microsoft.Sql/managedInstances/altraprodsql01"
+		},
+		"AzureSqlMIPRODUAT_properties_groupId": {
+			"type": "string",
+			"defaultValue": "managedInstance"
 		}
 	},
 	"variables": {
@@ -11007,6 +11020,34 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Transaction_UAT_UATSQL_Server_Connection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlMI",
+				"typeProperties": {
+					"connectionString": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "altrasqlappformsadm"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AzureSqlPrivateEndPointConnection",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_transactiondb')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -11242,14 +11283,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ConnectionALTRAdevsql01')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlPrivateEndPointConnection')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"type": "Managed",
 				"typeProperties": {
 					"computeProperties": {
-						"location": "Central US",
+						"location": "AutoResolve",
 						"dataFlowProperties": {
 							"computeType": "General",
 							"coreCount": 8,
@@ -11277,6 +11318,18 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default/AzureSqlMIPRODUAT')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"privateLinkResourceId": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]",
+				"groupId": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+			]
 		}
 	]
 }
