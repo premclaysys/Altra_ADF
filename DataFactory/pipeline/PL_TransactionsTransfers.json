@@ -33,7 +33,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_TransactionStagingUAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -399,7 +399,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_TransactioStagingUAT",
+						"referenceName": "ds_S_TransactionStagingUAT",
 						"type": "DatasetReference"
 					}
 				}

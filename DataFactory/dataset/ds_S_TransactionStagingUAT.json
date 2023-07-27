@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_TransactioStagingUAT",
+	"name": "ds_S_TransactionStagingUAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
