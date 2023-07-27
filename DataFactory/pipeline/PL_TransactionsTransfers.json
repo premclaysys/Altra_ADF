@@ -755,13 +755,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsUAT",
 						"type": "DatasetReference"
 					}
 				}
