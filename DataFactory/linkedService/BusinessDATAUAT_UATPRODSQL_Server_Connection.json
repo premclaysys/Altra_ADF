@@ -1,0 +1,22 @@
+{
+	"name": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlMI",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "altrasqlappformsadm"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AzureSqlPrivateEndPointConnection",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
