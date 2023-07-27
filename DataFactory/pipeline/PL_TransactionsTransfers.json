@@ -433,7 +433,7 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -729,7 +729,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsUAT",
 						"type": "DatasetReference"
 					}
 				]
