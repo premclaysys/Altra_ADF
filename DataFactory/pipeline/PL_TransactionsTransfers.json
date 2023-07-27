@@ -426,8 +426,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -721,7 +720,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_TransactionStagingUAT",
 						"type": "DatasetReference"
 					}
 				],
