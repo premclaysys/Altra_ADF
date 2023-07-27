@@ -39,6 +39,11 @@
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
 		},
+		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
@@ -152,6 +157,9 @@
 					},
 					"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
 						"value": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]"
+					},
+					"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
+						"value": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
 					}
 				}
 			},
