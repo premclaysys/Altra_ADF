@@ -12,6 +12,11 @@
 			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'",
 			"defaultValue": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
 		},
+		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+		},
 		"BusinessData_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessData'"
@@ -38,11 +43,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
-		},
-		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -155,11 +155,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
-						"value": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]"
-					},
 					"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
 						"value": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
+					},
+					"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
+						"value": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]"
 					}
 				}
 			},

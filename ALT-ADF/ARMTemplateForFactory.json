@@ -12,6 +12,11 @@
 			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'",
 			"defaultValue": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
 		},
+		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+		},
 		"BusinessData_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessData'"
@@ -38,11 +43,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
-		},
-		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -7121,7 +7121,7 @@
 								"partitionOption": "None"
 							},
 							"sink": {
-								"type": "AzureSqlSink",
+								"type": "SqlMISink",
 								"writeBehavior": "insert",
 								"sqlWriterUseTableLock": false
 							},
@@ -7418,7 +7418,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_S_InsertDataToAlerts",
+								"referenceName": "ds_S_InsertDataToAlertsUAT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -7445,13 +7445,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "AzureSqlSource",
+								"type": "SqlMISource",
 								"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
-								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "ds_S_InsertDataToAlerts",
+								"referenceName": "ds_S_InsertDataToAlertsUAT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -7480,7 +7479,7 @@
 							"storedProcedureName": "[[dbo].[InsertTransactionAlertFromStaging]"
 						},
 						"linkedServiceName": {
-							"referenceName": "BusinessDataDev",
+							"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 							"type": "LinkedServiceReference"
 						}
 					}
@@ -7508,8 +7507,8 @@
 				"[concat(variables('factoryId'), '/datasets/ds_S_DigitalBankingConectivity')]",
 				"[concat(variables('factoryId'), '/datasets/ds_S_DigitalBankingTransactionRecord')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]",
-				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToAlerts')]",
-				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
+				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToAlertsUAT')]",
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
 			]
 		},
 		{
@@ -9145,6 +9144,126 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/BusinessDataQA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlertsUAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubAcctNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "BalCatCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalTypCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalanceDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Amount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "TranAmt",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "Balance",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "CheckNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TraceNbr",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transaction_AlertStaging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
 			]
 		},
 		{
@@ -10930,6 +11049,34 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/BusinessDATAUAT_UATPRODSQL_Server_Connection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlMI",
+				"typeProperties": {
+					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "altrasqlappformsadm"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AzureSqlPrivateEndPointConnection",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BusinessData')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -11334,34 +11481,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BusinessDATAUAT_UATPRODSQL_Server_Connection')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlMI",
-				"typeProperties": {
-					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "altrasqlappformsadm"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AzureSqlPrivateEndPointConnection",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]",
-				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		}
 	]

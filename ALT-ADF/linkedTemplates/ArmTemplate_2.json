@@ -7,15 +7,15 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ALT-ADF"
 		},
-		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
-		},
 		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+		},
+		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
 		}
 	},
 	"variables": {
@@ -997,14 +997,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Transaction_UAT_UATSQL_Server_Connection')]",
+			"name": "[concat(parameters('factoryName'), '/BusinessDATAUAT_UATPRODSQL_Server_Connection')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureSqlMI",
 				"typeProperties": {
-					"connectionString": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]",
+					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
 					"password": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -1022,14 +1022,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/BusinessDATAUAT_UATPRODSQL_Server_Connection')]",
+			"name": "[concat(parameters('factoryName'), '/Transaction_UAT_UATSQL_Server_Connection')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureSqlMI",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
+					"connectionString": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]",
 					"password": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
