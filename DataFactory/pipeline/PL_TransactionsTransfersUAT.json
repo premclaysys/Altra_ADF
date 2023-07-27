@@ -1,5 +1,5 @@
 {
-	"name": "PL_TransactionsTransfers",
+	"name": "PL_TransactionsTransfersUAT",
 	"properties": {
 		"activities": [
 			{
@@ -33,7 +33,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_TransactionStagingUAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -313,13 +313,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingTransactionRecord",
+						"referenceName": "ds_S_TransactionRecordUAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -371,7 +370,7 @@
 					"storedProcedureName": "[dbo].[SP_TransactionData]"
 				},
 				"linkedServiceName": {
-					"referenceName": "ls_transactiondb",
+					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -396,13 +395,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_TransactionStagingUAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -428,8 +426,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -723,7 +720,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_TransactionStagingUAT",
 						"type": "DatasetReference"
 					}
 				],
