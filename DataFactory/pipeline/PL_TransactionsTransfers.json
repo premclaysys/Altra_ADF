@@ -756,6 +756,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
