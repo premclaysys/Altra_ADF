@@ -370,7 +370,7 @@
 					"storedProcedureName": "[dbo].[SP_TransactionData]"
 				},
 				"linkedServiceName": {
-					"referenceName": "ls_transactiondb",
+					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
 					"type": "LinkedServiceReference"
 				}
 			},
