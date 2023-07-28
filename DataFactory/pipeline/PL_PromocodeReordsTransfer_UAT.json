@@ -795,13 +795,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance_Staging];\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance_Staging];",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging_UAT",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
