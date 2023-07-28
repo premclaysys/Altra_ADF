@@ -1281,13 +1281,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;\nselect count(*) from CampaignShareServices",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignShareServices",
+						"referenceName": "ds_S_DynamicCampaignShareServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
