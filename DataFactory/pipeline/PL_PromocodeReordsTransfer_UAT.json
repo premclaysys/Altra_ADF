@@ -28,7 +28,7 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -776,7 +776,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -857,7 +857,7 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -953,7 +953,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+						"referenceName": "ds_S_MiniOAOPromoStaticData_Staging_UAT",
 						"type": "DatasetReference"
 					}
 				]
