@@ -1157,13 +1157,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignMember;\nselect count(*) from CampaignMember",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignMembers;\nselect count(*) from CampaignMembers",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignMember",
+						"referenceName": "ds_S_StagingCampignMembers_UAT",
 						"type": "DatasetReference"
 					}
 				}
