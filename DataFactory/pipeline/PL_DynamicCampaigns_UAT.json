@@ -1395,7 +1395,7 @@
 					"storedProcedureName": "[dbo].[InsertFromCampaignShareStagingToCampaignShare]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 					"type": "LinkedServiceReference"
 				}
 			},
