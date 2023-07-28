@@ -1219,13 +1219,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServices;\nselect count(*) from CampaignLoanServices",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignLoanServices",
+						"referenceName": "ds_S_DynamicCampaignLoanServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1251,13 +1250,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;\nselect count(*) from CampaignShare",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignShare",
+						"referenceName": "ds_S_DynamicCampaignShare_UAT",
 						"type": "DatasetReference"
 					}
 				}
