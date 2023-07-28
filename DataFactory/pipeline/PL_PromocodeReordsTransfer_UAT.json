@@ -981,7 +981,7 @@
 					"storedProcedureName": "[dbo].[sp_MiniOAOPromoMaintenanceStagingInserttoMiniOAOPromoMaintenance]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1008,7 +1008,7 @@
 					"storedProcedureName": "[dbo].[sp_MiniOAOPromoStaticDataStagingInserttoMiniOAOPromoStaticData]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessData",
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 					"type": "LinkedServiceReference"
 				}
 			}
