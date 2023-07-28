@@ -28,7 +28,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -96,7 +96,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -115,13 +115,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE dbo.DNAActiveAgrmntData;\nSELECT COUNT(*) FROM dbo.DNAActiveAgrmntData",
-						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt",
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
 						"type": "DatasetReference"
 					}
 				}
