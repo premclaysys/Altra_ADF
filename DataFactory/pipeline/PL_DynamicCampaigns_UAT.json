@@ -1058,13 +1058,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanStaging;\nselect count(*) from CampaignLoanStaging\n",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoan",
+						"referenceName": "ds_S_StagingCampaignLoan_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1083,13 +1081,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServicesStaging;\nselect count(*) from CampaignLoanServicesStaging\n\n",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoanServices",
+						"referenceName": "ds_S_StagingCampaignLoanServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1108,13 +1104,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareStaging;\nselect count(*) from CampaignShareStaging\n",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShare",
+						"referenceName": "ds_S_StagingCampaignShare_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1133,13 +1127,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServicesStaging;\nselect count(*) from CampaignShareServicesStaging\n\n",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShareServices",
+						"referenceName": "ds_S_StagingCampaignShareServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
