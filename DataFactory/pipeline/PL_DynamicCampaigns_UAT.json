@@ -1189,7 +1189,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoans;\nselect count(*) from CampaignLoans",
+						"sqlReaderQuery": "TRUNCATE TABLE CampaignLoan;\nselect count(*) from CampaignLoan",
 						"partitionOption": "None"
 					},
 					"dataset": {
