@@ -13,6 +13,1040 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_PromocodeReordsTransfer')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Source to Staging_Maintenance",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate MiniOAOPromocodeMaintenance_Staging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Id",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "PromoCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "PromoCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SavingsAccount",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "SavingsAccount",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "CheckingAccounts",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "CheckingAccounts",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "CertificateAccounts",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "CertificateAccounts",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "MoneyMarketAccounts",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "MoneyMarketAccounts",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "PromoType",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "PromoType",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Promotion",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Promotion",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Promo Start Date",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Promo Start Date",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Administrator I",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Administrator I",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Administrator II",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Administrator II",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Approvers Name",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Approvers Name",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Expiration Date",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Expiration Date",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Platforms Impacted",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Platforms Impacted",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Age From",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Age From",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Age To",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Age To",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Existing Products",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Existing Products",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Existing Products Checking Types",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Existing Products Checking Types",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Zip Code",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zip Code",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Open Office",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Open Office",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Balance History Amount",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "Balance History Amount",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "Balance History Period",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Balance History Period",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Opening Date From",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Opening Date From",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Opening Date To",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Opening Date To",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Transaction Type",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Transaction Type",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Transaction Details",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Transaction Details",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Transaction Details Period",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Transaction Details Period",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Completed Date From",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Completed Date From",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Completed Date To",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Completed Date To",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Criteria",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Criteria",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Can Qualify more than once",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "Can Qualify more than once",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "Reward Type",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Reward Type",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Disclosures",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Disclosures",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Transaction Details within",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Transaction Details within",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Rate",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Rate",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Promotion Type Youth",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Promotion Type Youth",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Balance History",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Balance History",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Checkings",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Checkings",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Savings",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Savings",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ActiveInactive",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ActiveInactive",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "HubID",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "HubID",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Promo Category",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Promo Category",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "DetailsQualifications",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "DetailsQualifications",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Marketing Materials",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Marketing Materials",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Market",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Market",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CreatedBy",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "CreatedBy",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CreatedOn",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "CreatedOn",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "ModifiedBy",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ModifiedBy",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ModifiedOn",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "ModifiedOn",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "Reward Amount",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "Reward Amount",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "Minimum Balance",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "Minimum Balance",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "Aggregate Transaction Amount",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "Aggregate Transaction Amount",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "New Account Deposit Amount",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "New Account Deposit Amount",
+											"type": "Double",
+											"physicalType": "float"
+										}
+									},
+									{
+										"source": {
+											"name": "Aggregate Days",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Aggregate Days",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Aggregate No",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Aggregate No",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Member Status",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Member Status",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Applicable Region or Market",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Applicable Region or Market",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "UId",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 18
+										},
+										"sink": {
+											"name": "UId",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 0,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "Source",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Source",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_ss_PromoCodeMaintenance",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Truncate MiniOAOPromocodeMaintenance_Staging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance_Staging];\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance_Staging];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "Truncate MiniOAOPromoStaticData_Staging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromoStaticData_Staging];\r\nselect count(*) from [dbo].[MiniOAOPromoStaticData_Staging];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "Copy Source to Staging_Static",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate MiniOAOPromoStaticData_Staging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Display Value",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Display Value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Type",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Type",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Group",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Group",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Description",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Description",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Is Active",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Is Active",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_ss_PromocodeStatic",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_MiniOAOPromoStaticData_Staging",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "sp_Maintenance",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy Source to Staging_Maintenance",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_MiniOAOPromoMaintenanceStagingInserttoMiniOAOPromoMaintenance]"
+						},
+						"linkedServiceName": {
+							"referenceName": "BusinessData",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "sp_StaticData",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy Source to Staging_Static",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_MiniOAOPromoStaticDataStagingInserttoMiniOAOPromoStaticData]"
+						},
+						"linkedServiceName": {
+							"referenceName": "BusinessData",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-07-21T14:43:06Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_PromocodeReordsTransferDev')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1041,7 +2075,8 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-07-21T14:43:06Z"
 			},
 			"dependsOn": []
 		},
@@ -2255,12 +3290,443 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-05T06:37:03Z"
+				"lastPublishTime": "2023-07-20T10:50:19Z"
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlertsUAT')]",
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_LoanServices_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessLoanFlag",
+						"type": "bit"
+					},
+					{
+						"name": "LoanGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_Loan_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LoanID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "CreditLimit",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LoanMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoan"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_Members_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "MemberStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "MembershipOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "MembershipType",
+						"type": "varchar"
+					},
+					{
+						"name": "ZIPCode",
+						"type": "varchar"
+					},
+					{
+						"name": "City",
+						"type": "varchar"
+					},
+					{
+						"name": "State",
+						"type": "varchar"
+					},
+					{
+						"name": "BirthDate",
+						"type": "date"
+					},
+					{
+						"name": "MarketingOptOut",
+						"type": "bit"
+					},
+					{
+						"name": "NewMemberFlag",
+						"type": "bit"
+					},
+					{
+						"name": "OnlineBankingUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "MobileAppUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "QuickAccessUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "EStatementsUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "BillPayUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ScheduledTransferUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "RemoteDepositUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "SendMoneyUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "MobileWalletUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "Region",
+						"type": "varchar"
+					},
+					{
+						"name": "BranchNumber",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BranchName",
+						"type": "varchar"
+					},
+					{
+						"name": "CountryCode",
+						"type": "varchar"
+					},
+					{
+						"name": "AFAMemberFlag",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignMember"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_ShareServices_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessShareFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ShareGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShareServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_Share_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ShareID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ShareMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShare"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToActiveAgreement_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "varchar"
+					},
+					{
+						"name": "PERSNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "DATELASTMAINT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DNAActiveAgrmntData"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlerts_UAT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2378,50 +3844,859 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticDataStaging_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
+				"type": "AzureSqlMITable",
+				"schema": [
 					{
-						"pipelineReference": {
-							"referenceName": "PL_DeleteRecordsBefore18Months",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Display Value",
+						"type": "varchar"
+					},
+					{
+						"name": "Type",
+						"type": "varchar"
+					},
+					{
+						"name": "Group",
+						"type": "varchar"
+					},
+					{
+						"name": "Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Is Active",
+						"type": "int",
+						"precision": 10
 					}
 				],
-				"type": "ScheduleTrigger",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-06-27T08:00:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"hours": [
-								8
-							]
-						}
-					}
+					"schema": "dbo",
+					"table": "MiniOAOPromoStaticData_Staging"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_TransactionsTransfers')]",
+			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenance_Staging_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PromoCode",
+						"type": "varchar"
+					},
+					{
+						"name": "SavingsAccount",
+						"type": "bit"
+					},
+					{
+						"name": "CheckingAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "CertificateAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "MoneyMarketAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "PromoType",
+						"type": "varchar"
+					},
+					{
+						"name": "Promotion",
+						"type": "varchar"
+					},
+					{
+						"name": "Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Promo Start Date",
+						"type": "date"
+					},
+					{
+						"name": "Administrator I",
+						"type": "varchar"
+					},
+					{
+						"name": "Administrator II",
+						"type": "varchar"
+					},
+					{
+						"name": "Approvers Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Expiration Date",
+						"type": "date"
+					},
+					{
+						"name": "Platforms Impacted",
+						"type": "varchar"
+					},
+					{
+						"name": "Age From",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age To",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Existing Products",
+						"type": "varchar"
+					},
+					{
+						"name": "Existing Products Checking Types",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Zip Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Open Office",
+						"type": "varchar"
+					},
+					{
+						"name": "Balance History Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Balance History Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Opening Date From",
+						"type": "date"
+					},
+					{
+						"name": "Opening Date To",
+						"type": "date"
+					},
+					{
+						"name": "Transaction Type",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Transaction Details",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction Details Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Completed Date From",
+						"type": "date"
+					},
+					{
+						"name": "Completed Date To",
+						"type": "date"
+					},
+					{
+						"name": "Criteria",
+						"type": "varchar"
+					},
+					{
+						"name": "Can Qualify more than once",
+						"type": "bit"
+					},
+					{
+						"name": "Reward Type",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Disclosures",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction Details within",
+						"type": "varchar"
+					},
+					{
+						"name": "Rate",
+						"type": "varchar"
+					},
+					{
+						"name": "Promotion Type Youth",
+						"type": "varchar"
+					},
+					{
+						"name": "Balance History",
+						"type": "varchar"
+					},
+					{
+						"name": "Checkings",
+						"type": "varchar"
+					},
+					{
+						"name": "Savings",
+						"type": "varchar"
+					},
+					{
+						"name": "ActiveInactive",
+						"type": "varchar"
+					},
+					{
+						"name": "HubID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Promo Category",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DetailsQualifications",
+						"type": "varchar"
+					},
+					{
+						"name": "Marketing Materials",
+						"type": "varchar"
+					},
+					{
+						"name": "Market",
+						"type": "varchar"
+					},
+					{
+						"name": "CreatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ModifiedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "ModifiedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Reward Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Minimum Balance",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Aggregate Transaction Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "New Account Deposit Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Aggregate Days",
+						"type": "varchar"
+					},
+					{
+						"name": "Aggregate No",
+						"type": "varchar"
+					},
+					{
+						"name": "Member Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Applicable Region or Market",
+						"type": "varchar"
+					},
+					{
+						"name": "UId",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Source",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MiniOAOPromocodeMaintenance_Staging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaign_LoanServices_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessLoanFlag",
+						"type": "bit"
+					},
+					{
+						"name": "LoanGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanServicesStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaign_Loan_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LoanID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "CreditLimit",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LoanMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaign_ShareServices_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessShareFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ShareGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShareServicesStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaign_Share_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ShareID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ShareMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShareStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampign_Members_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignMemberStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_TransactionRecord_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubAcctNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "BalCatCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalTypCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalanceDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Amount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "TranAmt",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "Balance",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "CheckNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TraceNbr",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_Transaction_StagingUAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubAcctNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "BalCatCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalTypCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalanceDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Amount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "TranAmt",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "Balance",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "CheckNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TraceNbr",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions_Staging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_DynamicCampaigns_UAT')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "cd_AltratoDigitalBankingTransfers",
+						"name": "CopyCampaignMembers",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Truncate the staging table",
+								"activity": "TruncateCampaignMemberStaging",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2437,416 +4712,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": {
-									"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} ",
-									"type": "Expression"
-								},
-								"partitionOption": "None",
-								"convertDecimalToInteger": false,
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ACCOUNTNUMBER",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "AccountNumber",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "ACCOUNTTRANSACTIONNUMBER",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "AccountTransactionNumber",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONID",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "TransactionID",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONFISCALDATE",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "TransactionFiscalDate",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONDATETIME",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "TransactionDateTime",
-											"type": "DateTime",
-											"physicalType": "datetime"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONEFFECTIVEDATE",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "TransactionEffectiveDate",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONTYPECODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionTypeCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONTYPE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONSTATUSCODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionStatusCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONSTATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TRANSACTIONDESCRIPTION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TransactionDescription",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SUBACCTNBR",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "SubAcctNbr",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "BALCATCD",
-											"type": "String"
-										},
-										"sink": {
-											"name": "BalCatCd",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "BALTYPCD",
-											"type": "String"
-										},
-										"sink": {
-											"name": "BalTypCd",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "BALANCEDESCRIPTION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "BalanceDescription",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "AMOUNT",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "Amount",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										}
-									},
-									{
-										"source": {
-											"name": "TRANAMT",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "TranAmt",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										}
-									},
-									{
-										"source": {
-											"name": "BALANCE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Balance",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										}
-									},
-									{
-										"source": {
-											"name": "CHECKNBR",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "CheckNbr",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "TRACENBR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TraceNbr",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ds_O_AltraServerConnectivity",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ds_S_DigitalBankingConectivity",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Fetch the last TransId",
-						"description": "Fetch last transaction Id in database",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "ds_S_DigitalBankingTransactionRecord",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Set variable",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Fetch the last TransId",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "transid",
-							"value": {
-								"value": "@string(activity('Fetch the last TransId').output.firstRow.MAXTRANSID)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "sp_InsertTransaction",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "cd_AltratoDigitalBankingTransfers",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[SP_TransactionData]"
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_transactiondb",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Truncate the staging table",
-						"type": "Lookup",
-						"dependsOn": [
-							{
-								"activity": "Set variable",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "ds_S_DigitalBankingConectivity",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Transfer_StagingData_Alerts",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "TruncateAlertStaging",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
+								"type": "SqlServerSource",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -2861,274 +4727,302 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "AccountNumber",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
+											"name": "PartyCode",
+											"type": "String",
+											"physicalType": "varchar"
 										},
 										"sink": {
-											"name": "AccountNumber",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
+											"name": "PartyCode",
+											"type": "String",
+											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "AccountTransactionNumber",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										},
-										"sink": {
-											"name": "AccountTransactionNumber",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionID",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										},
-										"sink": {
-											"name": "TransactionID",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "TransactionFiscalDate",
+											"name": "AsOfDate",
 											"type": "DateTime",
 											"physicalType": "date"
 										},
 										"sink": {
-											"name": "TransactionFiscalDate",
+											"name": "AsOfDate",
 											"type": "DateTime",
 											"physicalType": "date"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionDateTime",
-											"type": "DateTime",
-											"physicalType": "datetime"
+											"name": "MemberStatusGroup",
+											"type": "String",
+											"physicalType": "varchar"
 										},
 										"sink": {
-											"name": "TransactionDateTime",
-											"type": "DateTime",
-											"physicalType": "datetime"
+											"name": "MemberStatusGroup",
+											"type": "String",
+											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionEffectiveDate",
+											"name": "MembershipOpenDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "MembershipOpenDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "MembershipType",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "MembershipType",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ZIPCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ZIPCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "BirthDate",
 											"type": "DateTime",
 											"physicalType": "date"
 										},
 										"sink": {
-											"name": "TransactionEffectiveDate",
+											"name": "BirthDate",
 											"type": "DateTime",
 											"physicalType": "date"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionTypeCode",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "MarketingOptOut",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "TransactionTypeCode",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "MarketingOptOut",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionType",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "NewMemberFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "TransactionType",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "NewMemberFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionStatusCode",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "OnlineBankingUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "TransactionStatusCode",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "OnlineBankingUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "MobileAppUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "TransactionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "MobileAppUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "TransactionDescription",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "QuickAccessUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "TransactionDescription",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "QuickAccessUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "SubAcctNbr",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
+											"name": "EStatementsUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "SubAcctNbr",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
+											"name": "EStatementsUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "BalCatCd",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "BillPayUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "BalCatCd",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "BillPayUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "BalTypCd",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "ScheduledTransferUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										},
 										"sink": {
-											"name": "BalTypCd",
-											"type": "String",
-											"physicalType": "nvarchar"
+											"name": "ScheduledTransferUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									},
 									{
 										"source": {
-											"name": "BalanceDescription",
+											"name": "RemoteDepositUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "RemoteDepositUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "SendMoneyUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "SendMoneyUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "MobileWalletUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "MobileWalletUserFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "Region",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
 										},
 										"sink": {
-											"name": "BalanceDescription",
+											"name": "Region",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Amount",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
+											"name": "BranchNumber",
+											"type": "Int32",
+											"physicalType": "int"
 										},
 										"sink": {
-											"name": "Amount",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
+											"name": "BranchNumber",
+											"type": "Int32",
+											"physicalType": "int"
 										}
 									},
 									{
 										"source": {
-											"name": "TranAmt",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										},
-										"sink": {
-											"name": "TranAmt",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										}
-									},
-									{
-										"source": {
-											"name": "Balance",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										},
-										"sink": {
-											"name": "Balance",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 3,
-											"precision": 38
-										}
-									},
-									{
-										"source": {
-											"name": "CheckNbr",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										},
-										"sink": {
-											"name": "CheckNbr",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 0,
-											"precision": 22
-										}
-									},
-									{
-										"source": {
-											"name": "TraceNbr",
+											"name": "BranchName",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
 										},
 										"sink": {
-											"name": "TraceNbr",
+											"name": "BranchName",
 											"type": "String",
-											"physicalType": "nvarchar"
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CountryCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "CountryCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "AFAMemberFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "AFAMemberFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
 										}
 									}
 								],
@@ -3141,57 +5035,25 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_S_DigitalBankingConectivity",
+								"referenceName": "ds_SS_DynamicCampaignMembers",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_S_InsertDataToAlertsUAT",
+								"referenceName": "ds_S_StagingCampign_Members_UAT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "TruncateAlertStaging",
-						"type": "Lookup",
+						"name": "CopyCampaignLoan",
+						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "cd_AltratoDigitalBankingTransfers",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlMISource",
-								"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "ds_S_InsertDataToAlertsUAT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Insert to AlertTransaction",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Transfer_StagingData_Alerts",
+								"activity": "TruncateCampaignLoanStaging",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3206,7 +5068,1068 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[InsertTransactionAlertFromStaging]"
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlMISink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "LoanID",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "LoanID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "AsOfDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "AsOfDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "PartyCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "PartyCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanStatusGroup",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "LoanStatusGroup",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanFamilyCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "LoanFamilyCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanTypeCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "LoanTypeCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanOpenDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "LoanOpenDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanCloseDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "LoanCloseDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "CurrentBalance",
+											"type": "Decimal",
+											"physicalType": "money",
+											"scale": 4,
+											"precision": 19
+										},
+										"sink": {
+											"name": "CurrentBalance",
+											"type": "Decimal",
+											"physicalType": "money",
+											"scale": 4,
+											"precision": 19
+										}
+									},
+									{
+										"source": {
+											"name": "CreditLimit",
+											"type": "Decimal",
+											"physicalType": "money",
+											"scale": 4,
+											"precision": 19
+										},
+										"sink": {
+											"name": "CreditLimit",
+											"type": "Decimal",
+											"physicalType": "money",
+											"scale": 4,
+											"precision": 19
+										}
+									},
+									{
+										"source": {
+											"name": "LoanMaturityDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "LoanMaturityDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_SS_DynamicCampaignLoan",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_StagingCampaign_Loan_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CopyCampaignLoanServices",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignLoanServicesStaging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlMISink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "AsOfDate"
+										},
+										"sink": {
+											"name": "AsOfDate"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanFamilyCode"
+										},
+										"sink": {
+											"name": "LoanFamilyCode"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanTypeCode"
+										},
+										"sink": {
+											"name": "LoanTypeCode"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanTypeDescription"
+										},
+										"sink": {
+											"name": "LoanTypeDescription"
+										}
+									},
+									{
+										"source": {
+											"name": "BusinessLoanFlag"
+										},
+										"sink": {
+											"name": "BusinessLoanFlag"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanGroup1"
+										},
+										"sink": {
+											"name": "LoanGroup1"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanGroup2"
+										},
+										"sink": {
+											"name": "LoanGroup2"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanGroup3"
+										},
+										"sink": {
+											"name": "LoanGroup3"
+										}
+									},
+									{
+										"source": {
+											"name": "LoanGroup4"
+										},
+										"sink": {
+											"name": "LoanGroup4"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_SS_DynamicCampaignLoanServices",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_StagingCampaign_LoanServices_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CopyCampaignshare",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignShareStaging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlMISink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ShareID",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "AsOfDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "AsOfDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "PartyCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "PartyCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareStatusGroup",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareStatusGroup",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareTypeGroupCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareTypeGroupCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareTypeCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareTypeCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareOpenDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "ShareOpenDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareCloseDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "ShareCloseDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "CurrentBalance",
+											"type": "Decimal",
+											"physicalType": "money",
+											"scale": 4,
+											"precision": 19
+										},
+										"sink": {
+											"name": "CurrentBalance",
+											"type": "Decimal",
+											"physicalType": "money",
+											"scale": 4,
+											"precision": 19
+										}
+									},
+									{
+										"source": {
+											"name": "ShareMaturityDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "ShareMaturityDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_SS_DynamicCampaignShare",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_StagingCampaign_Share_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CopyCampaignShareServices",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignShareServicesStaging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlMISink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "AsOfDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "AsOfDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareTypeGroupCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareTypeGroupCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareTypeCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareTypeCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareTypeDescription",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareTypeDescription",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "BusinessShareFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "BusinessShareFlag",
+											"type": "Boolean",
+											"physicalType": "bit"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareGroup1",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareGroup1",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareGroup2",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareGroup2",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareGroup3",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareGroup3",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ShareGroup4",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ShareGroup4",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_SS_DynamicCampaignShareServices",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_StagingCampaign_ShareServices_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "TruncateCampaignMemberStaging",
+						"description": "TruncateCampaignMemberStaging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_StagingCampign_Members_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignLoanStaging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_StagingCampaign_Loan_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignLoanServicesStaging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_StagingCampaign_LoanServices_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignShareStaging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_StagingCampaign_Share_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignShareServicesStaging",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_StagingCampaign_ShareServices_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignMember",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "CopyCampaignMembers",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE CampaignMembers;\nselect count(*) from CampaignMembers",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_DynamicCampaign_Members_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignLoan",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "CopyCampaignLoan",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE CampaignLoan;\nselect count(*) from CampaignLoan",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_DynamicCampaign_Loan_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignLoanServices",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "CopyCampaignLoanServices",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE CampaignLoanServices;\nselect count(*) from CampaignLoanServices",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_DynamicCampaign_LoanServices_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignShare",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "CopyCampaignshare",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE CampaignShare;\nselect count(*) from CampaignShare",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_DynamicCampaign_Share_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "TruncateCampaignShareServices",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "CopyCampaignShareServices",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE CampaignShareServices;\nselect count(*) from CampaignShareServices",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_DynamicCampaign_ShareServices_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Sp_InsertMemberStagingToMember",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignMember",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InsertFromCampaignMemberStagingToCampaignMember]"
+						},
+						"linkedServiceName": {
+							"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_InsertLoanStagingToLoan",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignLoan",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InsertFromCampaignLoanStagingToCampaignLoan]"
+						},
+						"linkedServiceName": {
+							"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_InsertLoanServicesStagingToLoanServices",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignLoanServices",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InsertFromCampaignLoanServicesStagingToCampaignLoanServices]"
+						},
+						"linkedServiceName": {
+							"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_InsertShareStagingToShare",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignShare",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InsertFromCampaignShareStagingToCampaignShare]"
+						},
+						"linkedServiceName": {
+							"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_InsertShareServicesStagingToShareServices",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "TruncateCampaignShareServices",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InsertFromcampaignShareServicesStagingToCampaignShareServices]"
 						},
 						"linkedServiceName": {
 							"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
@@ -3214,188 +6137,25 @@
 						}
 					}
 				],
-				"concurrency": 1,
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"variables": {
-					"transid": {
-						"type": "String",
-						"defaultValue": "0"
-					},
-					"subacctnbr": {
-						"type": "String",
-						"defaultValue": "0"
-					}
-				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-05T06:37:03Z"
+				"lastPublishTime": "2023-07-13T09:39:36Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToAlertsUAT')]"
+				"[concat(variables('factoryId'), '/datasets/ds_S_StagingCampign_Members_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_StagingCampaign_Loan_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_StagingCampaign_LoanServices_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_StagingCampaign_Share_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_StagingCampaign_ShareServices_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_DynamicCampaign_Members_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_DynamicCampaign_Loan_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_DynamicCampaign_LoanServices_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_DynamicCampaign_Share_UAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_DynamicCampaign_ShareServices_UAT')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STr_DynamicCampaigns')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_DynamicCampaignsDev",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_DynamicCampaigns",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-07-13T06:18:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								13
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STr_PromocodeRecordsTransfer')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_PromocodeReordsTransferDev",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_PromocodeReordsTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-07-20T13:30:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"minutes": [
-								30
-							],
-							"hours": [
-								13
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransferDev')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 3,
-						"startTime": "2023-06-06T14:51:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Tr_DataTransfer')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_InactiveEAgreementNumberDataTransferDev",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-06-26T12:02:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								9
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
 		}
 	]
 }

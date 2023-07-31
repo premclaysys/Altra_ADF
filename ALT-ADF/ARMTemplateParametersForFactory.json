@@ -40,6 +40,11 @@
 		},
 		"AzureSqlMIPRODUAT_properties_groupId": {
 			"value": "managedInstance"
+		},
+		"AzureSqlMIPRODUAT_properties_fqdns": {
+			"value": [
+				"altraprodsql01.fbfb1f231f1d.database.windows.net"
+			]
 		}
 	}
 }
