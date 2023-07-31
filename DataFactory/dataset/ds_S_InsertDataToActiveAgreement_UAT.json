@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_InsertDataToActiveAgrmnt_UAT",
+	"name": "ds_S_InsertDataToActiveAgreement_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",

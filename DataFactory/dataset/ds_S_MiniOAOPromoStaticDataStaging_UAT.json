@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_MiniOAOPromoStaticData_Staging_UAT",
+	"name": "ds_S_MiniOAOPromoStaticDataStaging_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",

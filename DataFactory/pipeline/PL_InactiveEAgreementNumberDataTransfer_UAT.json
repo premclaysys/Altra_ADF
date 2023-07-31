@@ -92,7 +92,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
+						"referenceName": "ds_S_InsertDataToActiveAgreement_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -117,7 +117,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
+						"referenceName": "ds_S_InsertDataToActiveAgreement_UAT",
 						"type": "DatasetReference"
 					}
 				}
