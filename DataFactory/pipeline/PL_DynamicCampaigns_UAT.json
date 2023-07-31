@@ -1037,7 +1037,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "Truncate table dbo.CampaignMemberStaging",
+						"sqlReaderQuery": "Truncate table dbo.CampaignMemberStaging;\nselect count(*) from dbo.CampaignMemberStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1061,7 +1061,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "Truncate table dbo.CampaignLoanStaging",
+						"sqlReaderQuery": "Truncate table dbo.CampaignLoanStaging;\nselect count(*) from  dbo.CampaignLoanStaging ",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1085,7 +1085,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignLoanServicesStaging",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignLoanServicesStaging;\nselect count(*) from dbo.CampaignLoanServicesStaging;",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1109,7 +1109,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareStaging",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareStaging;\nselect count(*) from dbo.CampaignShareStaging;",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1133,7 +1133,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareServicesStaging",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareServicesStaging;\nselect count(*) from dbo.CampaignShareServicesStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
