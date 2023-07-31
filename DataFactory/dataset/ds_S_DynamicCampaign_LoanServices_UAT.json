@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_StagingCampaignShareServices_UAT",
+	"name": "ds_S_DynamicCampaign_LoanServices_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
@@ -18,41 +18,41 @@
 				"type": "date"
 			},
 			{
-				"name": "ShareTypeGroupCode",
+				"name": "LoanFamilyCode",
 				"type": "varchar"
 			},
 			{
-				"name": "ShareTypeCode",
+				"name": "LoanTypeCode",
 				"type": "varchar"
 			},
 			{
-				"name": "ShareTypeDescription",
+				"name": "LoanTypeDescription",
 				"type": "varchar"
 			},
 			{
-				"name": "BusinessShareFlag",
+				"name": "BusinessLoanFlag",
 				"type": "bit"
 			},
 			{
-				"name": "ShareGroup1",
+				"name": "LoanGroup1",
 				"type": "varchar"
 			},
 			{
-				"name": "ShareGroup2",
+				"name": "LoanGroup2",
 				"type": "varchar"
 			},
 			{
-				"name": "ShareGroup3",
+				"name": "LoanGroup3",
 				"type": "varchar"
 			},
 			{
-				"name": "ShareGroup4",
+				"name": "LoanGroup4",
 				"type": "varchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignShareServicesStaging"
+			"table": "CampaignLoanServices"
 		}
 	}
 }

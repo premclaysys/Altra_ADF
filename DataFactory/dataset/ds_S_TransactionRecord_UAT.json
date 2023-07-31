@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_TransactionStagingUAT",
+	"name": "ds_S_TransactionRecord_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
@@ -109,7 +109,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transactions_Staging"
+			"table": "Transactions"
 		}
 	}
 }

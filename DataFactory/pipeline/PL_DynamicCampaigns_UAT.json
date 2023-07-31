@@ -352,7 +352,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampignMembers_UAT",
+						"referenceName": "ds_S_StagingCampign_Members_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -547,7 +547,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignLoan_UAT",
+						"referenceName": "ds_S_StagingCampaign_Loan_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -674,7 +674,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignLoanServices_UAT",
+						"referenceName": "ds_S_StagingCampaign_LoanServices_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -853,7 +853,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignShare_UAT",
+						"referenceName": "ds_S_StagingCampaign_Share_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -1016,7 +1016,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_StagingCampaignShareServices_UAT",
+						"referenceName": "ds_S_StagingCampaign_ShareServices_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -1040,7 +1040,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampignMembers_UAT",
+						"referenceName": "ds_S_StagingCampign_Members_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1063,7 +1063,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoan_UAT",
+						"referenceName": "ds_S_StagingCampaign_Loan_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1086,7 +1086,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignLoanServices_UAT",
+						"referenceName": "ds_S_StagingCampaign_LoanServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1109,7 +1109,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShare_UAT",
+						"referenceName": "ds_S_StagingCampaign_Share_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1132,7 +1132,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_StagingCampaignShareServices_UAT",
+						"referenceName": "ds_S_StagingCampaign_ShareServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1163,7 +1163,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignMembers_UAT",
+						"referenceName": "ds_S_DynamicCampaign_Members_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1194,7 +1194,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignLoan_UAT",
+						"referenceName": "ds_S_DynamicCampaign_Loan_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1225,7 +1225,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignLoanServices_UAT",
+						"referenceName": "ds_S_DynamicCampaign_LoanServices_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1256,7 +1256,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignShare_UAT",
+						"referenceName": "ds_S_DynamicCampaign_Share_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -1287,7 +1287,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DynamicCampaignShareServices_UAT",
+						"referenceName": "ds_S_DynamicCampaign_ShareServices_UAT",
 						"type": "DatasetReference"
 					}
 				}

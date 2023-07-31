@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_DynamicCampaignShareServices_UAT",
+	"name": "ds_S_DynamicCampaign_Share_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
@@ -14,8 +14,20 @@
 				"precision": 10
 			},
 			{
+				"name": "ShareID",
+				"type": "varchar"
+			},
+			{
 				"name": "AsOfDate",
 				"type": "date"
+			},
+			{
+				"name": "PartyCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ShareStatusGroup",
+				"type": "varchar"
 			},
 			{
 				"name": "ShareTypeGroupCode",
@@ -26,33 +38,27 @@
 				"type": "varchar"
 			},
 			{
-				"name": "ShareTypeDescription",
-				"type": "varchar"
+				"name": "ShareOpenDate",
+				"type": "date"
 			},
 			{
-				"name": "BusinessShareFlag",
-				"type": "bit"
+				"name": "ShareCloseDate",
+				"type": "date"
 			},
 			{
-				"name": "ShareGroup1",
-				"type": "varchar"
+				"name": "CurrentBalance",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
 			},
 			{
-				"name": "ShareGroup2",
-				"type": "varchar"
-			},
-			{
-				"name": "ShareGroup3",
-				"type": "varchar"
-			},
-			{
-				"name": "ShareGroup4",
-				"type": "varchar"
+				"name": "ShareMaturityDate",
+				"type": "date"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignShareServices"
+			"table": "CampaignShare"
 		}
 	}
 }

@@ -1,8 +1,8 @@
 {
-	"name": "ds_S_TransactionRecordUAT",
+	"name": "ds_S_InsertDataToAlerts_UAT",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -109,7 +109,8 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Transactions"
+			"table": "Transaction_AlertStaging"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

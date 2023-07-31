@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_StagingCampaignLoan_UAT",
+	"name": "ds_S_StagingCampaign_Share_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
@@ -14,7 +14,7 @@
 				"precision": 10
 			},
 			{
-				"name": "LoanID",
+				"name": "ShareID",
 				"type": "varchar"
 			},
 			{
@@ -26,23 +26,23 @@
 				"type": "varchar"
 			},
 			{
-				"name": "LoanStatusGroup",
+				"name": "ShareStatusGroup",
 				"type": "varchar"
 			},
 			{
-				"name": "LoanFamilyCode",
+				"name": "ShareTypeGroupCode",
 				"type": "varchar"
 			},
 			{
-				"name": "LoanTypeCode",
+				"name": "ShareTypeCode",
 				"type": "varchar"
 			},
 			{
-				"name": "LoanOpenDate",
+				"name": "ShareOpenDate",
 				"type": "date"
 			},
 			{
-				"name": "LoanCloseDate",
+				"name": "ShareCloseDate",
 				"type": "date"
 			},
 			{
@@ -52,19 +52,13 @@
 				"scale": 4
 			},
 			{
-				"name": "CreditLimit",
-				"type": "money",
-				"precision": 19,
-				"scale": 4
-			},
-			{
-				"name": "LoanMaturityDate",
+				"name": "ShareMaturityDate",
 				"type": "date"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CampaignLoanStaging"
+			"table": "CampaignShareStaging"
 		}
 	}
 }
