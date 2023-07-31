@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_DynamicCampaignMembers_UAT",
+	"name": "ds_S_DynamicCampaign_Members_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",

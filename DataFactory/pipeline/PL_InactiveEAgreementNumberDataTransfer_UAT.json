@@ -43,8 +43,7 @@
 								},
 								"sink": {
 									"name": "AGREENBR",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								}
 							},
 							{
@@ -54,8 +53,7 @@
 								},
 								"sink": {
 									"name": "PERSNBR",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								}
 							},
 							{
@@ -65,8 +63,7 @@
 								},
 								"sink": {
 									"name": "BYORGNBR",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								}
 							},
 							{
@@ -76,27 +73,15 @@
 								},
 								"sink": {
 									"name": "DATELASTMAINT",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								}
 							}
-						],
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
+						]
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_O_Connectivity_InactiveEagreement",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -119,10 +104,6 @@
 						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE dbo.DNAActiveAgrmntData;\nSELECT COUNT(*) FROM dbo.DNAActiveAgrmntData",
 						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
-						"type": "DatasetReference"
 					}
 				}
 			}

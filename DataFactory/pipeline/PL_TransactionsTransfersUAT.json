@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_TransactionStagingUAT",
+						"referenceName": "ds_S_Transaction_StagingUAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -318,7 +318,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_TransactionRecordUAT",
+						"referenceName": "ds_S_TransactionRecord_UAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -400,7 +400,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_TransactionStagingUAT",
+						"referenceName": "ds_S_Transaction_StagingUAT",
 						"type": "DatasetReference"
 					}
 				}
@@ -720,13 +720,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_TransactionStagingUAT",
+						"referenceName": "ds_S_Transaction_StagingUAT",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlertsUAT",
+						"referenceName": "ds_S_InsertDataToAlerts_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -757,7 +757,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlertsUAT",
+						"referenceName": "ds_S_InsertDataToAlerts_UAT",
 						"type": "DatasetReference"
 					}
 				}

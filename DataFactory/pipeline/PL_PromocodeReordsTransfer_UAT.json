@@ -776,7 +776,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging_UAT",
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenance_Staging_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -801,7 +801,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_MiniOAOPromocodeMaintenanceStaging_UAT",
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenance_Staging_UAT",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false

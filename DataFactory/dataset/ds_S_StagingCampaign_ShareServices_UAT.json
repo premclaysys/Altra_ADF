@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_StagingCampaignShareServices_UAT",
+	"name": "ds_S_StagingCampaign_ShareServices_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",

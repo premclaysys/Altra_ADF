@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_StagingCampaignLoanServices_UAT",
+	"name": "ds_S_StagingCampaign_LoanServices_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
