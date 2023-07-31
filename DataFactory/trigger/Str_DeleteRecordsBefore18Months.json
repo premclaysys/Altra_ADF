@@ -9,12 +9,6 @@
 					"referenceName": "PL_DeleteRecordsBefore18Months",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
