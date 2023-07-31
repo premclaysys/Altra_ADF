@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "DeleteRecordsBefore18Months",
+				"description": "DeleteRecordsBefore18Months ",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {

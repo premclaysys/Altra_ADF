@@ -783,6 +783,7 @@
 			},
 			{
 				"name": "Truncate MiniOAOPromocodeMaintenance_Staging",
+				"description": "Truncate MiniOAOPromocodeMaintenance_Staging",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {

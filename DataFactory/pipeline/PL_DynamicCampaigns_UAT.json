@@ -1023,6 +1023,7 @@
 			},
 			{
 				"name": "TruncateCampaignMemberStaging",
+				"description": "TruncateCampaignMemberStaging",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
