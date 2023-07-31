@@ -9,8 +9,7 @@
 		},
 		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'"
 		},
 		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
 			"type": "secureString",
@@ -1004,15 +1003,7 @@
 				"annotations": [],
 				"type": "AzureSqlMI",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "altrasqlappformsadm"
-					}
+					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AzureSqlPrivateEndPointConnection",

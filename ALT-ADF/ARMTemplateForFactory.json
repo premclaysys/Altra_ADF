@@ -14,8 +14,7 @@
 		},
 		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'"
 		},
 		"BusinessData_connectionString": {
 			"type": "secureString",
@@ -15061,15 +15060,7 @@
 				"annotations": [],
 				"type": "AzureSqlMI",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "altrasqlappformsadm"
-					}
+					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AzureSqlPrivateEndPointConnection",
@@ -15077,8 +15068,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]",
-				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]"
 			]
 		},
 		{
@@ -15247,13 +15237,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_DynamicCampaigns_UAT",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15276,8 +15259,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaignsDev')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaigns')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaigns_UAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaigns')]"
 			]
 		},
 		{
@@ -15298,13 +15280,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_PromocodeReordsTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_PromocodeReordsTransfer_UAT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15330,8 +15305,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransferDev')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer_UAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer')]"
 			]
 		},
 		{
@@ -15348,13 +15322,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionsTransfersUAT",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15368,8 +15335,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionsTransfersUAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
 			]
 		},
 		{
@@ -15383,13 +15349,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_DeleteRecordsBefore18Months",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15411,8 +15370,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months_UAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]"
 			]
 		},
 		{
@@ -15433,13 +15391,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_InactiveEAgreementNumberDataTransfer_UAT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15465,8 +15416,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransferDev')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer_UAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer')]"
 			]
 		},
 		{

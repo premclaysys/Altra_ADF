@@ -9,7 +9,7 @@
 			"value": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
 		},
 		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
-			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+			"value": ""
 		},
 		"BusinessData_connectionString": {
 			"value": ""
