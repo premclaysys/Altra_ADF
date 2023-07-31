@@ -1037,6 +1037,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
+						"sqlReaderQuery": "Truncate table dbo.CampaignMemberStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1060,6 +1061,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
+						"sqlReaderQuery": "Truncate table dbo.CampaignLoanStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1083,6 +1085,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignLoanServicesStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1106,6 +1109,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -1129,6 +1133,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareServicesStaging",
 						"partitionOption": "None"
 					},
 					"dataset": {
