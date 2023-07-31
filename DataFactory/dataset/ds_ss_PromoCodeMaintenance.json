@@ -272,5 +272,6 @@
 			"schema": "dbo",
 			"table": "PromoCodeMaintenace"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

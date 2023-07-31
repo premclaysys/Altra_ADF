@@ -1,5 +1,6 @@
 {
 	"name": "ls_transactiondb",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
@@ -13,6 +14,5 @@
 				"secretName": "ALTDevsql01TransactionsDev"
 			}
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }

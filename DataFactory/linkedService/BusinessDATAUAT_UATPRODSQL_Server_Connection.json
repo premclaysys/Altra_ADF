@@ -1,5 +1,6 @@
 {
 	"name": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlMI",
