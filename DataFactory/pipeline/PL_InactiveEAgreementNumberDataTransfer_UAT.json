@@ -76,12 +76,23 @@
 									"type": "DateTime"
 								}
 							}
-						]
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_O_Connectivity_InactiveEagreement",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -104,6 +115,10 @@
 						"type": "SqlMISource",
 						"sqlReaderQuery": "TRUNCATE TABLE dbo.DNAActiveAgrmntData;\nSELECT COUNT(*) FROM dbo.DNAActiveAgrmntData",
 						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_UAT",
+						"type": "DatasetReference"
 					}
 				}
 			}
