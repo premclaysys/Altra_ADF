@@ -1,5 +1,5 @@
 {
-	"name": "ds_S_InsertDataToActiveAgrmnt_UAT",
+	"name": "ds_S_MiniOAOPromoStaticDataStaging_UAT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
@@ -14,27 +14,30 @@
 				"precision": 10
 			},
 			{
-				"name": "AGREENBR",
+				"name": "Display Value",
 				"type": "varchar"
 			},
 			{
-				"name": "PERSNBR",
+				"name": "Type",
 				"type": "varchar"
 			},
 			{
-				"name": "BYORGNBR",
+				"name": "Group",
 				"type": "varchar"
 			},
 			{
-				"name": "DATELASTMAINT",
-				"type": "datetime",
-				"precision": 23,
-				"scale": 3
+				"name": "Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Is Active",
+				"type": "int",
+				"precision": 10
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "DNAActiveAgrmntData"
+			"table": "MiniOAOPromoStaticData_Staging"
 		}
 	}
 }
