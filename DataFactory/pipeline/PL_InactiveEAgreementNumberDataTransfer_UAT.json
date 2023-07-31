@@ -99,7 +99,7 @@
 			},
 			{
 				"name": "Truncate the DNAActiveAgrmntData table",
-				"description": "Truncate the DNAActiveAgrmntData table",
+				"description": "Truncate the DNAActiveAgrmntData table;\n",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
