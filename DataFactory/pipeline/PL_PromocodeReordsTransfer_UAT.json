@@ -966,7 +966,7 @@
 					{
 						"activity": "Copy Source to Staging_Maintenance",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -993,7 +993,7 @@
 					{
 						"activity": "Copy Source to Staging_Static",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
