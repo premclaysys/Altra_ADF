@@ -14,7 +14,8 @@
 		},
 		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'"
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
 		"BusinessData_connectionString": {
 			"type": "secureString",
@@ -36,12 +37,12 @@
 		"PromoCode_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
-			"defaultValue": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
+			"defaultValue": "Integrated Security=False;Data Source=MRMTSTOPDB01;Initial Catalog=MRMOAO_Data;User ID=PromoCodeMaintenance-ro"
 		},
 		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",

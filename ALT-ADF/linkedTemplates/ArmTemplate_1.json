@@ -20,7 +20,7 @@
 		"PromoCode_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
-			"defaultValue": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
+			"defaultValue": "Integrated Security=False;Data Source=MRMTSTOPDB01;Initial Catalog=MRMOAO_Data;User ID=PromoCodeMaintenance-ro"
 		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -1494,7 +1494,7 @@
 							"referenceName": "ALTADFKeyVault",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "NextlyUser"
+						"secretName": "PromoCodeMaintenance-ro"
 					}
 				},
 				"connectVia": {

@@ -14,7 +14,8 @@
 		},
 		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'"
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
 		"BusinessData_connectionString": {
 			"type": "secureString",
@@ -36,12 +37,12 @@
 		"PromoCode_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
-			"defaultValue": "Integrated Security=False;Data Source=mrmprdopdb01;Initial Catalog=MRMOAO_Data;User ID=NextlyUser"
+			"defaultValue": "Integrated Security=False;Data Source=MRMTSTOPDB01;Initial Catalog=MRMOAO_Data;User ID=PromoCodeMaintenance-ro"
 		},
 		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -4182,6 +4183,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlMISource",
+								"sqlReaderQuery": "Truncate table dbo.CampaignMemberStaging;\nselect count(*) from dbo.CampaignMemberStaging",
 								"partitionOption": "None"
 							},
 							"dataset": {
@@ -4206,6 +4208,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlMISource",
+								"sqlReaderQuery": "Truncate table dbo.CampaignLoanStaging;\nselect count(*) from  dbo.CampaignLoanStaging ",
 								"partitionOption": "None"
 							},
 							"dataset": {
@@ -4230,6 +4233,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignLoanServicesStaging;\nselect count(*) from dbo.CampaignLoanServicesStaging;",
 								"partitionOption": "None"
 							},
 							"dataset": {
@@ -4254,6 +4258,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareStaging;\nselect count(*) from dbo.CampaignShareStaging;",
 								"partitionOption": "None"
 							},
 							"dataset": {
@@ -4278,6 +4283,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE dbo.CampaignShareServicesStaging;\nselect count(*) from dbo.CampaignShareServicesStaging",
 								"partitionOption": "None"
 							},
 							"dataset": {
@@ -5006,7 +5012,7 @@
 					},
 					{
 						"name": "Truncate the DNAActiveAgrmntData table",
-						"description": "Truncate the DNAActiveAgrmntData table",
+						"description": "Truncate the DNAActiveAgrmntData table;\n",
 						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
@@ -6020,7 +6026,7 @@
 							{
 								"activity": "Copy Source to Staging_Maintenance",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -6047,7 +6053,7 @@
 							{
 								"activity": "Copy Source to Staging_Static",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -7060,7 +7066,7 @@
 							{
 								"activity": "Copy Source to Staging_Maintenance",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -7087,7 +7093,7 @@
 							{
 								"activity": "Copy Source to Staging_Static",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -8099,7 +8105,7 @@
 							{
 								"activity": "Copy Source to Staging_Maintenance",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -8126,7 +8132,7 @@
 							{
 								"activity": "Copy Source to Staging_Static",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -15060,7 +15066,15 @@
 				"annotations": [],
 				"type": "AzureSqlMI",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
+					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "altrasqlappformsadm"
+					}
 				},
 				"connectVia": {
 					"referenceName": "AzureSqlPrivateEndPointConnection",
@@ -15068,7 +15082,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]",
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		},
 		{
@@ -15153,7 +15168,7 @@
 							"referenceName": "ALTADFKeyVault",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "NextlyUser"
+						"secretName": "PromoCodeMaintenance-ro"
 					}
 				},
 				"connectVia": {
@@ -15237,6 +15252,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_DynamicCampaigns_UAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15259,7 +15281,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaignsDev')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaigns')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaigns')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_DynamicCampaigns_UAT')]"
 			]
 		},
 		{
@@ -15322,6 +15345,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionsTransfersUAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15335,7 +15365,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionsTransfersUAT')]"
 			]
 		},
 		{
@@ -15349,6 +15380,13 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_DeleteRecordsBefore18Months",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15370,7 +15408,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months_UAT')]"
 			]
 		},
 		{
@@ -15391,6 +15430,13 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_InactiveEAgreementNumberDataTransfer_UAT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15416,7 +15462,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransferDev')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer_UAT')]"
 			]
 		},
 		{
