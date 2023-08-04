@@ -108,6 +108,122 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "CP_DIGITALBANKING_PERSUSERFIELD",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "USERFIELDCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USERFIELDCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VALUE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VALUELASTUPDATEDDA",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "FIRSTNAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FIRSTNAME",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTNAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTNAME",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_PERSUSERFIELD",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_PERSUSERFIELD",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
