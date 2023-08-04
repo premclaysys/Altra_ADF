@@ -244,8 +244,9 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "OracleSink",
-						"writeBatchSize": 10000
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -258,7 +259,10 @@
 								},
 								"sink": {
 									"name": "ORGNBR",
-									"type": "Decimal"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
 								}
 							},
 							{
@@ -268,7 +272,8 @@
 								},
 								"sink": {
 									"name": "USERFIELDCD",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							},
 							{
@@ -278,7 +283,8 @@
 								},
 								"sink": {
 									"name": "VALUE",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							},
 							{
@@ -287,8 +293,9 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "VALUELASTUPDATEDDATE",
-									"type": "DateTime"
+									"name": "VALUELASTUPDATEDDA",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							},
 							{
@@ -298,7 +305,8 @@
 								},
 								"sink": {
 									"name": "ORGNAME",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
 						],
@@ -317,7 +325,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_O_VW_DIGITALBANKING_ORGSUSERFIELD",
+						"referenceName": "ds_S_DIGITALBANKING_ORGSUSERFIELD",
 						"type": "DatasetReference"
 					}
 				]
