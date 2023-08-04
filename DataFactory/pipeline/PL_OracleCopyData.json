@@ -329,6 +329,100 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "DIGITALBANKING_ACCTLOCKOUT",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "LOCKOUTFLAGCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LOCKOUTFLAGCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "VW_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
