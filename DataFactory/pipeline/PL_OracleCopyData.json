@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "VW_DIGITALBANKING_ORGPERSROLE",
+				"name": "DIGITALBANKING_ORGPERSROLE",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -110,7 +110,7 @@
 				]
 			},
 			{
-				"name": "CP_DIGITALBANKING_PERSUSERFIELD",
+				"name": "DIGITALBANKING_PERSUSERFIELD",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
