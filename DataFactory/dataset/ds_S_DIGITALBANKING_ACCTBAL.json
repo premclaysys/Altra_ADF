@@ -1,0 +1,50 @@
+{
+	"name": "ds_S_DIGITALBANKING_ACCTBAL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ACCTBALID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "BALAMT",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BALCATDESC",
+				"type": "varchar"
+			},
+			{
+				"name": "BALTYPCD",
+				"type": "varchar"
+			},
+			{
+				"name": "BALTYPDESC",
+				"type": "varchar"
+			},
+			{
+				"name": "EFFDATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_ACCTBAL"
+		}
+	}
+}

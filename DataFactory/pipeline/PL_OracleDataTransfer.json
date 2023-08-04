@@ -1,0 +1,691 @@
+{
+	"name": "PL_OracleDataTransfer",
+	"properties": {
+		"description": "Copy data from oracle to SQL",
+		"activities": [
+			{
+				"name": "ACCTBAL Data transfer",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "BALAMT",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BALAMT",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "BALCATDESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BALCATDESC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BALTYPCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BALTYPCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BALTYPDESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BALTYPDESC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTBAL",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_ACCTBAL",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ACCTACCTROLEPERS Data transfer",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ACCTACCTROLEORG Data transfer",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTROLECD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCTROLECD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "ORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "EAGREEMENT Data Transfer",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AGREENBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AGREENBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "BYORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BYORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_EAGREEMENT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_EAGREEMENT",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ACCTDETAILS Data Transfer",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "CURRACCTSTATCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CURRACCTSTATCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MJACCTTYPCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MJACCTTYPCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRMIACCTTYPCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CURRMIACCTTYPCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MIACCTTYPDESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MIACCTTYPDESC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MICUSTDESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MICUSTDESC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTDESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCTDESC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATEMAT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATEMAT",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "TAXRPTFORORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "TAXRPTFORORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "TAXRPTFORPERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "TAXRPTFORPERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "CONTRACTDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "CONTRACTDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRDUEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "CURRDUEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "PRIORYEARINTERESTPAID",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PRIORYEARINTERESTPAID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "CURRENTYEARINTERESTPAID",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CURRENTYEARINTERESTPAID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "REMAININGPAYMENTS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "REMAININGPAYMENTS",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "REGULARPAYMENTAMOUNT",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "REGULARPAYMENTAMOUNT",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "NOTEBALPERDIEM",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NOTEBALPERDIEM",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "NOTEINTRATE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NOTEINTRATE",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTDETAILS",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_ACCTDETAILS",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
