@@ -111,5 +111,6 @@
 			"schema": "dbo",
 			"table": "Transactions_Staging"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

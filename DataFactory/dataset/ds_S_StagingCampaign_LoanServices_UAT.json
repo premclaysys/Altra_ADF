@@ -54,5 +54,6 @@
 			"schema": "dbo",
 			"table": "CampaignLoanServicesStaging"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
