@@ -147,7 +147,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-06-27T16:27:58Z"
+				"lastPublishTime": "2023-08-02T08:02:20Z"
 			},
 			"dependsOn": []
 		},
@@ -1179,7 +1179,8 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-08-02T08:02:20Z"
 			},
 			"dependsOn": []
 		},
@@ -2000,50 +2001,7 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-05T06:37:03Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STr_PromocodeRecordsTransfer')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_PromocodeReordsTransferDev",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_PromocodeReordsTransfer",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-07-20T13:30:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"minutes": [
-								30
-							],
-							"hours": [
-								13
-							]
-						}
-					}
-				}
+				"lastPublishTime": "2023-08-02T09:08:30Z"
 			},
 			"dependsOn": []
 		},
@@ -2136,6 +2094,58 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/STr_PromocodeRecordsTransfer')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_PromocodeReordsTransferDev",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_PromocodeReordsTransfer",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_PromocodeReordsTransfer_UAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-07-20T13:30:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								13
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer_UAT')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",

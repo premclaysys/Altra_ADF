@@ -1079,7 +1079,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-06-27T16:27:58Z"
+				"lastPublishTime": "2023-07-31T06:37:54Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Transaction_UAT_UATSQL_Server_Connection')]"

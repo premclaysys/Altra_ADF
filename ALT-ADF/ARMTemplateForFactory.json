@@ -142,7 +142,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-06-27T16:27:58Z"
+				"lastPublishTime": "2023-07-31T06:37:54Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Transaction_UAT_UATSQL_Server_Connection')]"
@@ -4594,7 +4594,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-13T09:39:36Z"
+				"lastPublishTime": "2023-08-02T09:08:30Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_SS_DynamicCampaignMembers')]",
@@ -5042,7 +5042,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-06-27T16:27:58Z"
+				"lastPublishTime": "2023-08-02T08:02:20Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_O_Connectivity_InactiveEagreement')]",
@@ -6079,7 +6079,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-21T14:43:06Z"
+				"lastPublishTime": "2023-08-02T08:02:20Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_ss_PromoCodeMaintenance')]",
@@ -7119,7 +7119,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-21T14:43:06Z"
+				"lastPublishTime": "2023-08-02T08:02:20Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_ss_PromoCodeMaintenance')]",
@@ -8157,7 +8157,8 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-08-02T08:02:20Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_ss_PromoCodeMaintenance')]",
@@ -10207,7 +10208,7 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-07-05T06:37:03Z"
+				"lastPublishTime": "2023-08-02T09:08:30Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_O_AltraServerConnectivity')]",
@@ -15306,6 +15307,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_PromocodeReordsTransfer_UAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15328,7 +15336,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransferDev')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer_UAT')]"
 			]
 		},
 		{
