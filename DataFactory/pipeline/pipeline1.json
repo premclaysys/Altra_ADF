@@ -1,0 +1,326 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "TransferID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "TransferID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "UUID",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "UUID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "FromAccount",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "FromAccount",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "FromSLType",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FromSLType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FromSuffix",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FromSuffix",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Description",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NextTransferDate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NextTransferDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Amount",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Amount",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "TransferType",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransferType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceOption",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceOption",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceDays",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceDays",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceWeeks",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceWeeks",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceDayofWeek",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceDayofWeek",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceMonthDay",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceMonthDay",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceMonths",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceMonths",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceMonthWeek",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceMonthWeek",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceMonthDayofWeek",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceMonthDayofWeek",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceYearMonth",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceYearMonth",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceYearDay",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceYearDay",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceYearWeek",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceYearWeek",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ReoccuranceYearDayofWeek",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ReoccuranceYearDayofWeek",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "StartDateTime",
+									"type": "String"
+								},
+								"sink": {
+									"name": "StartDateTime",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "EndEnum",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "EndEnum",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "EndOccurances",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EndOccurances",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EndDateTime",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EndDateTime",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32"
+								}
+							}
+						]
+					}
+				},
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": []
+	}
+}

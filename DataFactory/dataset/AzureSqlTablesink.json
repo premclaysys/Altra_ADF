@@ -1,0 +1,152 @@
+{
+	"name": "AzureSqlTablesink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TransferID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "UUID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "FromAccount",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "FromSLType",
+				"type": "varchar"
+			},
+			{
+				"name": "FromSuffix",
+				"type": "varchar"
+			},
+			{
+				"name": "FeeSuffix",
+				"type": "varchar"
+			},
+			{
+				"name": "FeeAccountType",
+				"type": "varchar"
+			},
+			{
+				"name": "ACHID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "BankName",
+				"type": "varchar"
+			},
+			{
+				"name": "MaskedAccountNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Description",
+				"type": "varchar"
+			},
+			{
+				"name": "NextTransferDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TransferType",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceOption",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceDays",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceWeeks",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceDayofWeek",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceMonthDay",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceMonths",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceMonthWeek",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceMonthDayofWeek",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceYearMonth",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceYearDay",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceYearWeek",
+				"type": "varchar"
+			},
+			{
+				"name": "ReoccuranceYearDayofWeek",
+				"type": "varchar"
+			},
+			{
+				"name": "StartDateTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "EndEnum",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EndOccurances",
+				"type": "varchar"
+			},
+			{
+				"name": "EndDateTime",
+				"type": "varchar"
+			},
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ScheduledACHTrasnfers_staging"
+		}
+	}
+}
