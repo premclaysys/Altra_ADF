@@ -17,6 +17,11 @@
 			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
+		"BusinessData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessData'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
+		},
 		"Dynamic Campaigns_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
@@ -32,23 +37,20 @@
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=Transactions.UAT;User ID=altrasqlappformsadm"
 		},
+		"ls_transactiondb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_transactiondb'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
-		},
-		"BusinessData_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "ALTDevsql01"
 		},
 		"BusinessDataDev_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "ALTDevsql01"
 		},
 		"BusinessDataQA_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "ALTDevsql01"
-		},
-		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "ALTDevsql01"
 		},
@@ -96,26 +98,26 @@
 					"Altra_Test_Link_connectionString": {
 						"value": "[parameters('Altra_Test_Link_connectionString')]"
 					},
+					"BusinessData_connectionString": {
+						"value": "[parameters('BusinessData_connectionString')]"
+					},
 					"Dynamic Campaigns_connectionString": {
 						"value": "[parameters('Dynamic Campaigns_connectionString')]"
 					},
 					"PromoCode_connectionString": {
 						"value": "[parameters('PromoCode_connectionString')]"
 					},
+					"ls_transactiondb_connectionString": {
+						"value": "[parameters('ls_transactiondb_connectionString')]"
+					},
 					"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('ALTADFKeyVault_properties_typeProperties_baseUrl')]"
-					},
-					"BusinessData_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('BusinessData_properties_typeProperties_connectionString_secretName')]"
 					},
 					"BusinessDataDev_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('BusinessDataDev_properties_typeProperties_connectionString_secretName')]"
 					},
 					"BusinessDataQA_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('BusinessDataQA_properties_typeProperties_connectionString_secretName')]"
-					},
-					"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
 					},
 					"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
 						"value": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]"
