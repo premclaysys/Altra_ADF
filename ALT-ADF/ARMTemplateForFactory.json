@@ -17,18 +17,6 @@
 			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
-		"BusinessData_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessData'"
-		},
-		"BusinessDataDev_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
-		},
-		"BusinessDataQA_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDataQA'"
-		},
 		"Dynamic Campaigns_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
@@ -48,9 +36,21 @@
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
+		"BusinessData_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01"
+		},
+		"BusinessDataDev_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01"
+		},
+		"BusinessDataQA_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01"
+		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
-			"defaultValue": "ALTDevsql01TransactionsDev"
+			"defaultValue": "ALTDevsql01"
 		},
 		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
 			"type": "string",
@@ -15095,10 +15095,19 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessData_connectionString')]"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('BusinessData_properties_typeProperties_connectionString_secretName')]"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/BusinessDataDev')]",
@@ -15108,10 +15117,19 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessDataDev_connectionString')]"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('BusinessDataDev_properties_typeProperties_connectionString_secretName')]"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/BusinessDataQA')]",
@@ -15121,10 +15139,19 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('BusinessDataQA_connectionString')]"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('BusinessDataQA_properties_typeProperties_connectionString_secretName')]"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Dynamic Campaigns')]",

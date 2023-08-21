@@ -17,18 +17,6 @@
 			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
-		"BusinessData_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessData'"
-		},
-		"BusinessDataDev_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'"
-		},
-		"BusinessDataQA_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BusinessDataQA'"
-		},
 		"Dynamic Campaigns_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
@@ -48,9 +36,21 @@
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
+		"BusinessData_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01"
+		},
+		"BusinessDataDev_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01"
+		},
+		"BusinessDataQA_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ALTDevsql01"
+		},
 		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
-			"defaultValue": "ALTDevsql01TransactionsDev"
+			"defaultValue": "ALTDevsql01"
 		},
 		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
 			"type": "string",
@@ -93,17 +93,38 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"BusinessData_connectionString": {
-						"value": "[parameters('BusinessData_connectionString')]"
+					"Altra_Test_Link_connectionString": {
+						"value": "[parameters('Altra_Test_Link_connectionString')]"
 					},
-					"BusinessDataDev_connectionString": {
-						"value": "[parameters('BusinessDataDev_connectionString')]"
+					"Dynamic Campaigns_connectionString": {
+						"value": "[parameters('Dynamic Campaigns_connectionString')]"
 					},
-					"BusinessDataQA_connectionString": {
-						"value": "[parameters('BusinessDataQA_connectionString')]"
+					"PromoCode_connectionString": {
+						"value": "[parameters('PromoCode_connectionString')]"
 					},
 					"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('ALTADFKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"BusinessData_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('BusinessData_properties_typeProperties_connectionString_secretName')]"
+					},
+					"BusinessDataDev_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('BusinessDataDev_properties_typeProperties_connectionString_secretName')]"
+					},
+					"BusinessDataQA_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('BusinessDataQA_properties_typeProperties_connectionString_secretName')]"
+					},
+					"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
+					},
+					"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]"
+					},
+					"AzureSqlMIPRODUAT_properties_groupId": {
+						"value": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]"
+					},
+					"AzureSqlMIPRODUAT_properties_fqdns": {
+						"value": "[parameters('AzureSqlMIPRODUAT_properties_fqdns')]"
 					}
 				}
 			},
@@ -122,27 +143,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Altra_Test_Link_connectionString": {
-						"value": "[parameters('Altra_Test_Link_connectionString')]"
-					},
-					"Dynamic Campaigns_connectionString": {
-						"value": "[parameters('Dynamic Campaigns_connectionString')]"
-					},
-					"PromoCode_connectionString": {
-						"value": "[parameters('PromoCode_connectionString')]"
-					},
-					"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
-					},
-					"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]"
-					},
-					"AzureSqlMIPRODUAT_properties_groupId": {
-						"value": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]"
-					},
-					"AzureSqlMIPRODUAT_properties_fqdns": {
-						"value": "[parameters('AzureSqlMIPRODUAT_properties_fqdns')]"
 					}
 				}
 			},

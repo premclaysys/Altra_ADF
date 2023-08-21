@@ -6,45 +6,1198 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "ALT-ADF"
-		},
-		"Altra_Test_Link_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Altra_Test_Link'",
-			"defaultValue": "host=dnatestdb;port=1521;sid=attst1;user id=NEXTLYTRANSACTIONS_RO"
-		},
-		"Dynamic Campaigns_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
-			"defaultValue": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
-		},
-		"PromoCode_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
-			"defaultValue": "Integrated Security=False;Data Source=MRMTSTOPDB01;Initial Catalog=MRMOAO_Data;User ID=PromoCodeMaintenance-ro"
-		},
-		"ls_transactiondb_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "ALTDevsql01TransactionsDev"
-		},
-		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/altra-cu-prod-srv-rg/providers/Microsoft.Sql/managedInstances/altraprodsql01"
-		},
-		"AzureSqlMIPRODUAT_properties_groupId": {
-			"type": "string",
-			"defaultValue": "managedInstance"
-		},
-		"AzureSqlMIPRODUAT_properties_fqdns": {
-			"type": "array",
-			"defaultValue": [
-				"altraprodsql01.fbfb1f231f1d.database.windows.net"
-			]
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DeleteReordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DigitalBankingConectivity')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionSortIndex",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalAmount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalBalance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LoanInterestAmount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CURRRTXNSTATCD",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CHECKNBR",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions_Staging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DigitalBankingTransactionRecord')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionSortIndex",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "PrincipalAmount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "PrincipalBalance",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "LoanInterestAmount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "CURRRTXNSTATCD",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CHECKNBR",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoan')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LoanID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "CreditLimit",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LoanMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoan"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoanServices')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessLoanFlag",
+						"type": "bit"
+					},
+					{
+						"name": "LoanGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoanServices_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessLoanFlag",
+						"type": "bit"
+					},
+					{
+						"name": "LoanGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoan_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LoanID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "CreditLimit",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LoanMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoan"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignMember')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "MemberStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "MembershipOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "MembershipType",
+						"type": "varchar"
+					},
+					{
+						"name": "ZIPCode",
+						"type": "varchar"
+					},
+					{
+						"name": "City",
+						"type": "varchar"
+					},
+					{
+						"name": "State",
+						"type": "varchar"
+					},
+					{
+						"name": "BirthDate",
+						"type": "date"
+					},
+					{
+						"name": "MarketingOptOut",
+						"type": "bit"
+					},
+					{
+						"name": "NewMemberFlag",
+						"type": "bit"
+					},
+					{
+						"name": "OnlineBankingUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "MobileAppUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "QuickAccessUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "EStatementsUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "BillPayUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ScheduledTransferUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "RemoteDepositUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "SendMoneyUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "MobileWalletUserFlag",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignMember"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignMember_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "MemberStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "MembershipOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "MembershipType",
+						"type": "varchar"
+					},
+					{
+						"name": "ZIPCode",
+						"type": "varchar"
+					},
+					{
+						"name": "City",
+						"type": "varchar"
+					},
+					{
+						"name": "State",
+						"type": "varchar"
+					},
+					{
+						"name": "BirthDate",
+						"type": "date"
+					},
+					{
+						"name": "MarketingOptOut",
+						"type": "bit"
+					},
+					{
+						"name": "NewMemberFlag",
+						"type": "bit"
+					},
+					{
+						"name": "OnlineBankingUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "MobileAppUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "QuickAccessUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "EStatementsUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "BillPayUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ScheduledTransferUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "RemoteDepositUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "SendMoneyUserFlag",
+						"type": "bit"
+					},
+					{
+						"name": "MobileWalletUserFlag",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignMember"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignShare')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ShareID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ShareMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShare"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignShareServices')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessShareFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ShareGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShareServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignShareServices_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessShareFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ShareGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShareServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignShare_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ShareID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ShareMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignShare"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToActiveAgrmnt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "varchar"
+					},
+					{
+						"name": "PERSNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "DATELASTMAINT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DNAActiveAgrmntData"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToActiveAgrmnt_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "varchar"
+					},
+					{
+						"name": "PERSNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "varchar"
+					},
+					{
+						"name": "DATELASTMAINT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DNAActiveAgrmntData"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlerts')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "AccountNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionSortIndex",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalAmount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalBalance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LoanInterestAmount",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transaction_AlertStaging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_InsertDataToAlertsQA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataQA",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "AccountNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionSortIndex",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalAmount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalBalance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LoanInterestAmount",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transaction_AlertStaging"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticData_Staging')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -413,1153 +1566,6 @@
 					"schema": "dbo",
 					"table": "MiniOAOPromocodeMaintenance_Staging"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenanceStaging_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PromoCode",
-						"type": "varchar"
-					},
-					{
-						"name": "SavingsAccount",
-						"type": "bit"
-					},
-					{
-						"name": "CheckingAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "CertificateAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "MoneyMarketAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "PromoType",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion",
-						"type": "varchar"
-					},
-					{
-						"name": "Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Promo Start Date",
-						"type": "date"
-					},
-					{
-						"name": "Administrator I",
-						"type": "varchar"
-					},
-					{
-						"name": "Administrator II",
-						"type": "varchar"
-					},
-					{
-						"name": "Approvers Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Expiration Date",
-						"type": "date"
-					},
-					{
-						"name": "Platforms Impacted",
-						"type": "varchar"
-					},
-					{
-						"name": "Age From",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Age To",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Existing Products",
-						"type": "varchar"
-					},
-					{
-						"name": "Existing Products Checking Types",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Zip Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Open Office",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Balance History Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Opening Date From",
-						"type": "date"
-					},
-					{
-						"name": "Opening Date To",
-						"type": "date"
-					},
-					{
-						"name": "Transaction Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Transaction Details",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Completed Date From",
-						"type": "date"
-					},
-					{
-						"name": "Completed Date To",
-						"type": "date"
-					},
-					{
-						"name": "Criteria",
-						"type": "varchar"
-					},
-					{
-						"name": "Can Qualify more than once",
-						"type": "bit"
-					},
-					{
-						"name": "Reward Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Disclosures",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details within",
-						"type": "varchar"
-					},
-					{
-						"name": "Rate",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion Type Youth",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History",
-						"type": "varchar"
-					},
-					{
-						"name": "Checkings",
-						"type": "varchar"
-					},
-					{
-						"name": "Savings",
-						"type": "varchar"
-					},
-					{
-						"name": "ActiveInactive",
-						"type": "varchar"
-					},
-					{
-						"name": "HubID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Promo Category",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DetailsQualifications",
-						"type": "varchar"
-					},
-					{
-						"name": "Marketing Materials",
-						"type": "varchar"
-					},
-					{
-						"name": "Market",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Reward Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Minimum Balance",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Transaction Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "New Account Deposit Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Days",
-						"type": "varchar"
-					},
-					{
-						"name": "Aggregate No",
-						"type": "varchar"
-					},
-					{
-						"name": "Member Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Applicable Region or Market",
-						"type": "varchar"
-					},
-					{
-						"name": "UId",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 0
-					},
-					{
-						"name": "Source",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromocodeMaintenance_Staging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignLoan')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "LoanID",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanFamilyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "LoanCloseDate",
-						"type": "date"
-					},
-					{
-						"name": "CurrentBalance",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "CreditLimit",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "LoanMaturityDate",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignLoanStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignLoanServices')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "LoanFamilyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeDescription",
-						"type": "varchar"
-					},
-					{
-						"name": "BusinessLoanFlag",
-						"type": "bit"
-					},
-					{
-						"name": "LoanGroup1",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanGroup2",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanGroup3",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanGroup4",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignLoanServicesStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignLoanServices_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "LoanFamilyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeDescription",
-						"type": "varchar"
-					},
-					{
-						"name": "BusinessLoanFlag",
-						"type": "bit"
-					},
-					{
-						"name": "LoanGroup1",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanGroup2",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanGroup3",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanGroup4",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignLoanServicesStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignLoan_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "LoanID",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanFamilyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "LoanCloseDate",
-						"type": "date"
-					},
-					{
-						"name": "CurrentBalance",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "CreditLimit",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "LoanMaturityDate",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignLoanStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignShare')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ShareID",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeGroupCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "ShareCloseDate",
-						"type": "date"
-					},
-					{
-						"name": "CurrentBalance",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "ShareMaturityDate",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignShareStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignShareServices')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "ShareTypeGroupCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeDescription",
-						"type": "varchar"
-					},
-					{
-						"name": "BusinessShareFlag",
-						"type": "bit"
-					},
-					{
-						"name": "ShareGroup1",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup2",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup3",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup4",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignShareServicesStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignShareServices_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "ShareTypeGroupCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeDescription",
-						"type": "varchar"
-					},
-					{
-						"name": "BusinessShareFlag",
-						"type": "bit"
-					},
-					{
-						"name": "ShareGroup1",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup2",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup3",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup4",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignShareServicesStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignShare_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ShareID",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeGroupCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "ShareCloseDate",
-						"type": "date"
-					},
-					{
-						"name": "CurrentBalance",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "ShareMaturityDate",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignShareStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampignMembers')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "MemberStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "MembershipOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "MembershipType",
-						"type": "varchar"
-					},
-					{
-						"name": "ZIPCode",
-						"type": "varchar"
-					},
-					{
-						"name": "City",
-						"type": "varchar"
-					},
-					{
-						"name": "State",
-						"type": "varchar"
-					},
-					{
-						"name": "BirthDate",
-						"type": "date"
-					},
-					{
-						"name": "MarketingOptOut",
-						"type": "bit"
-					},
-					{
-						"name": "NewMemberFlag",
-						"type": "bit"
-					},
-					{
-						"name": "OnlineBankingUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "MobileAppUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "QuickAccessUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "EStatementsUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "BillPayUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "ScheduledTransferUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "RemoteDepositUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "SendMoneyUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "MobileWalletUserFlag",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignMemberStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampignMembers_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "MemberStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "MembershipOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "MembershipType",
-						"type": "varchar"
-					},
-					{
-						"name": "ZIPCode",
-						"type": "varchar"
-					},
-					{
-						"name": "City",
-						"type": "varchar"
-					},
-					{
-						"name": "State",
-						"type": "varchar"
-					},
-					{
-						"name": "BirthDate",
-						"type": "date"
-					},
-					{
-						"name": "MarketingOptOut",
-						"type": "bit"
-					},
-					{
-						"name": "NewMemberFlag",
-						"type": "bit"
-					},
-					{
-						"name": "OnlineBankingUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "MobileAppUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "QuickAccessUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "EStatementsUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "BillPayUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "ScheduledTransferUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "RemoteDepositUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "SendMoneyUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "MobileWalletUserFlag",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignMemberStaging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Altra_Test_Link')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Oracle",
-				"typeProperties": {
-					"connectionString": "[parameters('Altra_Test_Link_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "nextlytransactionsRO"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AltraOracleIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Dynamic Campaigns')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('Dynamic Campaigns_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "NextlyMarketing"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AltraOracleIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PromoCode')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('PromoCode_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "PromoCodeMaintenance-ro"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AltraOracleIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ls_transactiondb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('ls_transactiondb_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlPrivateEndPointConnection')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "AutoResolve",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 10,
-							"cleanup": false,
-							"customProperties": []
-						},
-						"pipelineExternalComputeScaleProperties": {
-							"timeToLive": 60
-						}
-					}
-				},
-				"managedVirtualNetwork": {
-					"type": "ManagedVirtualNetworkReference",
-					"referenceName": "default"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default/AzureSqlMIPRODUAT')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"privateLinkResourceId": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]",
-				"groupId": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]",
-				"fqdns": "[parameters('AzureSqlMIPRODUAT_properties_fqdns')]"
 			},
 			"dependsOn": []
 		}
