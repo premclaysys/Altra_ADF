@@ -12,7 +12,13 @@
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
 		},
 		"BusinessData_connectionString": {
-			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataQA;User ID=altsqldev"
+		},
+		"BusinessDataDev_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataDev;User ID=altsqldev"
+		},
+		"BusinessDataQA_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataQA;User ID=altsqldev"
 		},
 		"Dynamic Campaigns_connectionString": {
 			"value": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
@@ -28,12 +34,6 @@
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
-		},
-		"BusinessDataDev_properties_typeProperties_connectionString_secretName": {
-			"value": "ALTDevsql01"
-		},
-		"BusinessDataQA_properties_typeProperties_connectionString_secretName": {
-			"value": "ALTDevsql01"
 		},
 		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
 			"value": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/altra-cu-prod-srv-rg/providers/Microsoft.Sql/managedInstances/altraprodsql01"
