@@ -15,7 +15,7 @@
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataQA;User ID=altsqldev"
 		},
 		"BusinessDataDev_connectionString": {
-			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataOpt;User ID=altsqldev"
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataDev;User ID=altsqldev"
 		},
 		"BusinessDataQA_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataQA;User ID=altsqldev"

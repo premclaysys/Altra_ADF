@@ -20,7 +20,7 @@
 		"BusinessDataDev_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BusinessDataDev'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataOpt;User ID=altsqldev"
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=BusinessDataDev;User ID=altsqldev"
 		},
 		"BusinessDataQA_connectionString": {
 			"type": "secureString",
