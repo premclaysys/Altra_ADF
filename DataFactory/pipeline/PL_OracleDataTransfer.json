@@ -6,8 +6,6 @@
 			{
 				"name": "ACCTBAL Data transfer",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -38,53 +36,11 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "AccountNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "CURRACCTSTATCD",
-									"type": "String"
-								},
-								"sink": {
-									"name": "AccountTransactionNumber",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "MAJORMINORCD",
-									"type": "String"
-								},
-								"sink": {
-									"name": "TransactionID",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "SUBACCTNBR",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "TransactionFiscalDate",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "BALANCETYPE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "TransactionDateTime",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
 								}
 							},
 							{
@@ -93,20 +49,11 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "TransactionEffectiveDate",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "AVAILABLEBALANCE_ONLI",
-									"type": "Double"
-								},
-								"sink": {
-									"name": "TransactionTypeCode",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"name": "BALAMT",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
 								}
 							},
 							{
@@ -115,9 +62,68 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "TransactionType",
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRACCTSTATCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CURRACCTSTATCD",
 									"type": "String",
-									"physicalType": "nvarchar"
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MAJORMINORCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MAJORMINORCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SUBACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SUBACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "BALANCETYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BALANCETYPE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AVAILABLEBALANCE_ONLI",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "AVAILABLEBALANCE_ONLI",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
 								}
 							}
 						],
@@ -717,6 +723,17 @@
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "ESTDATEMAT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ESTDATEMAT",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
