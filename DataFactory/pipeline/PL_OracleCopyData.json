@@ -5,8 +5,6 @@
 			{
 				"name": "DIGITALBANKING_ORGPERSROLE",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -237,8 +235,6 @@
 			{
 				"name": "DIGITALBANKING_ORGSUSERFIELD",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -344,8 +340,6 @@
 			{
 				"name": "DIGITALBANKING_ACCTLOCKOUT",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
