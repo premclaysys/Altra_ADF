@@ -38,11 +38,53 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "ACCTNBR",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 10
+									"name": "AccountNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRACCTSTATCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AccountTransactionNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MAJORMINORCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SUBACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "TransactionFiscalDate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BALANCETYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TransactionDateTime",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -51,44 +93,20 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "BALAMT",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 10
+									"name": "TransactionEffectiveDate",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "BALCATDESC",
-									"type": "String"
+									"name": "AVAILABLEBALANCE_ONLI",
+									"type": "Double"
 								},
 								"sink": {
-									"name": "BALCATDESC",
+									"name": "TransactionTypeCode",
 									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "BALTYPCD",
-									"type": "String"
-								},
-								"sink": {
-									"name": "BALTYPCD",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "BALTYPDESC",
-									"type": "String"
-								},
-								"sink": {
-									"name": "BALTYPDESC",
-									"type": "String",
-									"physicalType": "varchar"
+									"physicalType": "nvarchar"
 								}
 							},
 							{
@@ -97,9 +115,9 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "EFFDATE",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							}
 						],
@@ -198,6 +216,17 @@
 									"name": "INACTIVEDATE",
 									"type": "DateTime",
 									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTROLECD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ACCTROLECD",
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
 						],
@@ -614,19 +643,6 @@
 							},
 							{
 								"source": {
-									"name": "REMAININGPAYMENTS",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "REMAININGPAYMENTS",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 20
-								}
-							},
-							{
-								"source": {
 									"name": "REGULARPAYMENTAMOUNT",
 									"type": "Decimal"
 								},
@@ -662,6 +678,45 @@
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "DEFREMTERM",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "DEFREMTERM",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "TOTALAMOUNTCURRENTLYDUE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "TOTALAMOUNTCURRENTLYDUE",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "AMOUNTTOPAYCURRENT",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "AMOUNTTOPAYCURRENT",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
 								}
 							}
 						],
