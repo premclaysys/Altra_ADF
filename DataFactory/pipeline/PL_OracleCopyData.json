@@ -32,6 +32,13 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
+								"sink": {
+									"name": "ORGPERSROLE_ID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
 								"source": {
 									"name": "ORGNBR",
 									"type": "Decimal"
@@ -372,8 +379,8 @@
 									"name": "ACCTNBR",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 1,
-									"precision": 10
+									"scale": 2,
+									"precision": 16
 								}
 							},
 							{
