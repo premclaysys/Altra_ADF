@@ -215,7 +215,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select NOTEINTRATE from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where ACCTNBR='1710632604'",
+						"oracleReaderQuery": "select NOTEINTRATE,ACCTNBR from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where ACCTNBR='1710632604'",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
