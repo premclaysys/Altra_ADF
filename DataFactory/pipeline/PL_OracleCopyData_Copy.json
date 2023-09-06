@@ -419,7 +419,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DIGITALBANKING_ACCTLOCKOUT",
+						"referenceName": "ds_S_DIGITALBANKING_ACCTLOCKOUT_Copy",
 						"type": "DatasetReference"
 					}
 				]
