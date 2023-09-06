@@ -323,13 +323,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT ACCTNBR,NOTEINTRATE from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where NOTEINTRATE like '%.00000%'",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "OracleSource",
+						"oracleReaderQuery": "select ACCTNBR, NOTEINTRATE FROM DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where NOTEINTRATE like '%.00000%'",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DIGITALBANKING_ACCTDETAILS",
+						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTDETAILS",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
