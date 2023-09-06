@@ -255,6 +255,8 @@
 			{
 				"name": "Lookup3",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -293,37 +295,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "\nselect ACCTNBR, Max(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0))))) from \nDIGITALBANKING_ACCTDETAILS group by Acctnbr having\nMax(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0)))))=10",
+						"oracleReaderQuery": "select ACCTNBR, Max(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0))))) from \nDIGITALBANKING_ACCTDETAILS group by Acctnbr having\nMax(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0)))))=23",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTDETAILS",
-						"type": "DatasetReference"
-					}
-				}
-			},
-			{
-				"name": "Lookup5",
-				"type": "Lookup",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "\nselect ACCTNBR, Max(Length(SUBSTR(NOTEINTRATE,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1))))) from \nDNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS group by Acctnbr having\n Max(Length(SUBSTR(NOTEINTRATE,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1)))))=23",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "ds_S_DIGITALBANKING_ACCTDETAILS",
 						"type": "DatasetReference"
 					}
 				}
