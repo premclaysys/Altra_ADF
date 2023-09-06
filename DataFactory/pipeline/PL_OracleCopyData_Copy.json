@@ -401,6 +401,106 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AGREENBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "AGREENBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "BYORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BYORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "ACCTNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ACCTNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_O_VW_DIGITALBANKING_EAGREEMENT_MAPPING",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_DIGITALBANKING_EAGREEMENT_MAPPING",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
