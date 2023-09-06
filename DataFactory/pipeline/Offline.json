@@ -295,7 +295,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select ACCTNBR, Max(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0))))) from \nDIGITALBANKING_ACCTDETAILS group by Acctnbr having\nMax(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0)))))=23",
+						"oracleReaderQuery": "\nselect ACCTNBR, Max(Length(SUBSTR(NOTEINTRATE,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1))))) from \nDNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS group by Acctnbr having\n Max(Length(SUBSTR(NOTEINTRATE,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1)))))=23",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
