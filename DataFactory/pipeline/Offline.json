@@ -324,7 +324,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT * from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where NOTEINTRATE like '%.00000%'",
+						"sqlReaderQuery": "SELECT ACCTNBR,NOTEINTRATE from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where NOTEINTRATE like '%.00000%'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
