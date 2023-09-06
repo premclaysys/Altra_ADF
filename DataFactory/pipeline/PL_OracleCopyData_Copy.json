@@ -238,7 +238,9 @@
 								"sink": {
 									"name": "ORGNBR",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
 								}
 							},
 							{
