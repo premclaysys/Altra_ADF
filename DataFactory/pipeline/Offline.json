@@ -269,7 +269,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT ACCTNBR FROM DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS  where Max(LENGTH(SUBSTR(NOTEINTRATE ,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1))))) ='23' group by ACCTNBR",
+						"oracleReaderQuery": "SELECT ACCTNBR, Max(LENGTH(SUBSTR(NOTEINTRATE ,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1))))) FROM DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS  group by ACCTNBR",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
