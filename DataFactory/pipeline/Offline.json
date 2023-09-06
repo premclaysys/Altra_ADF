@@ -302,6 +302,32 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Lookup5",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT * from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where NOTEINTRATE like '%.00000%'",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_DIGITALBANKING_ACCTDETAILS",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
 			}
 		],
 		"annotations": []
