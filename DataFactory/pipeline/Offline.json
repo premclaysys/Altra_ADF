@@ -130,40 +130,6 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
-								"sink": {
-									"name": "ID",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"sink": {
-									"name": "AGREENBR",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 16
-								}
-							},
-							{
-								"sink": {
-									"name": "PERSNBR",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 16
-								}
-							},
-							{
-								"sink": {
-									"name": "BYORGNBR",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 16
-								}
-							},
-							{
 								"source": {
 									"name": "ACCTNBR",
 									"type": "Decimal"
@@ -174,6 +140,39 @@
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 16
+								}
+							},
+							{
+								"source": {
+									"name": "USERFIELDCD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USERFIELDCD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VALUE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
