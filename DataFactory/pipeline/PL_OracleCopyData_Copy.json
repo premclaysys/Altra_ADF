@@ -403,7 +403,7 @@
 				]
 			},
 			{
-				"name": "Copy data1",
+				"name": "DIGITALBANKING_EAGREEMENT_MAPPING",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
