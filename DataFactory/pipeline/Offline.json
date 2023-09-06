@@ -203,8 +203,6 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -267,14 +265,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select ACCTNBR from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where LENGTH(SUBSTR(NOTEINTRATE ,INSTR(NOTEINTRATE,'.',0,1)+1,\n(Length(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1)))))=20 from  \nDNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS",
+						"oracleReaderQuery": "SELECT INSTR(NOTEINTRATE,'.', -1, 1) From DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS ",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_VW_DIGITALBANKING_ACCTDETAILS",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
