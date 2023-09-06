@@ -228,6 +228,8 @@
 			{
 				"name": "Lookup2",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -265,7 +267,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT ACCTNBR FROM DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS  where MAX(LENGTH(SUBSTR(NOTEINTRATE,INSTR(NOTEINTRATE,'.',0,1)+1,(LENGTH(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1))))) Group by  ACCTNBR",
+						"oracleReaderQuery": "SELECT ACCTNBR FROM DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS  where MAX(LENGTH(SUBSTR(NOTEINTRATE,INSTR(NOTEINTRATE,'.',0,1)+1,(LENGTH(NOTEINTRATE)-INSTR(NOTEINTRATE,'.',0,1))))) ",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
