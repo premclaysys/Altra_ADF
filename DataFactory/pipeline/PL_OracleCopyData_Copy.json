@@ -260,9 +260,7 @@
 								"sink": {
 									"name": "ORGNBR",
 									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 10
+									"physicalType": "decimal"
 								}
 							},
 							{
@@ -325,7 +323,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DIGITALBANKING_ORGSUSERFIELD",
+						"referenceName": "ds_S_DIGITALBANKING_ORGSUSERFIELD_Copy",
 						"type": "DatasetReference"
 					}
 				]
