@@ -181,28 +181,6 @@
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
-							},
-							{
-								"source": {
-									"name": "FIRSTNAME",
-									"type": "String"
-								},
-								"sink": {
-									"name": "FIRSTNAME",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTNAME",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTNAME",
-									"type": "String",
-									"physicalType": "varchar"
-								}
 							}
 						],
 						"typeConversion": true,
@@ -220,7 +198,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DIGITALBANKING_PERSUSERFIELD",
+						"referenceName": "ds_S_DIGITALBANKING_PERSUSERFIELD_copy1",
 						"type": "DatasetReference"
 					}
 				]
