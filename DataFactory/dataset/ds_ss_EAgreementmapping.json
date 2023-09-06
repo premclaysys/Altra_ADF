@@ -1,0 +1,46 @@
+{
+	"name": "ds_ss_EAgreementmapping",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDataDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AGREENBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "PERSNBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "BYORGNBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "ACCTNBR",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIGITALBANKING_EAGREEMENT_MAPPING"
+		}
+	}
+}
