@@ -203,6 +203,8 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -240,7 +242,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select Max(Len(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0))))) from  \nDNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS",
+						"oracleReaderQuery": "select Max(LENGTH(substring(cast(NOTEINTRATE as varchar(20)),CHARINDEX('.',NOTEINTRATE,0)+1,\n(Len(NOTEINTRATE)-CHARINDEX('.',NOTEINTRATE,0))))) from  \nDNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
