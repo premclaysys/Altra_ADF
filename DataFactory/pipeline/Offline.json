@@ -203,8 +203,6 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -217,7 +215,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select NOTEINTRATE from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where ACCTNBR='1003620000'",
+						"oracleReaderQuery": "select NOTEINTRATE from DNACUSTOM.VW_DIGITALBANKING_ACCTDETAILS where ACCTNBR='1710632604'",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
