@@ -104,7 +104,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DIGITALBANKING_ORGPERSROLE",
+						"referenceName": "ds_S_DIGITALBANKING_ORGPERSROLE_Copy",
 						"type": "DatasetReference"
 					}
 				]
