@@ -624,26 +624,26 @@
 							{
 								"source": {
 									"name": "PRIORYEARINTERESTPAID",
-									"type": "Decimal"
+									"type": "Double"
 								},
 								"sink": {
 									"name": "PRIORYEARINTERESTPAID",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
+									"scale": 5,
 									"precision": 20
 								}
 							},
 							{
 								"source": {
 									"name": "CURRENTYEARINTERESTPAID",
-									"type": "Decimal"
+									"type": "Double"
 								},
 								"sink": {
 									"name": "CURRENTYEARINTERESTPAID",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
+									"scale": 5,
 									"precision": 20
 								}
 							},
@@ -669,7 +669,7 @@
 									"name": "NOTEBALPERDIEM",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
+									"scale": 5,
 									"precision": 20
 								}
 							},
@@ -682,7 +682,7 @@
 									"name": "NOTEINTRATE",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
+									"scale": 5,
 									"precision": 20
 								}
 							},
@@ -708,8 +708,8 @@
 									"name": "TOTALAMOUNTCURRENTLYDUE",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 16
+									"scale": 5,
+									"precision": 20
 								}
 							},
 							{
@@ -721,8 +721,8 @@
 									"name": "AMOUNTTOPAYCURRENT",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 16
+									"scale": 5,
+									"precision": 20
 								}
 							},
 							{
@@ -732,6 +732,67 @@
 								},
 								"sink": {
 									"name": "ESTDATEMAT",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "CREDITLIMITAMT",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CREDITLIMITAMT",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "CURRTERM",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CURRTERM",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "PMTCALPERIODLIST",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PMTCALPERIODLIST",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "DEFAULTTERMDAYS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DEFAULTTERMDAYS",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTCONTACT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DATELASTCONTACT",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
