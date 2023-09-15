@@ -8478,7 +8478,7 @@
 					},
 					{
 						"name": "Fetch the last TransId",
-						"description": "Fetch last transaction Id in database",
+						"description": "Fetch last transaction Id from transaction table of transactions",
 						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
@@ -15389,13 +15389,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionsTransfersUAT",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15409,8 +15402,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionsTransfersUAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
 			]
 		},
 		{

@@ -2386,7 +2386,7 @@
 					},
 					{
 						"name": "Fetch the last TransId",
-						"description": "Fetch last transaction Id in database",
+						"description": "Fetch last transaction Id from transaction table of transactions",
 						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
