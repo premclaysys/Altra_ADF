@@ -15389,6 +15389,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionsTransfersUAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15402,7 +15409,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionsTransfersUAT')]"
 			]
 		},
 		{
