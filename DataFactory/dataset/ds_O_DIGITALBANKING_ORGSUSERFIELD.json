@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "DNACUSTOM",
-			"table": "VW_DIGITALBANKING_PERSUSERFIELD"
+			"table": "VW_DIGITALBANKING_ORGSUSERFIELD"
 		}
 	}
 }
