@@ -33,7 +33,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "SqlMISink",
+						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_Transaction_StagingUAT",
+						"referenceName": "ds_S_InsertDataToActiveAgrmnt_DEV",
 						"type": "DatasetReference"
 					}
 				]
@@ -366,11 +366,8 @@
 					"secureInput": false
 				},
 				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[SP_TransactionData]"
-				},
 				"linkedServiceName": {
-					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -395,12 +392,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_Transaction_StagingUAT",
+						"referenceName": "ds_S_InsertDataToAlerts",
 						"type": "DatasetReference"
 					}
 				}
@@ -781,11 +778,8 @@
 					"secureInput": false
 				},
 				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
-				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			}
