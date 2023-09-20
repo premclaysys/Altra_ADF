@@ -397,6 +397,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -756,6 +757,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
