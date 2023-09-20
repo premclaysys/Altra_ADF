@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToActiveAgrmnt_DEV",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				]
@@ -313,12 +313,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
-						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS WITH (NOLOCK)",
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_TransactionRecord_UAT",
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					}
 				}
@@ -366,6 +367,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
+				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
@@ -397,7 +401,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				}
@@ -423,11 +427,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
-						"partitionOption": "None"
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} ",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "SqlMISink",
+						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -717,13 +723,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_Transaction_StagingUAT",
+						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlerts_UAT",
+						"referenceName": "ds_S_InsertDataToAlerts",
 						"type": "DatasetReference"
 					}
 				]
@@ -749,12 +755,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlerts_UAT",
+						"referenceName": "ds_S_InsertDataToAlerts",
 						"type": "DatasetReference"
 					}
 				}
@@ -778,6 +784,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
+				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
