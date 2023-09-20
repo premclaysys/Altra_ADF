@@ -17,12 +17,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
-						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS WITH (NOLOCK)",
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_TransactionRecord_UAT",
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					}
 				}
@@ -72,7 +72,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -366,7 +367,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_S_Transaction_StagingUAT",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				],
@@ -427,6 +428,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
+				},
 				"linkedServiceName": {
 					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
