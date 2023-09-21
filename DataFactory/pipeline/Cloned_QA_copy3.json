@@ -33,7 +33,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "SqlMISink",
+						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_Transaction_StagingUAT",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				]
@@ -371,7 +371,7 @@
 					"storedProcedureName": "[dbo].[SP_TransactionData]"
 				},
 				"linkedServiceName": {
-					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+					"referenceName": "ls_transactiondb",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -396,12 +396,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
+						"type": "AzureSqlSource",
 						"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_Transaction_StagingUAT",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				}
