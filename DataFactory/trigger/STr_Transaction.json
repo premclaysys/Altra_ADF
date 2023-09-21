@@ -21,12 +21,6 @@
 					"referenceName": "Cloned_PL_TransactionsTransfersDEV_copy2",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Cloned_PL_TransactionsTransfersQA_copy2",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
