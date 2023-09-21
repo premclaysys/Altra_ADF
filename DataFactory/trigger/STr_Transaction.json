@@ -18,13 +18,13 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Cloned_PL_TransactionsTransfersDEV_copy2",
+					"referenceName": "PL_TransactionTransferQA",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_TransactionTransferQA",
+					"referenceName": "PL_TransactionsTransfersDEV",
 					"type": "PipelineReference"
 				}
 			}
