@@ -1,5 +1,5 @@
 {
-	"name": "Cloned_PL_TransactionsTransfersQA_copy2",
+	"name": "Cloned_PL_QA_copy3",
 	"properties": {
 		"activities": [
 			{
@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				]
@@ -368,10 +368,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[SP_TransactionData]"
+					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
 				},
 				"linkedServiceName": {
-					"referenceName": "ls_transactiondb",
+					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -397,12 +397,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				}
@@ -733,7 +733,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlertsQA",
+						"referenceName": "ds_S_InsertDataToAlerts",
 						"type": "DatasetReference"
 					}
 				]
@@ -765,7 +765,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlertsQA",
+						"referenceName": "ds_S_InsertDataToAlerts",
 						"type": "DatasetReference"
 					}
 				}
@@ -793,7 +793,7 @@
 					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDataQA",
+					"referenceName": "BusinessDataDev",
 					"type": "LinkedServiceReference"
 				}
 			}
