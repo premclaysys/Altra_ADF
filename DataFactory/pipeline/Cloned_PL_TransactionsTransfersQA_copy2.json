@@ -1,5 +1,5 @@
 {
-	"name": "Cloned_PL_TransactionsTransfersQA_copy2",
+	"name": "Cloned_QA_copy3",
 	"properties": {
 		"activities": [
 			{
@@ -293,7 +293,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlertsQA",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				]
@@ -368,10 +368,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
+					"storedProcedureName": "[dbo].[SP_TransactionData]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDataQA",
+					"referenceName": "ls_transactiondb",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -397,12 +397,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
+						"sqlReaderQuery": "TRUNCATE TABLE Transactions_Staging;\nselect count(*) from Transactions_Staging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlertsQA",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				}
@@ -733,7 +733,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				]
@@ -745,7 +745,7 @@
 					{
 						"activity": "Set variable",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -765,7 +765,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_InsertDataToAlerts",
+						"referenceName": "ds_S_InsertDataToAlertsQA",
 						"type": "DatasetReference"
 					}
 				}
@@ -793,7 +793,7 @@
 					"storedProcedureName": "[dbo].[InsertTransactionAlertFromStaging]"
 				},
 				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
+					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
 				}
 			}
