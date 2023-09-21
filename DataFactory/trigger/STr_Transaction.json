@@ -6,13 +6,19 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
+					"referenceName": "PL_TransactionTransfer",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
 					"referenceName": "PL_TransactionsTransfersUAT",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_TransactionsTransfersDEV",
+					"referenceName": "Cloned_PL_TransactionsTransfersDEV_copy2",
 					"type": "PipelineReference"
 				}
 			},
