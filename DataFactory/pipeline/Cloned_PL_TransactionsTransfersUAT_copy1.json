@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table",
+						"activity": "Truncate the Transactions staging table",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -359,7 +359,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the Transactions staging table",
 				"type": "Lookup",
 				"dependsOn": [
 					{
@@ -671,7 +671,7 @@
 					{
 						"activity": "Set variable",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
