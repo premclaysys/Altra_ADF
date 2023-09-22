@@ -15,6 +15,12 @@
 					"referenceName": "PL_TransactionsTransfersDEV",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Cloned_PL_TransactionsTransfersUAT_copy1",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
