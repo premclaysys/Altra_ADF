@@ -353,7 +353,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Rows copied",
+						"activity": "Upperlimit trans id",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -763,7 +763,7 @@
 				}
 			},
 			{
-				"name": "Rows copied",
+				"name": "Upperlimit trans id",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
