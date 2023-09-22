@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "cd_AltratoDigitalBankingTransfers",
+				"name": "cd_AltratoDigitalBankingTransactionTransfers",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -336,7 +336,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransfers",
+						"activity": "cd_AltratoDigitalBankingTransactionTransfers",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -390,7 +390,7 @@
 				}
 			},
 			{
-				"name": "Transfer_StagingData_Alerts",
+				"name": "Transfer_StagingData_TransactionAlerts",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -701,7 +701,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Transfer_StagingData_Alerts",
+						"activity": "Transfer_StagingData_TransactionAlerts",
 						"dependencyConditions": [
 							"Succeeded"
 						]
