@@ -781,7 +781,7 @@
 				"typeProperties": {
 					"variableName": "transidlimit",
 					"value": {
-						"value": "@activity('cd_AltratoDigitalBankingTransfers').output.rowsCopied\n",
+						"value": "@string(activity('fetch the transactionId').output.firstRow.MAXTRANSID)",
 						"type": "Expression"
 					}
 				}
