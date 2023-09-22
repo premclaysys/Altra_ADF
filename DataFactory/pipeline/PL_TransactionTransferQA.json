@@ -767,7 +767,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransfers",
+						"activity": "fetch the transactionId",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -783,6 +783,38 @@
 					"value": {
 						"value": "@activity('cd_AltratoDigitalBankingTransfers').output.rowsCopied\n",
 						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "fetch the transactionId",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "cd_AltratoDigitalBankingTransfers",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
+						"type": "DatasetReference"
 					}
 				}
 			}
