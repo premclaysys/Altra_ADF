@@ -18,7 +18,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Cloned_PL_TransactionsTransfersUAT_copy1",
+					"referenceName": "PL_TransactionsTransfersUAT_copy1",
 					"type": "PipelineReference"
 				}
 			}
