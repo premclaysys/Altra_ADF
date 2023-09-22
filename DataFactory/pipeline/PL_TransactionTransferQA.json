@@ -779,7 +779,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "rowscopied",
+					"variableName": "transidlimit",
 					"value": {
 						"value": "@activity('cd_AltratoDigitalBankingTransfers').output.rowsCopied\n",
 						"type": "Expression"
@@ -829,9 +829,9 @@
 				"type": "String",
 				"defaultValue": "0"
 			},
-			"rowscopied": {
-				"type": "Integer",
-				"defaultValue": 0
+			"transidlimit": {
+				"type": "String",
+				"defaultValue": "0"
 			}
 		},
 		"annotations": [],
