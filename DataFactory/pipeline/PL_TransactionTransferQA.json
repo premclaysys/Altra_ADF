@@ -353,7 +353,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransfers",
+						"activity": "Rows copied",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -707,9 +707,9 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable",
+						"activity": "sp_InsertTransaction",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -760,6 +760,30 @@
 					"referenceName": "BusinessDataQA",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Rows copied",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "cd_AltratoDigitalBankingTransfers",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "rowscopied",
+					"value": {
+						"value": "@activity('cd_AltratoDigitalBankingTransfers').output.rowsCopied\n",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"concurrency": 1,
@@ -771,6 +795,9 @@
 			"subacctnbr": {
 				"type": "String",
 				"defaultValue": "0"
+			},
+			"rowscopied": {
+				"type": "String"
 			}
 		},
 		"annotations": [],
