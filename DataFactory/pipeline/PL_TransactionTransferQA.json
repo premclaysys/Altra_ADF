@@ -353,7 +353,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Upperlimit trans id",
+						"activity": "cd_AltratoDigitalBankingTransfers",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -436,7 +436,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransfers",
+						"activity": "sp_InsertTransaction",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -468,7 +468,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "sp_InsertTransaction",
+						"activity": "Upperlimit trans id",
 						"dependencyConditions": [
 							"Succeeded"
 						]
