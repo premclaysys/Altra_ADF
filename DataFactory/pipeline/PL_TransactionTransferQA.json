@@ -844,8 +844,8 @@
 				"defaultValue": "0"
 			},
 			"transidlimit": {
-				"type": "Integer",
-				"defaultValue": 0
+				"type": "String",
+				"defaultValue": "0"
 			}
 		},
 		"annotations": [],
