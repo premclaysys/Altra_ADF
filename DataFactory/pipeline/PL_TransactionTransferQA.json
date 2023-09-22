@@ -798,7 +798,7 @@
 				"defaultValue": "0"
 			},
 			"rowscopied": {
-				"type": "String"
+				"type": "Integer"
 			}
 		},
 		"annotations": [],
