@@ -1,13 +1,13 @@
 {
-	"name": "PL_TransactionsTransfersUAT",
+	"name": "PL_TransactionsTransfersUATold",
 	"properties": {
 		"activities": [
 			{
-				"name": "cd_AltratoDigitalBankingTransactionTransfers",
+				"name": "cd_AltratoDigitalBankingTransfers",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the Transactions staging table",
+						"activity": "Truncate the staging table",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -49,7 +49,9 @@
 								"sink": {
 									"name": "AccountNumber",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -60,7 +62,9 @@
 								"sink": {
 									"name": "AccountTransactionNumber",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -71,7 +75,9 @@
 								"sink": {
 									"name": "TransactionID",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -170,7 +176,9 @@
 								"sink": {
 									"name": "SubAcctNbr",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -214,7 +222,9 @@
 								"sink": {
 									"name": "Amount",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
@@ -225,7 +235,9 @@
 								"sink": {
 									"name": "TranAmt",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
@@ -236,7 +248,9 @@
 								"sink": {
 									"name": "Balance",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
@@ -247,7 +261,9 @@
 								"sink": {
 									"name": "CheckNbr",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
@@ -336,7 +352,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "cd_AltratoDigitalBankingTransactionTransfers",
+						"activity": "cd_AltratoDigitalBankingTransfers",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -359,7 +375,7 @@
 				}
 			},
 			{
-				"name": "Truncate the Transactions staging table",
+				"name": "Truncate the staging table",
 				"type": "Lookup",
 				"dependsOn": [
 					{
@@ -390,7 +406,7 @@
 				}
 			},
 			{
-				"name": "Transfer_StagingData_TransactionAlerts",
+				"name": "Transfer_StagingData_Alerts",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -410,10 +426,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} ",
-						"partitionOption": "None",
-						"queryTimeout": "02:00:00"
+						"type": "SqlMISource",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "SqlMISink",
@@ -426,41 +440,57 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ACCOUNTNUMBER",
-									"type": "Decimal"
+									"name": "AccountNumber",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "AccountNumber",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "ACCOUNTTRANSACTIONNUMBER",
-									"type": "Decimal"
+									"name": "AccountTransactionNumber",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "AccountTransactionNumber",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONID",
-									"type": "Decimal"
+									"name": "TransactionID",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "TransactionID",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONFISCALDATE",
-									"type": "DateTime"
+									"name": "TransactionFiscalDate",
+									"type": "DateTime",
+									"physicalType": "date"
 								},
 								"sink": {
 									"name": "TransactionFiscalDate",
@@ -470,8 +500,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONDATETIME",
-									"type": "DateTime"
+									"name": "TransactionDateTime",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								},
 								"sink": {
 									"name": "TransactionDateTime",
@@ -481,8 +512,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONEFFECTIVEDATE",
-									"type": "DateTime"
+									"name": "TransactionEffectiveDate",
+									"type": "DateTime",
+									"physicalType": "date"
 								},
 								"sink": {
 									"name": "TransactionEffectiveDate",
@@ -492,8 +524,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONTYPECODE",
-									"type": "String"
+									"name": "TransactionTypeCode",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionTypeCode",
@@ -503,8 +536,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONTYPE",
-									"type": "String"
+									"name": "TransactionType",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionType",
@@ -514,8 +548,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONSTATUSCODE",
-									"type": "String"
+									"name": "TransactionStatusCode",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionStatusCode",
@@ -525,8 +560,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONSTATUS",
-									"type": "String"
+									"name": "TransactionStatus",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionStatus",
@@ -536,8 +572,9 @@
 							},
 							{
 								"source": {
-									"name": "TRANSACTIONDESCRIPTION",
-									"type": "String"
+									"name": "TransactionDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TransactionDescription",
@@ -547,19 +584,25 @@
 							},
 							{
 								"source": {
-									"name": "SUBACCTNBR",
-									"type": "Decimal"
+									"name": "SubAcctNbr",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "SubAcctNbr",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "BALCATCD",
-									"type": "String"
+									"name": "BalCatCd",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "BalCatCd",
@@ -569,8 +612,9 @@
 							},
 							{
 								"source": {
-									"name": "BALTYPCD",
-									"type": "String"
+									"name": "BalTypCd",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "BalTypCd",
@@ -580,8 +624,9 @@
 							},
 							{
 								"source": {
-									"name": "BALANCEDESCRIPTION",
-									"type": "String"
+									"name": "BalanceDescription",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "BalanceDescription",
@@ -591,52 +636,73 @@
 							},
 							{
 								"source": {
-									"name": "AMOUNT",
-									"type": "Double"
+									"name": "Amount",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								},
 								"sink": {
 									"name": "Amount",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
 								"source": {
-									"name": "TRANAMT",
-									"type": "Double"
+									"name": "TranAmt",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								},
 								"sink": {
 									"name": "TranAmt",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
 								"source": {
-									"name": "BALANCE",
-									"type": "String"
+									"name": "Balance",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								},
 								"sink": {
 									"name": "Balance",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 3,
+									"precision": 38
 								}
 							},
 							{
 								"source": {
-									"name": "CHECKNBR",
-									"type": "Decimal"
+									"name": "CheckNbr",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								},
 								"sink": {
 									"name": "CheckNbr",
 									"type": "Decimal",
-									"physicalType": "decimal"
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 22
 								}
 							},
 							{
 								"source": {
-									"name": "TRACENBR",
-									"type": "String"
+									"name": "TraceNbr",
+									"type": "String",
+									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "TraceNbr",
@@ -654,7 +720,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_O_AltraServerConnectivity",
+						"referenceName": "ds_S_Transaction_StagingUAT",
 						"type": "DatasetReference"
 					}
 				],
@@ -670,9 +736,9 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable",
+						"activity": "cd_AltratoDigitalBankingTransfers",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -701,7 +767,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Transfer_StagingData_TransactionAlerts",
+						"activity": "Transfer_StagingData_Alerts",
 						"dependencyConditions": [
 							"Succeeded"
 						]
