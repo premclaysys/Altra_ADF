@@ -798,7 +798,8 @@
 				"defaultValue": "0"
 			},
 			"rowscopied": {
-				"type": "Integer"
+				"type": "Integer",
+				"defaultValue": 0
 			}
 		},
 		"annotations": [],
