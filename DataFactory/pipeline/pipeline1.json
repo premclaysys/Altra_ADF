@@ -1,0 +1,81 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Transaction db",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS WITH (NOLOCK)",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_TransactionRecord_UAT",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Business db",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlMITable1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "oracle db",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select count( *) from Transaction_Alerts where \nTransactionID between 331387650 and 331387766",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
