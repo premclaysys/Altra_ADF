@@ -1,5 +1,6 @@
 {
 	"name": "BusinessDataQA",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
@@ -14,6 +15,5 @@
 				"secretName": "altsqldev"
 			}
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }
