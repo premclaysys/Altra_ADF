@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "SELECT MAX(TRANSACTIONID) AS MAXTRANSID FROM TRANSACTIONS WITH (NOLOCK)",
+						"sqlReaderQuery": "select count( *) from Transaction_Alerts where \r\nTransactionID between 331387650 and 331387766",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -41,7 +41,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "TRUNCATE TABLE Transaction_AlertStaging;\nselect count(*) from Transaction_AlertStaging",
+						"sqlReaderQuery": "select count( *) from Transaction_Alerts where \nTransactionID between 331387650 and 331387766",
 						"partitionOption": "None"
 					},
 					"dataset": {
