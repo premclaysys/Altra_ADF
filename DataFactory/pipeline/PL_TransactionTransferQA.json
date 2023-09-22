@@ -529,7 +529,7 @@
 								"source": {
 									"type": "OracleSource",
 									"oracleReaderQuery": {
-										"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} and transactionId < @{variables('transidlimit')}",
+										"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TRANSACTIONID > @{variables('transid')} and transactionId <= @{variables('transidlimit')}",
 										"type": "Expression"
 									},
 									"partitionOption": "None",
