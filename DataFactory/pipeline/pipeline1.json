@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select count( *) from Transaction_Alerts where \r\nTransactionID between 331387650 and 331387766",
+						"sqlReaderQuery": "select count( *) from Transactions where \r\nTransactionID between 331387650 and 331387766",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -65,7 +65,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select count( *) from Transaction_Alerts where \nTransactionID between 331387650 and 331387766",
+						"oracleReaderQuery": "select count( *) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where \nTransactionID between 331387650 and 331387766",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
