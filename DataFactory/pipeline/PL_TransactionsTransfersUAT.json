@@ -454,6 +454,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('transid'), variables('transidlimit'))",
+						"type": "Expression"
+					},
 					"ifFalseActivities": [
 						{
 							"name": "TruncateAlertStaging",
