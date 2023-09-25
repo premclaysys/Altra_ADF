@@ -18,12 +18,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_TransactionTransfersUAT",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "PL_TransactionsTransfersUATold",
 					"type": "PipelineReference"
 				}
