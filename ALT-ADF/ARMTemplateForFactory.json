@@ -11477,7 +11477,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_TransactionsTransfersUATold')]",
+			"name": "[concat(parameters('factoryName'), '/PL_TransactionsTransfersUAT_Reverted')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -17480,7 +17480,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "PL_TransactionTransfersUAT",
+							"referenceName": "PL_TransactionsTransfersUAT_Reverted",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -17499,7 +17499,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransferQA')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_TransactionsTransfersDEV')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfersUAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionsTransfersUAT_Reverted')]"
 			]
 		},
 		{
