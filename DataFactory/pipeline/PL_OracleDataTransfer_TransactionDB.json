@@ -758,10 +758,8 @@
 								},
 								"sink": {
 									"name": "PMTCALPERIODLIST",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 20
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							},
 							{
@@ -771,8 +769,10 @@
 								},
 								"sink": {
 									"name": "DEFAULTTERMDAYS",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 20
 								}
 							},
 							{
