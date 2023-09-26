@@ -445,7 +445,7 @@
 				}
 			},
 			{
-				"name": "If Condition1",
+				"name": "If no new records are therer",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
@@ -487,7 +487,7 @@
 							}
 						},
 						{
-							"name": "Transfer_StagingData_Alerts_copy1",
+							"name": "Transfer_StagingData_Alerts",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -766,11 +766,11 @@
 							]
 						},
 						{
-							"name": "Insert to AlertTransaction_copy1",
+							"name": "Insert to AlertTransaction",
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "Transfer_StagingData_Alerts_copy1",
+									"activity": "Transfer_StagingData_Alerts",
 									"dependencyConditions": [
 										"Succeeded"
 									]
