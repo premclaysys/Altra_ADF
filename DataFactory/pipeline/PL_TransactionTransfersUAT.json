@@ -457,6 +457,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('transid'), variables('transidlimit'))",
+						"type": "Expression"
+					},
 					"ifFalseActivities": [
 						{
 							"name": "TruncateAlertStaging",
@@ -483,7 +487,7 @@
 							}
 						},
 						{
-							"name": "Transfer_StagingData_Alerts",
+							"name": "Transfer_StagingData_Alerts_copy1",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -762,11 +766,11 @@
 							]
 						},
 						{
-							"name": "Insert to AlertTransaction",
+							"name": "Insert to AlertTransaction_copy1",
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "Transfer_StagingData_Alerts",
+									"activity": "Transfer_StagingData_Alerts_copy1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
