@@ -18,7 +18,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_TransactionsTransfersUAT_Reverted",
+					"referenceName": "PL_TransactionTransfersUAT",
 					"type": "PipelineReference"
 				}
 			}
