@@ -523,17 +523,6 @@
 							},
 							{
 								"source": {
-									"name": "MIACCTTYPDESC",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MIACCTTYPDESC",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
 									"name": "MICUSTDESC",
 									"type": "String"
 								},
@@ -757,7 +746,7 @@
 							{
 								"source": {
 									"name": "PMTCALPERIODLIST",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "PMTCALPERIODLIST",
@@ -770,7 +759,7 @@
 							{
 								"source": {
 									"name": "DEFAULTTERMDAYS",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "DEFAULTTERMDAYS",
