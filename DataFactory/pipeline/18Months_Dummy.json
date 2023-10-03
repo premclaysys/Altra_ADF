@@ -25,7 +25,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and \n @{variables('18date')}\n \nfetch  first 10 rows only;",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and \n @{variables('datebefore')}\n \nfetch  first 10 rows only;",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
@@ -428,8 +428,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "18date",
-					"value": "@string(activity('fetch date').output.firstRow.18TRANSID)"
+					"variableName": "datebefore",
+					"value": {
+						"value": "@string(activity('fetch date').output.firstRow.18TRANSID)",
+						"type": "Expression"
+					}
 				}
 			}
 		],
@@ -441,6 +444,9 @@
 				"type": "String"
 			},
 			"18date": {
+				"type": "String"
+			},
+			"datebefore": {
 				"type": "String"
 			}
 		},
