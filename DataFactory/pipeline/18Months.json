@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\n  WHERE transactionID >= @{variables('TransactionID')} and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\r\n\r\n",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\n  WHERE transactionID >= @{variables('transid')} and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\r\n\r\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -98,13 +98,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "TransactionID",
+					"variableName": "transid",
 					"value": "@string(activity('Fetch min transid').output.firstRow.MINTRANSID)"
 				}
 			}
 		],
 		"variables": {
 			"TransactionID": {
+				"type": "String"
+			},
+			"transid": {
 				"type": "String"
 			}
 		},
