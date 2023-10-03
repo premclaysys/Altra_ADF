@@ -303,8 +303,6 @@
 			{
 				"name": "Fetch min transid",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Set variable2",
@@ -422,6 +420,8 @@
 			{
 				"name": "Set variable2",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "fetch date",
@@ -438,7 +438,7 @@
 				"typeProperties": {
 					"variableName": "datebefore",
 					"value": {
-						"value": "@string(activity('fetch date').output.firstRow.\"18TRANSID\")",
+						"value": "@string(activity('fetch date').output.firstRow.18TRANSID)",
 						"type": "Expression"
 					}
 				}
