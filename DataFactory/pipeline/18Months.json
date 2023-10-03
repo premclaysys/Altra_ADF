@@ -369,7 +369,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE ds_S_DigitalBankingConectivity;\nselect count(*) from ds_S_DigitalBankingConectivity",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions_Staging;\nselect count(*) from dbo.Transactions_Staging",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
