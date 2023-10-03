@@ -440,7 +440,7 @@
 				"typeProperties": {
 					"variableName": "datebefore",
 					"value": {
-						"value": "@string(activity('fetch date').output.firstRow.18TRANSID)",
+						"value": "@string(activity('fetch date').output.firstRow.\"18TRANSID\")",
 						"type": "Expression"
 					}
 				}
