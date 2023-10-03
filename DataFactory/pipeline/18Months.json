@@ -441,7 +441,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Set variable2",
+						"activity": "fetch date",
 						"dependencyConditions": [
 							"Succeeded"
 						]
