@@ -322,7 +322,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS MINTRANSID FROM TRANSACTIONS",
+						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS \"MINTRANSID\" FROM TRANSACTIONS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
