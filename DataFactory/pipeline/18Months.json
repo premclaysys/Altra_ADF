@@ -99,7 +99,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "transid",
-					"value": "@string(activity('Fetch min transid').output.firstRow.MINTRANSID)"
+					"value": {
+						"value": "@string(activity('Fetch min transid').output.firstRow.MINTRANSID)",
+						"type": "Expression"
+					}
 				}
 			}
 		],
