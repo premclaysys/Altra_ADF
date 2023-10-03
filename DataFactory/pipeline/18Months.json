@@ -301,7 +301,14 @@
 			{
 				"name": "Fetch min transid",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -312,13 +319,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT MIN(TRANSACTIONID) AS MINTRANSID FROM TRANSACTIONS",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS MINTRANSID FROM TRANSACTIONS",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
 					}
 				}
@@ -352,7 +359,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable2",
+						"activity": "Set variable1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -382,14 +389,7 @@
 			{
 				"name": "fetch date",
 				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "Set variable1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -429,7 +429,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "datebefore",
-					"value": "@string(activity('fetch date').output.firstRow.18TRANSID)"
+					"value": {
+						"value": "@string(activity('fetch date').output.firstRow.18TRANSID)",
+						"type": "Expression"
+					}
 				}
 			}
 		],
