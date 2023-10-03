@@ -23,7 +23,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE timestamp >= DATEADD(MONTH, -18, GETDATE())\r\n\r\nSELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\n  WHERE transactionID >= @MinTranId and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\r\n\r\n",
+						"oracleReaderQuery": "\r\n\r\nSELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\n  WHERE transactionID >= @MinTranId and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\r\n\r\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
