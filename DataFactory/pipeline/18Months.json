@@ -305,14 +305,7 @@
 				"type": "Lookup",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "Set variable2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -442,6 +435,27 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Set variable3",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "var",
+					"value": "1"
+				}
 			}
 		],
 		"variables": {
@@ -452,6 +466,9 @@
 				"type": "String"
 			},
 			"datebefore": {
+				"type": "String"
+			},
+			"var": {
 				"type": "String"
 			}
 		},
