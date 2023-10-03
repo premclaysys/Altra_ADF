@@ -24,8 +24,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\n  WHERE transactionID >= @{variables('transid')} and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\r\n\r\n",
+						"oracleReaderQuery": {
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\n  WHERE transactionID >= @{variables('transid')} and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))",
+							"type": "Expression"
+						},
 						"partitionOption": "None",
+						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
