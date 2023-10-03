@@ -25,7 +25,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} \n",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} \n fetch  first 10 rows only;\n",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
