@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Truncate Transaction",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -25,7 +25,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and \n TransactionFiscalDate >= TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH\nfetch  first 10 rows only;",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and \n  TransactionFiscalDate >= @{variables('datebefore')}\n \norder by transactionID fetch  first 10 rows only;",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
@@ -348,7 +348,39 @@
 				}
 			},
 			{
-				"name": "Lookup1",
+				"name": "Truncate Transaction",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Set variable2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions;\nselect count(*) from dbo.Transactions",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_DigitalBankingConectivity",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "fetch date",
 				"type": "Lookup",
 				"dependsOn": [
 					{
@@ -368,15 +400,36 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions_Staging;\nselect count(*) from dbo.Transactions_Staging",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "OracleSource",
+						"oracleReaderQuery": "select  TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH  FROM DUAL",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
 					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "fetch date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "datebefore",
+					"value": "@string(activity('fetch date').output.firstRow.18TRANSID)"
 				}
 			}
 		],
