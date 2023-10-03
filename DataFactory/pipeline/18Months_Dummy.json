@@ -27,7 +27,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and \n TransactionFiscalDate >= TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH\nfetch  first 10 rows only;",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and \n @{variables('18date')}\n \nfetch  first 10 rows only;",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
@@ -360,7 +360,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "18months",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -388,9 +388,16 @@
 				}
 			},
 			{
-				"name": "Lookup2",
+				"name": "fetch date",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -411,6 +418,27 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "18months",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "fetch date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "18date",
+					"value": "@string(activity('fetch date').output.firstRow.18TRANSID)"
+				}
 			}
 		],
 		"variables": {
@@ -418,6 +446,9 @@
 				"type": "String"
 			},
 			"transid": {
+				"type": "String"
+			},
+			"18date": {
 				"type": "String"
 			}
 		},
