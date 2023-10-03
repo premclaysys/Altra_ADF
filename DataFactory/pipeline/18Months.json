@@ -303,8 +303,6 @@
 			{
 				"name": "Fetch min transid",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -390,6 +388,8 @@
 			{
 				"name": "fetch date",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -415,6 +415,8 @@
 			{
 				"name": "Set variable2",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "fetch date",
@@ -439,6 +441,8 @@
 			{
 				"name": "Set variable3",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "fetch date",
