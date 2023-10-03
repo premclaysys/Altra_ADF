@@ -25,7 +25,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} and TransactionFiscalDate>= DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\n",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE transactionID >= @{variables('transid')} \n",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
