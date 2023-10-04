@@ -51,10 +51,69 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "fetch transid",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS MINTRANSID FROM TRANSACTIONS",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "fetch transid",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "nmintransid",
+					"value": {
+						"value": "@string(activity('fetch transid').output.firstRow.MINTRANSID)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
 			"ntransdate": {
+				"type": "String"
+			},
+			"nmintransid": {
 				"type": "String"
 			}
 		},
