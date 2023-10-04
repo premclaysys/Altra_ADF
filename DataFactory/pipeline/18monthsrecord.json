@@ -76,7 +76,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT MIN(TRANSACTIONID) AS MINTRANSID FROM \nDNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nwhere TRANSACTIONFISCALDATE = '2022-04-02'",
+							"value": "SELECT MIN(TRANSACTIONID) AS MINTRANSID FROM \nDNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nwhere TRANSACTIONFISCALDATE = '2022-04-02T00:00:00'",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
