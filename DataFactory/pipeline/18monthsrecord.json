@@ -116,8 +116,6 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -138,7 +136,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \n  transactionID> = @{variables('nmintransid')}\norder by transactionID fetch  first 100 rows only;",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \n  transactionID> = @{variables('nmintransid')}\nfetch first 100 rows only;",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
