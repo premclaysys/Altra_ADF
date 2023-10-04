@@ -75,7 +75,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS \"MINTRANSID\" FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS \"MINTRANSID\" FROM DUAL",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
