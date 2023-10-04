@@ -88,6 +88,30 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "fetch transid",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "nmintransid",
+					"value": {
+						"value": "@string(activity('fetch transid').output.firstRow.MINTRANSID)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
