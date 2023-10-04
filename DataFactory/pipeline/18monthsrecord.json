@@ -27,8 +27,37 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Fetch date ",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ntransdate",
+					"value": {
+						"value": "@string(activity('Fetch date ').output.firstRow.transdate)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"ntransdate": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
