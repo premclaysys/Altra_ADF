@@ -54,6 +54,7 @@
 			},
 			{
 				"name": "fetch transid",
+				"description": "fetch the minimum transaction id for 18 months ago",
 				"type": "Lookup",
 				"dependsOn": [
 					{
@@ -74,7 +75,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS \"MINTRANSID\" FROM TRANSACTIONS",
+						"oracleReaderQuery": "SELECT MIN(TRANSACTIONID) AS \"MINTRANSID\" FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
