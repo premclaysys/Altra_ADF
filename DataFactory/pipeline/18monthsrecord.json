@@ -136,7 +136,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\n  TransactionFiscalDate >= TO_TIMESTAMP('2022-04-02T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\n \r\norder by transactionID fetch  first 10 rows only;",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\n  TransactionFiscalDate = TO_TIMESTAMP('2022-04-02T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\n \r\norder by transactionID fetch  first 10 rows only;",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
