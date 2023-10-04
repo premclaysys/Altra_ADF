@@ -18,7 +18,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select  TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH AS \"transdate\" FROM DUAL ",
+						"oracleReaderQuery": "select  TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH AS transdate FROM DUAL ",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
