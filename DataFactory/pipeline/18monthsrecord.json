@@ -1,0 +1,34 @@
+{
+	"name": "18monthsrecord",
+	"properties": {
+		"activities": [
+			{
+				"name": "Fetch date",
+				"description": "Fetch the record 18 months ago",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select  TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH AS \"transdate\" FROM DUAL ",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
