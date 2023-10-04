@@ -404,7 +404,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DummyDatasetforcopy",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				]
@@ -431,12 +431,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE dbo.Dummy_Transactions;\nselect count(*) from dbo.Dummy_Transactions",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions;\nselect count(*) from dbo.Transactions",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DummyDatasetforcopy",
+						"referenceName": "ds_S_DigitalBankingConectivity",
 						"type": "DatasetReference"
 					}
 				}
