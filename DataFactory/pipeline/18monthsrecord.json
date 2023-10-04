@@ -137,8 +137,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\n  TransactionFiscalDate = TO_TIMESTAMP('2022-04-02T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\norder by transactionID fetch  first 10 rows only;",
+						"oracleReaderQuery": {
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \n  transactionID> = @{variables('nmintransid')}\norder by transactionID fetch  first 100 rows only;",
+							"type": "Expression"
+						},
 						"partitionOption": "None",
+						"convertDecimalToInteger": false,
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
