@@ -33,7 +33,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Fetch date ",
+						"activity": "Fetch date",
 						"dependencyConditions": [
 							"Succeeded"
 						]
