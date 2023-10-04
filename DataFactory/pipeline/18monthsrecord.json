@@ -136,7 +136,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \n  transactionID> = @{variables('nmintransid')}\nfetch first 100 rows only;",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \n  transactionID> = @{variables('nmintransid')}\n",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
