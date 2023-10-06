@@ -18,7 +18,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE AccountTransactionNumber=353 and AccountNumber='1047924640'",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE AccountTransactionNumber=352 and AccountNumber='1047924640'",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
