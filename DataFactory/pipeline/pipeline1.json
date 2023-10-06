@@ -18,37 +18,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TransactionId between 332097563 and 332098487",
-							"type": "Expression"
-						},
-						"partitionOption": "None",
-						"convertDecimalToInteger": false,
-						"queryTimeout": "02:00:00"
-					},
-					"dataset": {
-						"referenceName": "ds_O_AltraServerConnectivity",
-						"type": "DatasetReference"
-					},
-					"firstRowOnly": false
-				}
-			},
-			{
-				"name": "Lookup2",
-				"type": "Lookup",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TransactionDateTime > '2023-10-04 21:03:27.000'  ",
+							"value": "SELECT count(*) FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE AccountTransactionNumber=356 and AccountNumber='1047924640'",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
