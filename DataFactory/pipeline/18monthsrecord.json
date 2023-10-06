@@ -80,7 +80,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "select  TRUNC(SYSDATE - 2) AS transdate FROM DUAL",
+							"value": "select  TRUNC(SYSDATE - 2) AS MINTRANSID FROM DUAL",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
