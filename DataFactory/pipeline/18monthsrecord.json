@@ -76,7 +76,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "select  TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH AS transdate FROM DUAL ",
+							"value": "select  TRUNC(SYSDATE - 1) - INTERVAL '18' MONTH AS MINTRANSID FROM DUAL ",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
@@ -116,6 +116,8 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -136,7 +138,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \nTRANSACTIONFISCALDATE  > = TO_TIMESTAMP('2023-01-05T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS') and \nTRANSACTIONFISCALDATE  < = TO_TIMESTAMP('2023-10-04T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS')",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \nTRANSACTIONFISCALDATE  > = TO_TIMESTAMP('2023-01-05T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS') and \nTRANSACTIONFISCALDATE  < = TO_TIMESTAMP('2022-04-05T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS')",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
