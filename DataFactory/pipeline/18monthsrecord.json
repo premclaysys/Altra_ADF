@@ -136,7 +136,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \n  TransactionFiscalDate> = @{variables('ntransdate')} and \nTransactionFiscalDate> = @{variables('nmintransid')}",
+							"value": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE \nTransactionFiscalDate  > = To_Date(@{variables('ntransdate')},'dd-mm-yyyy') and \nTransactionFiscalDate  > = To_Date(@{variables('nmintransid')},'dd-mm-yyyy')",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
