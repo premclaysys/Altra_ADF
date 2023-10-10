@@ -468,7 +468,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\nTRANSACTIONFISCALDATE  >  TO_TIMESTAMP('2023-01-05T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS') and \r\nTRANSACTIONFISCALDATE  < = TO_TIMESTAMP('2023-10-04T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS')",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\nTRANSACTIONDateTime  >  TO_TIMESTAMP('2023-10-04T21:03:16.000','YYYY-MM-DD\"T\"HH24:MI:SS') and \r\nTRANSACTIONDateTime  < = TO_TIMESTAMP('2023-10-04T11:59:59.999','YYYY-MM-DD\"T\"HH24:MI:SS')",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
