@@ -468,7 +468,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT count(*) FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\n TRANSACTIONFISCALDATE = TO_TIMESTAMP('2023-10-04T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS')\r\n",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\n WHERE \r\n TRANSACTIONFISCALDATE = TO_TIMESTAMP('2023-10-04T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS')\r\nOrder by TransactionId",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
