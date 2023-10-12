@@ -18,7 +18,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT MIN(transaction_id) AS minimum_transaction_id\nFROM transactions\nWHERE fiscal_date = TO_TIMESTAMP('2022-04-09T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS');\n",
+						"oracleReaderQuery": "SELECT MIN(transaction_id) AS minimum_transaction_id\nFROM transactions\nWHERE TRANSACTIONFISCALDATE = TO_TIMESTAMP('2022-04-09T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS');\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
