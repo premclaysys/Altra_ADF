@@ -478,7 +478,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "TransactionId = 332224122",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE TransactionId = 332224122",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
