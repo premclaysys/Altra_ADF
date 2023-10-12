@@ -35,6 +35,8 @@
 				"name": "Fetch max transid",
 				"description": "Fetch the maximum transaction id of '2023-10-09T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS'",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -48,6 +50,33 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": "SELECT MAX(TRANSACTIONID) AS maximum_transaction_id\r\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\nWHERE TRANSACTIONFISCALDATE = TO_TIMESTAMP('2023-10-09T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS');",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "count",
+				"description": "fetch the count of transaction id",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT COUNT(*) AS transaction_count\r\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\r\nWHERE TRANSACTIONID BETWEEN 252079916 AND 332224130;",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
