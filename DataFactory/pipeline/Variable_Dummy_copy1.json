@@ -445,9 +445,6 @@
 			"transid": {
 				"type": "String"
 			},
-			"18date": {
-				"type": "String"
-			},
 			"datebefore": {
 				"type": "String"
 			},
