@@ -25,7 +25,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE your_date_column >= TO_TIMESTAMP('@{variables('StartDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\nAND your_date_column <= TO_TIMESTAMP('@{variables('EndDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"');\n\n \norder by transactionID fetch  first 10 rows only;",
+							"value": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TransactionFiscalDate >= TO_TIMESTAMP('@{variables('StartDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\nAND TransactionFiscalDate <= TO_TIMESTAMP('@{variables('EndDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"');\n\n \norder by transactionID fetch  first 10 rows only;",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
