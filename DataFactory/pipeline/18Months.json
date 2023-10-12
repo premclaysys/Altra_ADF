@@ -478,7 +478,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE TransactionId = 332224122",
+						"oracleReaderQuery": "SELECT * FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \n WHERE TransactionId = 332224122 and TRANSACTIONFISCALDATE  >=  TO_TIMESTAMP('2022-04-09T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS') and \nTRANSACTIONFISCALDATE  < = TO_TIMESTAMP('2023-10-09T00:00:00','YYYY-MM-DD\"T\"HH24:MI:SS')",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
