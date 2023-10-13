@@ -1,12 +1,10 @@
 {
-	"name": "UAT_Dummy",
+	"name": "PL_TransactionsAfter_DNARefresh",
 	"properties": {
 		"activities": [
 			{
 				"name": "DummyCopy",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -268,8 +266,6 @@
 				"name": "Fetch the date",
 				"description": "Fetch the date before 18 months ago",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -296,8 +292,6 @@
 				"name": "MinTransDate",
 				"description": "First Transaction Date",
 				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Fetch the date",
@@ -322,8 +316,6 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "MaxTransDate",
@@ -387,8 +379,6 @@
 			{
 				"name": "MaxTransDate",
 				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Fetch the End Date",
