@@ -15,12 +15,6 @@
 					"referenceName": "PL_TransactionTransferQA",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "PL_TransactionTransfer",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
