@@ -33,7 +33,7 @@
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlMISink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -241,12 +241,23 @@
 									"type": "String"
 								}
 							}
-						]
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_O_AltraServerConnectivity",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_S_TransactionRecord_UAT",
 						"type": "DatasetReference"
 					}
 				]
@@ -323,10 +334,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE Dummy_Transactions;\nselect count(*) from Dummy_Transactions",
-						"queryTimeout": "02:00:00",
+						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions;\nselect count(*) from dbo.Transactions\n",
 						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_TransactionRecord_UAT",
+						"type": "DatasetReference"
 					}
 				}
 			},
