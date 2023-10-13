@@ -4433,6 +4433,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_DeleteRecordsBefore18Months",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -4567,6 +4574,20 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_TransactionTransfersUAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionTransferQA",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionTransfer",
 							"type": "PipelineReference"
 						},
 						"parameters": {}

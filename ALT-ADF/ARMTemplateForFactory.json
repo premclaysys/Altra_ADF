@@ -17527,6 +17527,20 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionTransferQA",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionTransfer",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -17540,7 +17554,9 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfersUAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfersUAT')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransferQA')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfer')]"
 			]
 		},
 		{
@@ -17554,6 +17570,13 @@
 					{
 						"pipelineReference": {
 							"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_DeleteRecordsBefore18Months",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -17575,7 +17598,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months_UAT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months_UAT')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]"
 			]
 		},
 		{
