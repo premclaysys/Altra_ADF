@@ -466,6 +466,8 @@
 			{
 				"name": "If there is records",
 				"type": "IfCondition",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Upperlimit trans id",
