@@ -18,7 +18,7 @@
 					"source": {
 						"type": "OracleSource",
 						"oracleReaderQuery": {
-							"value": "SELECT count(*) FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TransactionID between332224130 and 332225111",
+							"value": "SELECT count(*) FROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS WHERE TransactionID between 332224130 and 332225111",
 							"type": "Expression"
 						},
 						"partitionOption": "None",
