@@ -5,6 +5,8 @@
 			{
 				"name": "DummyCopy",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup1",
@@ -292,6 +294,8 @@
 				"name": "MinTransDate",
 				"description": "First Transaction Date",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Fetch the date",
@@ -316,6 +320,8 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "MaxTransDate",
@@ -347,6 +353,8 @@
 			{
 				"name": "Fetch the End Date",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "MinTransDate",
@@ -379,6 +387,8 @@
 			{
 				"name": "MaxTransDate",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Fetch the End Date",
