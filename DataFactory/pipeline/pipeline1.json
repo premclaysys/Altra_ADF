@@ -17,14 +17,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select * from Transactions where \t\r\nTRANSACTIONID = 281406416",
+						"oracleReaderQuery": "select count(*) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS where \t\nTRANSACTIONID = 281406416",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
