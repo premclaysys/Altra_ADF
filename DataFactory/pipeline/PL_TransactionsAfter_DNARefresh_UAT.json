@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DummyCopy",
+				"name": "Copy from the source",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Truncate the Transactions",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -314,7 +314,7 @@
 				}
 			},
 			{
-				"name": "Lookup1",
+				"name": "Truncate the Transactions",
 				"type": "Lookup",
 				"dependsOn": [
 					{
