@@ -1,5 +1,5 @@
 {
-	"name": "PL_TransactionsAfter_DNARefresh",
+	"name": "PL_TransactionsAfter_DNARefresh_UAT",
 	"properties": {
 		"activities": [
 			{
@@ -395,7 +395,7 @@
 				"typeProperties": {
 					"variableName": "EndDate",
 					"value": {
-						"value": "@string(activity('Fetch the End date').output.firstRow.LASTTRANSDATE)",
+						"value": "@string(activity('Fetch the End Date').output.firstRow.LASTTRANSDATE)",
 						"type": "Expression"
 					}
 				}
