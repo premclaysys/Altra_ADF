@@ -13,6 +13,124 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_TransactionRecord_UAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Transaction_UAT_UATSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubAcctNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "BalCatCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalTypCd",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BalanceDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Amount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "TranAmt",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "Balance",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "CheckNbr",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TraceNbr",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_Transaction_StagingUAT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -126,6 +244,39 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Transactions_Staging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_DeleteRecordsBefore18Months",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-27T08:00:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"hours": [
+								8
+							]
+						}
+					}
 				}
 			},
 			"dependsOn": []
@@ -3594,7 +3745,444 @@
 				"lastPublishTime": "2023-08-02T09:08:30Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_S_Transaction_StagingUAT')]"
+				"[concat(variables('factoryId'), '/datasets/ds_S_Transaction_StagingUAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_TransactionRecord_UAT')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_TransactionsAfter_DNARefresh_UAT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy from the source",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the Transactions",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": {
+									"value": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TransactionFiscalDate >= TO_TIMESTAMP('@{variables('StartDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\nAND TransactionFiscalDate <= TO_TIMESTAMP('@{variables('EndDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\n\n \n",
+									"type": "Expression"
+								},
+								"partitionOption": "None",
+								"convertDecimalToInteger": false,
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "SqlMISink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCOUNTNUMBER",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "AccountNumber",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ACCOUNTTRANSACTIONNUMBER",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "AccountTransactionNumber",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONID",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TransactionID",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONFISCALDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "TransactionFiscalDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONDATETIME",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "TransactionDateTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONEFFECTIVEDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "TransactionEffectiveDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONTYPECODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TransactionTypeCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONTYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TransactionType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONSTATUSCODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TransactionStatusCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TransactionStatus",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANSACTIONDESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TransactionDescription",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SUBACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SubAcctNbr",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "BALCATCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BalCatCd",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BALTYPCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BalTypCd",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BALANCEDESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BalanceDescription",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "AMOUNT",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Amount",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TRANAMT",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "TranAmt",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "BALANCE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Balance",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "CHECKNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "CheckNbr",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TRACENBR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TraceNbr",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_AltraServerConnectivity",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_S_TransactionRecord_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Fetch the date",
+						"description": "Fetch the date before 18 months ago",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select  TRUNC(SYSDATE - 2) - INTERVAL '18' MONTH AS FIRSTTRANSDATE FROM DUAL",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "ds_O_AltraServerConnectivity",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "MinTransDate",
+						"description": "First Transaction Date",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Fetch the date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "StartDate",
+							"value": {
+								"value": "@string(activity('Fetch the date').output.firstRow.FIRSTTRANSDATE)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Truncate the Transactions",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "MaxTransDate",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlMISource",
+								"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions;\nselect count(*) from dbo.Transactions\n",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_TransactionRecord_UAT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Fetch the End Date",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "MinTransDate",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT (SYSDATE - 1) AS LASTTRANSDATE FROM DUAL;",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "ds_O_AltraServerConnectivity",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "MaxTransDate",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Fetch the End Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "EndDate",
+							"value": {
+								"value": "@string(activity('Fetch the End Date').output.firstRow.LASTTRANSDATE)",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"TransactionID": {
+						"type": "String"
+					},
+					"transid": {
+						"type": "String"
+					},
+					"datebefore": {
+						"type": "String"
+					},
+					"StartDate": {
+						"type": "String"
+					},
+					"EndDate": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_S_TransactionRecord_UAT')]"
 			]
 		},
 		{
@@ -4416,11 +5004,12 @@
 				"lastPublishTime": "2023-08-02T09:08:30Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_S_Transaction_StagingUAT')]"
+				"[concat(variables('factoryId'), '/datasets/ds_S_Transaction_StagingUAT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_TransactionRecord_UAT')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
+			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -4429,14 +5018,14 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
+							"referenceName": "PL_TransactionTransferQA",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "PL_DeleteRecordsBefore18Months",
+							"referenceName": "PL_TransactionsTransfersDEV",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -4445,15 +5034,10 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-06-27T08:00:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"hours": [
-								8
-							]
-						}
+						"frequency": "Minute",
+						"interval": 3,
+						"startTime": "2023-06-06T14:51:00Z",
+						"timeZone": "UTC"
 					}
 				}
 			},
@@ -4561,50 +5145,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer_UAT')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionTransfersUAT",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionTransferQA",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "PL_TransactionsTransfersDEV",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 3,
-						"startTime": "2023-06-06T14:51:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfersUAT')]"
 			]
 		},
 		{
