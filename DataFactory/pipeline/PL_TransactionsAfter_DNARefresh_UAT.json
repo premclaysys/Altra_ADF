@@ -5,6 +5,8 @@
 			{
 				"name": "Copy from the source",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the Transactions",
@@ -316,6 +318,8 @@
 			{
 				"name": "Truncate the Transactions",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "MaxTransDate",
