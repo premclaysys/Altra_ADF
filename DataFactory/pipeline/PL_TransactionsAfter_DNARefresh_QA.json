@@ -257,7 +257,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					}
 				]
@@ -335,12 +335,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions_Staging;\nselect count(*) from dbo.Transactions_Staging",
+						"sqlReaderQuery": "TRUNCATE TABLE dbo.Transactions;\nselect count(*) from dbo.Transactions",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_DigitalBankingConectivity",
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					}
 				}
