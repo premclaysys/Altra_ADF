@@ -447,8 +447,6 @@
 			{
 				"name": "If no new records are there",
 				"type": "IfCondition",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Upperlimit trans id",
