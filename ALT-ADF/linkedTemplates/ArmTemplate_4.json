@@ -249,39 +249,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_DeleteRecordsBefore18Months",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2023-06-27T08:00:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"hours": [
-								8
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/PL_DynamicCampaigns_UAT')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -5009,7 +4976,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
+			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -5018,14 +4985,14 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "PL_TransactionTransferQA",
+							"referenceName": "PL_DeleteRecordsBefore18Months",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "PL_TransactionsTransfersDEV",
+							"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -5034,10 +5001,15 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Minute",
-						"interval": 3,
-						"startTime": "2023-06-06T14:51:00Z",
-						"timeZone": "UTC"
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-27T08:00:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"hours": [
+								8
+							]
+						}
 					}
 				}
 			},
@@ -5145,6 +5117,50 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_PromocodeReordsTransfer_UAT')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionTransferQA",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionsTransfersDEV",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "PL_TransactionTransfersUAT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 3,
+						"startTime": "2023-06-06T14:51:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_TransactionTransfersUAT')]"
 			]
 		},
 		{
