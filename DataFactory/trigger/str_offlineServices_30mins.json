@@ -1,0 +1,24 @@
+{
+	"name": "str_offlineServices_30mins",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_OfflineServices_30mins",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 30,
+				"startTime": "2023-09-15T10:23:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
