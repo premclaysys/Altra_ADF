@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Hourly",
+					"referenceName": "PL_Offline_Hourly",
 					"type": "PipelineReference"
 				}
 			}
