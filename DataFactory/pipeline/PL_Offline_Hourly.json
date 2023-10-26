@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table",
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTLOCKOUT",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -104,7 +104,7 @@
 				]
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_ACCTLOCKOUT",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -129,7 +129,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure1",
+				"name": "Sp_DIGITALBANKING_ACCTLOCKOUT",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
