@@ -1,5 +1,5 @@
 {
-	"name": "PL_DeleteRecordsBefore18Months",
+	"name": "PL_BackupRecordsBefore18Months",
 	"properties": {
 		"activities": [
 			{
