@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table  ",
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTBAL",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -158,7 +158,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table",
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -523,7 +523,7 @@
 				]
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_ACCTBAL",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -548,7 +548,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -572,7 +572,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure1",
+				"name": "Sp_DIGITALBANKING_ACCTBAL",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -599,7 +599,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure2",
+				"name": "Sp_DIGITALBANKING_ACCTDETAILS",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
