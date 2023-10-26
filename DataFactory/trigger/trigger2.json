@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_Offlline_Daily",
+					"referenceName": "PL_OffllineServices_Daily",
 					"type": "PipelineReference"
 				}
 			}

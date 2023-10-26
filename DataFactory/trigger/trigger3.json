@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_Offline_30mins",
+					"referenceName": "PL_OfflineServices_30mins",
 					"type": "PipelineReference"
 				}
 			}
