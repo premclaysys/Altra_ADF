@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table   ",
+						"activity": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -60,7 +60,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table    ",
+						"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD ",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -157,7 +157,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table     ",
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS   ",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -271,7 +271,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table      ",
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -385,7 +385,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table  ",
+						"activity": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -479,7 +479,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Truncate the staging table",
+						"activity": "Truncate the staging_ORGSUSERFIELD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -587,7 +587,7 @@
 				]
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -612,7 +612,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -637,7 +637,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -662,7 +662,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -687,7 +687,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -712,7 +712,7 @@
 				}
 			},
 			{
-				"name": "Truncate the staging table",
+				"name": "Truncate the staging_ORGSUSERFIELD",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -737,7 +737,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure1",
+				"name": "Sp_DIGITALBANKING_ORGPERSROLE",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -764,7 +764,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure2",
+				"name": "Sp_DIGITALBANKING_PERSUSERFIELD",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -791,7 +791,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure3",
+				"name": "Sp_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -818,7 +818,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure4",
+				"name": "Sp_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -845,7 +845,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure5",
+				"name": "Sp_DIGITALBANKING_EAGREEMENT",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -872,7 +872,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure6",
+				"name": "Sp_ORGSUSERFIELD",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
