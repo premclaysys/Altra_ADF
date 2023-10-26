@@ -1,5 +1,5 @@
 {
-	"name": "PL_DeleteRecordsBefore18Months",
+	"name": "PL_BackupRecordsBefore18Months",
 	"properties": {
 		"activities": [
 			{
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[SP_DeleteRecordsBefore18Months]"
+					"storedProcedureName": "dbo.SP_InsertRecordsBefore18Months_TransactionsBackup"
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_transactiondb",

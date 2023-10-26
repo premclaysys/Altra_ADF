@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_DeleteRecordsBefore18Months",
+					"referenceName": "PL_BackupRecordsBefore18Months",
 					"type": "PipelineReference"
 				}
 			},
