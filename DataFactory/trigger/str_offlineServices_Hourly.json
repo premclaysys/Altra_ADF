@@ -1,5 +1,5 @@
 {
-	"name": "trigger1",
+	"name": "str_offlineServices_Hourly",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
