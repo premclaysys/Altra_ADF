@@ -58,14 +58,7 @@
 			{
 				"name": "DIGITALBANKING_PERSUSERFIELD",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD ",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -91,19 +84,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "PERSNBR",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "PERSNBR",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 10
-								}
-							},
-							{
-								"source": {
 									"name": "USERFIELDCD",
 									"type": "String"
 								},
@@ -122,13 +102,6 @@
 									"name": "VALUE",
 									"type": "String",
 									"physicalType": "varchar"
-								}
-							},
-							{
-								"sink": {
-									"name": "VALUELASTUPDATEDDA",
-									"type": "DateTime",
-									"physicalType": "datetime"
 								}
 							}
 						],
@@ -155,14 +128,7 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS   ",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
