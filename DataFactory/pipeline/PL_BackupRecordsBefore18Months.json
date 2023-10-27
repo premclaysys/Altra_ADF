@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DeleteRecordsBefore18Months",
+				"name": "BackupRecordsBefore18Months",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
