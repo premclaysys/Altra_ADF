@@ -35,6 +35,78 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ORGNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ORGNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "PERSROLECD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERSROLECD",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "EFFDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EFFDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -91,6 +163,19 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "PERSNBR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PERSNBR",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								}
+							},
+							{
+								"source": {
 									"name": "USERFIELDCD",
 									"type": "String"
 								},
@@ -110,6 +195,28 @@
 									"type": "String",
 									"physicalType": "varchar"
 								}
+							},
+							{
+								"source": {
+									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VALUELASTUPDATEDDA",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -121,7 +228,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_O_DIGITALBANKING_ORGSUSERFIELD",
+						"referenceName": "ds_O_Persuserfield",
 						"type": "DatasetReference"
 					}
 				],
@@ -223,6 +330,17 @@
 									"name": "ACCTROLECD",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -338,6 +456,17 @@
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -431,6 +560,17 @@
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -543,6 +683,17 @@
 									"name": "ORGNAME",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -721,7 +872,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Truncate DIGITALBANKING_ORGPERSROLE",
+						"activity": "DIGITALBANKING_ORGPERSROLE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -748,7 +899,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Truncate DIGITALBANKING_PERSUSERFIELD",
+						"activity": "DIGITALBANKING_PERSUSERFIELD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -775,7 +926,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Truncate DIGITALBANKING_ACCTACCTROLEPERS",
+						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -802,7 +953,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Truncate DIGITALBANKING_ACCTACCTROLEORG",
+						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -829,7 +980,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Truncate DIGITALBANKING_EAGREEMENT",
+						"activity": "DIGITALBANKING_EAGREEMENT",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -877,106 +1028,6 @@
 					"referenceName": "ls_transactiondb",
 					"type": "LinkedServiceReference"
 				}
-			},
-			{
-				"name": "Truncate DIGITALBANKING_ORGPERSROLE",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "DIGITALBANKING_ORGPERSROLE",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
-			},
-			{
-				"name": "Truncate DIGITALBANKING_PERSUSERFIELD",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "DIGITALBANKING_PERSUSERFIELD",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
-			},
-			{
-				"name": "Truncate DIGITALBANKING_ACCTACCTROLEPERS",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
-			},
-			{
-				"name": "Truncate DIGITALBANKING_ACCTACCTROLEORG",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
-			},
-			{
-				"name": "Truncate DIGITALBANKING_EAGREEMENT",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "DIGITALBANKING_EAGREEMENT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
 			}
 		],
 		"annotations": []
