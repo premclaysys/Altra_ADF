@@ -58,7 +58,14 @@
 			{
 				"name": "DIGITALBANKING_PERSUSERFIELD",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -128,7 +135,14 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
