@@ -721,7 +721,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "DIGITALBANKING_ORGPERSROLE",
+						"activity": "Truncate DIGITALBANKING_ORGPERSROLE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -748,7 +748,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "DIGITALBANKING_PERSUSERFIELD",
+						"activity": "Truncate DIGITALBANKING_PERSUSERFIELD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -775,7 +775,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
+						"activity": "Truncate DIGITALBANKING_ACCTACCTROLEPERS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -802,7 +802,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
+						"activity": "Truncate DIGITALBANKING_ACCTACCTROLEORG",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -829,7 +829,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "DIGITALBANKING_EAGREEMENT",
+						"activity": "Truncate DIGITALBANKING_EAGREEMENT",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -877,6 +877,106 @@
 					"referenceName": "ls_transactiondb",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Truncate DIGITALBANKING_ORGPERSROLE",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ORGPERSROLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Truncate DIGITALBANKING_PERSUSERFIELD",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_PERSUSERFIELD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Truncate DIGITALBANKING_ACCTACCTROLEPERS",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Truncate DIGITALBANKING_ACCTACCTROLEORG",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "Truncate DIGITALBANKING_EAGREEMENT",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "DIGITALBANKING_EAGREEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"annotations": []
