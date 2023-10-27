@@ -131,6 +131,17 @@
 									"scale": 5,
 									"precision": 20
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -229,17 +240,6 @@
 								},
 								"sink": {
 									"name": "CURRMIACCTTYPCD",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "MIACCTTYPDESC",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MIACCTTYPDESC",
 									"type": "String",
 									"physicalType": "varchar"
 								}
@@ -469,7 +469,7 @@
 							{
 								"source": {
 									"name": "PMTCALPERIODLIST",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "PMTCALPERIODLIST",
@@ -482,7 +482,7 @@
 							{
 								"source": {
 									"name": "DEFAULTTERMDAYS",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "DEFAULTTERMDAYS",
@@ -497,6 +497,13 @@
 								},
 								"sink": {
 									"name": "DATELASTCONTACT",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
