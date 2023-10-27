@@ -81,6 +81,17 @@
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
