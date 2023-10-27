@@ -167,12 +167,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
-						"value": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
-					},
-					"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
-						"value": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]"
 					}
 				}
 			},
@@ -193,6 +187,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
+						"value": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]"
+					},
+					"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
+						"value": "[parameters('Transaction_UAT_UATSQL_Server_Connection_connectionString')]"
 					}
 				}
 			},
@@ -218,6 +218,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ALT-ADF_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "ALT-ADF_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ALT-ADF_ArmTemplate_4')]"
 			]
 		}
 	]

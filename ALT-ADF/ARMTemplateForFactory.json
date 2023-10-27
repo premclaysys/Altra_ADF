@@ -76,13 +76,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_DeleteRecordsBefore18Months')]",
+			"name": "[concat(parameters('factoryName'), '/PL_BackupRecordsBefore18Months')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "DeleteRecordsBefore18Months",
+						"name": "BackupRecordsBefore18Months",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [],
 						"policy": {
@@ -94,7 +94,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[SP_DeleteRecordsBefore18Months]"
+							"storedProcedureName": "dbo.SP_InsertRecordsBefore18Months_TransactionsBackup"
 						},
 						"linkedServiceName": {
 							"referenceName": "ls_transactiondb",
@@ -5043,6 +5043,1736 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_O_Connectivity_InactiveEagreement')]",
 				"[concat(variables('factoryId'), '/datasets/ds_S_InsertDataToActiveAgreement_UAT')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_OfflineServices_30mins')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DIGITALBANKING_ACCTBAL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_ACCTBAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "BALAMT",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "BALAMT",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "EFFDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRACCTSTATCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CURRACCTSTATCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MAJORMINORCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MAJORMINORCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SUBACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SUBACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "BALANCETYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BALANCETYPE",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "AVAILABLEBALANCE_ONLI",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "AVAILABLEBALANCE_ONLI",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ACCTBAL_Source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_ACCTBAL",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DIGITALBANKING_ACCTDETAILS",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "CURRACCTSTATCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CURRACCTSTATCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MJACCTTYPCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MJACCTTYPCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRMIACCTTYPCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CURRMIACCTTYPCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MIACCTTYPDESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MIACCTTYPDESC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MICUSTDESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MICUSTDESC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ACCTDESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACCTDESC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DATEMAT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DATEMAT",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "TAXRPTFORORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TAXRPTFORORGNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "TAXRPTFORPERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TAXRPTFORPERSNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "CONTRACTDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "CONTRACTDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRDUEDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "CURRDUEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "PRIORYEARINTERESTPAID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "PRIORYEARINTERESTPAID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "CURRENTYEARINTERESTPAID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CURRENTYEARINTERESTPAID",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "REGULARPAYMENTAMOUNT",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "REGULARPAYMENTAMOUNT",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "NOTEBALPERDIEM",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "NOTEBALPERDIEM",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "NOTEINTRATE",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "NOTEINTRATE",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "DEFREMTERM",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DEFREMTERM",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "TOTALAMOUNTCURRENTLYDUE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "TOTALAMOUNTCURRENTLYDUE",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "AMOUNTTOPAYCURRENT",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "AMOUNTTOPAYCURRENT",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 5,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "ESTDATEMAT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ESTDATEMAT",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "CREDITLIMITAMT",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "CREDITLIMITAMT",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "CURRTERM",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "CURRTERM",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "PMTCALPERIODLIST",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PMTCALPERIODLIST",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "DEFAULTTERMDAYS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DEFAULTTERMDAYS",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTCONTACT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DATELASTCONTACT",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ACCTDETAILS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_ACCTDETAILS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_ACCTBAL",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTBAL_Staging;\nselect count(*) from DIGITALBANKING_ACCTBAL_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_ACCTBAL",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_ACCTDETAILS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_ACCTBAL",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_ACCTBAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_inserttoACCTBAL]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_ACCTDETAILS",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_ACCTDETAILS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoACCTDETAILS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ACCTBAL_Source')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTBAL')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ACCTDETAILS')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTDETAILS')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_OfflineServices_Hourly')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DIGITALBANKING_ACCTLOCKOUT",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_ACCTLOCKOUT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "EFFDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "LOCKOUTFLAGCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LOCKOUTFLAGCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ACCTLOCKOUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_ACCTLOCKOUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTLOCKOUT_Staging;\nselect count(*) from DIGITALBANKING_ACCTLOCKOUT_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_ACCTLOCKOUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_ACCTLOCKOUT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoACCTLOCKOUT]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ACCTLOCKOUT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTLOCKOUT')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_OffllineServices_Daily')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DIGITALBANKING_ORGPERSROLE",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ORGPERSROLE",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_ORGPERSROLE",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DIGITALBANKING_PERSUSERFIELD",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "USERFIELDCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "USERFIELDCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALUE",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ORGSUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "EFFDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "PERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PERSNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "ACCTROLECD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACCTROLECD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ACCTACCTROLEPERS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEPERS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "ACCTROLECD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACCTROLECD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EFFDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "ORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ORGNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_o_DIGITALBANKING_ACCTACCTROLEORG",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEORG",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DIGITALBANKING_EAGREEMENT",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "AGREENBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "AGREENBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "PERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PERSNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									},
+									{
+										"source": {
+											"name": "BYORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "BYORGNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 20
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_EAGREEMENT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_s_DIGITALBANKING_EAGREEMENT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "ORGSUSERFIELD",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_ORGSUSERFIELD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ORGNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 10
+										}
+									},
+									{
+										"source": {
+											"name": "USERFIELDCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "USERFIELDCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALUE",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUELASTUPDATEDDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "VALUELASTUPDATEDDA",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "ORGNAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORGNAME",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ORGSUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "db_s_DIGITALBANKING_ORGSUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ORGPERSROLE_Staging;\nselect count(*) from DIGITALBANKING_ORGPERSROLE_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_ORGPERSROLE",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_PERSUSERFIELD_Staging;\nselect count(*) from DIGITALBANKING_PERSUSERFIELD_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTACCTROLEPERS_Staging;\nselect count(*) from DIGITALBANKING_ACCTACCTROLEPERS_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEPERS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_ACCTACCTROLEORG_Staging;\nselect count(*) from DIGITALBANKING_ACCTACCTROLEORG_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_ACCTACCTROLEORG",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE DIGITALBANKING_EAGREEMENT_Staging;\nselect count(*) from DIGITALBANKING_EAGREEMENT_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_s_DIGITALBANKING_EAGREEMENT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate the staging_ORGSUSERFIELD",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "\nTRUNCATE TABLE DIGITALBANKING_ORGSUSERFIELD_Staging;\nselect count(*) from DIGITALBANKING_ORGSUSERFIELD_Staging",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "db_s_DIGITALBANKING_ORGSUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_ORGPERSROLE",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_ORGPERSROLE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoORGPERSROLE]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_PERSUSERFIELD",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_PERSUSERFIELD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoPERSUSERFIELD]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_ACCTACCTROLEPERS",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoACCTACCTROLEPERS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_ACCTACCTROLEORG",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_ACCTACCTROLEORG",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InsertToACCTACCTROLEORG]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_DIGITALBANKING_EAGREEMENT",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "DIGITALBANKING_EAGREEMENT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoEAGREEMENT]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Sp_ORGSUSERFIELD",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "ORGSUSERFIELD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoORGSUSERFIELD]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ORGPERSROLE')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ORGPERSROLE')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ORGSUSERFIELD')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ACCTACCTROLEPERS')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTACCTROLEPERS')]",
+				"[concat(variables('factoryId'), '/datasets/ds_o_DIGITALBANKING_ACCTACCTROLEORG')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTACCTROLEORG')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_EAGREEMENT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_EAGREEMENT')]",
+				"[concat(variables('factoryId'), '/datasets/db_s_DIGITALBANKING_ORGSUSERFIELD')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
 			]
 		},
 		{
@@ -13238,6 +14968,104 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PERSUSERFIELD_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PERSNBR",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "USERFIELDCD",
+						"type": "varchar"
+					},
+					{
+						"name": "VALUE",
+						"type": "varchar"
+					},
+					{
+						"name": "VALUELASTUPDATEDDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_PERSUSERFIELD_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/db_s_DIGITALBANKING_ORGSUSERFIELD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ORGSUSERFIELD_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ORGNBR",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "USERFIELDCD",
+						"type": "varchar"
+					},
+					{
+						"name": "VALUE",
+						"type": "varchar"
+					},
+					{
+						"name": "VALUELASTUPDATEDDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ORGNAME",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ORGSUSERFIELD_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_O_AltraServerConnectivity')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -13273,6 +15101,153 @@
 				"typeProperties": {
 					"schema": "DNACUSTOM",
 					"table": "VW_DIGITALBANKINGINACTIVEEAGREEMENTS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTACCTROLEPERS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTACCTROLEPERS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTBAL_Source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTBAL"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTDETAILS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTDETAILS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTLOCKOUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTLOCKOUT"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_EAGREEMENT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_EAGREEMENT"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ORGPERSROLE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ORGPERSROLE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ORGSUSERFIELD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ORGSUSERFIELD"
 				}
 			},
 			"dependsOn": [
@@ -17708,6 +19683,524 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_o_DIGITALBANKING_ACCTACCTROLEORG')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTACCTROLEORG"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_ACCTACCTROLEORG')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ACCTACCTROLEORGID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ACCTNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "ACCTROLECD",
+						"type": "varchar"
+					},
+					{
+						"name": "EFFDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ORGNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "INACTIVEDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ACCTACCTROLEORG_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_ACCTACCTROLEPERS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ACCTACCTROLEPERSID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ACCTNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "EFFDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PERSNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "INACTIVEDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ACCTROLECD",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ACCTACCTROLEPERS_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_ACCTBAL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ACCTBALID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ACCTNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "BALAMT",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "EFFDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CURRACCTSTATCD",
+						"type": "varchar"
+					},
+					{
+						"name": "MAJORMINORCD",
+						"type": "varchar"
+					},
+					{
+						"name": "SUBACCTNBR",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "BALANCETYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "AVAILABLEBALANCE_ONLI",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ACCTBAL_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_ACCTDETAILS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ACCTDETAILSID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ACCTNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "CURRACCTSTATCD",
+						"type": "varchar"
+					},
+					{
+						"name": "MJACCTTYPCD",
+						"type": "varchar"
+					},
+					{
+						"name": "CURRMIACCTTYPCD",
+						"type": "varchar"
+					},
+					{
+						"name": "MIACCTTYPDESC",
+						"type": "varchar"
+					},
+					{
+						"name": "MICUSTDESC",
+						"type": "varchar"
+					},
+					{
+						"name": "ACCTDESC",
+						"type": "varchar"
+					},
+					{
+						"name": "DATEMAT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TAXRPTFORORGNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "TAXRPTFORPERSNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "CONTRACTDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CURRDUEDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PRIORYEARINTERESTPAID",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "CURRENTYEARINTERESTPAID",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "REGULARPAYMENTAMOUNT",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "NOTEBALPERDIEM",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "NOTEINTRATE",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "DEFREMTERM",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "TOTALAMOUNTCURRENTLYDUE",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "AMOUNTTOPAYCURRENT",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 5
+					},
+					{
+						"name": "ESTDATEMAT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CREDITLIMITAMT",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "CURRTERM",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "PMTCALPERIODLIST",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "DEFAULTTERMDAYS",
+						"type": "varchar"
+					},
+					{
+						"name": "DATELASTCONTACT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ACCTDETAILS_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_ACCTLOCKOUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ACCTLOCKOUT_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ACCTNBR",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "EFFDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "LOCKOUTFLAGCD",
+						"type": "varchar"
+					},
+					{
+						"name": "INACTIVEDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ACCTLOCKOUT_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_EAGREEMENT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "EAGREEMENTID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "PERSNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "decimal",
+						"precision": 20,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_EAGREEMENT_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DIGITALBANKING_ORGPERSROLE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ORGPERSROLE_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ORGNBR",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "PERSROLECD",
+						"type": "varchar"
+					},
+					{
+						"name": "EFFDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PERSNBR",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "INACTIVEDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_ORGPERSROLE_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_ss_PromoCodeMaintenance')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -18445,7 +20938,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "PL_DeleteRecordsBefore18Months",
+							"referenceName": "PL_BackupRecordsBefore18Months",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -18474,7 +20967,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_BackupRecordsBefore18Months')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months_UAT')]"
 			]
 		},
@@ -18531,6 +21024,74 @@
 				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_InactiveEAgreementNumberDataTransfer_UAT')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/str_offlineServices_30mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 30,
+						"startTime": "2023-09-15T10:23:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/str_offlineServices_Daily')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-09-15T10:22:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								15
+							],
+							"hours": [
+								9
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/str_offlineServices_Hourly')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 1,
+						"startTime": "2023-09-15T03:15:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AltraOracleIntegrationRuntime')]",
