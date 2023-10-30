@@ -24,6 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTLOCKOUT\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');\n\n",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
