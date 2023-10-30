@@ -248,6 +248,8 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
@@ -374,8 +376,6 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
@@ -790,6 +790,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -815,8 +817,6 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -954,6 +954,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
@@ -981,8 +983,6 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
