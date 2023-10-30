@@ -168,6 +168,8 @@
 			{
 				"name": "DIGITALBANKING_ACCTDETAILS",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
@@ -559,6 +561,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -610,6 +614,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTDETAILS",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTDETAILS",
