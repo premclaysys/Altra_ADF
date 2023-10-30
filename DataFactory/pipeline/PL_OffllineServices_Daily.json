@@ -131,8 +131,6 @@
 			{
 				"name": "DIGITALBANKING_PERSUSERFIELD",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
@@ -152,6 +150,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_PERSUSERFIELD\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -245,8 +244,6 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
@@ -372,8 +369,6 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
@@ -499,8 +494,6 @@
 			{
 				"name": "DIGITALBANKING_EAGREEMENT",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
@@ -606,8 +599,6 @@
 			{
 				"name": "ORGSUSERFIELD",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_ORGSUSERFIELD",
@@ -756,8 +747,6 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -783,8 +772,6 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -810,8 +797,6 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -837,8 +822,6 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -864,8 +847,6 @@
 			{
 				"name": "Truncate the staging_ORGSUSERFIELD",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -918,8 +899,6 @@
 			{
 				"name": "Sp_DIGITALBANKING_PERSUSERFIELD",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_PERSUSERFIELD",
@@ -947,8 +926,6 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
@@ -976,8 +953,6 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
@@ -1005,8 +980,6 @@
 			{
 				"name": "Sp_DIGITALBANKING_EAGREEMENT",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_EAGREEMENT",
@@ -1034,8 +1007,6 @@
 			{
 				"name": "Sp_ORGSUSERFIELD",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ORGSUSERFIELD",
