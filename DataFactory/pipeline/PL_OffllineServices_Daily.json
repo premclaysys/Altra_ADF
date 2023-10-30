@@ -621,6 +621,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "DNACUSTOM.VW_DIGITALBANKING_ORGSUSERFIELD",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
