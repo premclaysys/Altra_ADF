@@ -5,6 +5,8 @@
 			{
 				"name": "DIGITALBANKING_ORGPERSROLE",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
@@ -131,6 +133,8 @@
 			{
 				"name": "DIGITALBANKING_PERSUSERFIELD",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
@@ -244,6 +248,8 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
@@ -370,6 +376,8 @@
 			{
 				"name": "DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
@@ -496,6 +504,8 @@
 			{
 				"name": "DIGITALBANKING_EAGREEMENT",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
@@ -602,6 +612,8 @@
 			{
 				"name": "ORGSUSERFIELD",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_ORGSUSERFIELD",
@@ -726,6 +738,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -751,6 +765,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -776,6 +792,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -801,6 +819,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -826,6 +846,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_EAGREEMENT",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -851,6 +873,8 @@
 			{
 				"name": "Truncate the staging_ORGSUSERFIELD",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -876,6 +900,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ORGPERSROLE",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ORGPERSROLE",
@@ -903,6 +929,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_PERSUSERFIELD",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_PERSUSERFIELD",
@@ -930,6 +958,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTACCTROLEPERS",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTACCTROLEPERS",
@@ -957,6 +987,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTACCTROLEORG",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTACCTROLEORG",
@@ -984,6 +1016,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_EAGREEMENT",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_EAGREEMENT",
@@ -1011,6 +1045,8 @@
 			{
 				"name": "Sp_ORGSUSERFIELD",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ORGSUSERFIELD",
@@ -1201,6 +1237,8 @@
 			{
 				"name": "Truncate the staging_EAGREEMENT_MAPPING",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1225,6 +1263,8 @@
 			{
 				"name": "EAGREEMENT_MAPPING",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_EAGREEMENT_MAPPING",
@@ -1343,6 +1383,8 @@
 			{
 				"name": "Sp_EAGREEMENT_MAPPING",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "EAGREEMENT_MAPPING",
