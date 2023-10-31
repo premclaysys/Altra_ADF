@@ -1074,6 +1074,8 @@
 			{
 				"name": "Truncate the staging_ACCTUSERFIELD",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1098,6 +1100,8 @@
 			{
 				"name": "ACCTUSERFIELD",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_ACCTUSERFIELD",
@@ -1210,6 +1214,8 @@
 			{
 				"name": "Sp_staging_ACCTUSERFIELD",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ACCTUSERFIELD",
@@ -1237,8 +1243,6 @@
 			{
 				"name": "Truncate the staging_EAGREEMENT_MAPPING",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1263,8 +1267,6 @@
 			{
 				"name": "EAGREEMENT_MAPPING",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_EAGREEMENT_MAPPING",
@@ -1383,8 +1385,6 @@
 			{
 				"name": "Sp_EAGREEMENT_MAPPING",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "EAGREEMENT_MAPPING",
