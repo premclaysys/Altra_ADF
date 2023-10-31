@@ -5,6 +5,8 @@
 			{
 				"name": "DIGITALBANKING_ORGPERSROLE",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
@@ -726,6 +728,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -876,6 +880,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ORGPERSROLE",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ORGPERSROLE",
