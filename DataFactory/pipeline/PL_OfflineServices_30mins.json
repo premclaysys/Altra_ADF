@@ -24,6 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTBAL\nWHERE TO_TIMESTAMP(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '30' MINUTE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -131,6 +132,17 @@
 									"scale": 5,
 									"precision": 20
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -156,6 +168,8 @@
 			{
 				"name": "DIGITALBANKING_ACCTDETAILS",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
@@ -235,17 +249,6 @@
 							},
 							{
 								"source": {
-									"name": "MIACCTTYPDESC",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MIACCTTYPDESC",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
 									"name": "MICUSTDESC",
 									"type": "String"
 								},
@@ -469,7 +472,7 @@
 							{
 								"source": {
 									"name": "PMTCALPERIODLIST",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "PMTCALPERIODLIST",
@@ -482,7 +485,7 @@
 							{
 								"source": {
 									"name": "DEFAULTTERMDAYS",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "DEFAULTTERMDAYS",
@@ -497,6 +500,13 @@
 								},
 								"sink": {
 									"name": "DATELASTCONTACT",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
@@ -550,6 +560,8 @@
 			{
 				"name": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -601,6 +613,8 @@
 			{
 				"name": "Sp_DIGITALBANKING_ACCTDETAILS",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "DIGITALBANKING_ACCTDETAILS",

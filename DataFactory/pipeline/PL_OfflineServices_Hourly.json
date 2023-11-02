@@ -24,6 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTLOCKOUT\nWHERE TO_TIMESTAMP(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND (InActiveDate IS NULL OR InActiveDate >= SYSDATE);",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -78,6 +79,17 @@
 								},
 								"sink": {
 									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
