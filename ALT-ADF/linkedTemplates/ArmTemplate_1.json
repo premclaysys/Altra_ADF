@@ -13,44 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTACCTROLEPERS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Altra_Test_Link",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "DNACUSTOM",
-					"table": "VW_DIGITALBANKING_ACCTACCTROLEPERS"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTBAL_Source')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Altra_Test_Link",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "DNACUSTOM",
-					"table": "VW_DIGITALBANKING_ACCTBAL"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTDETAILS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -89,6 +51,25 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTUSERFIELD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTUSERFIELD"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_EAGREEMENT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -103,6 +84,25 @@
 				"typeProperties": {
 					"schema": "DNACUSTOM",
 					"table": "VW_DIGITALBANKING_EAGREEMENT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_EAGREEMENT_MAPPING')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_EAGREEMENT_MAPPING"
 				}
 			},
 			"dependsOn": []
@@ -141,6 +141,25 @@
 				"typeProperties": {
 					"schema": "DNACUSTOM",
 					"table": "VW_DIGITALBANKING_ORGSUSERFIELD"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_Persuserfield')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_PERSUSERFIELD"
 				}
 			},
 			"dependsOn": []
@@ -984,111 +1003,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "CampaignLoan"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignMember')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "MemberStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "MembershipOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "MembershipType",
-						"type": "varchar"
-					},
-					{
-						"name": "ZIPCode",
-						"type": "varchar"
-					},
-					{
-						"name": "City",
-						"type": "varchar"
-					},
-					{
-						"name": "State",
-						"type": "varchar"
-					},
-					{
-						"name": "BirthDate",
-						"type": "date"
-					},
-					{
-						"name": "MarketingOptOut",
-						"type": "bit"
-					},
-					{
-						"name": "NewMemberFlag",
-						"type": "bit"
-					},
-					{
-						"name": "OnlineBankingUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "MobileAppUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "QuickAccessUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "EStatementsUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "BillPayUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "ScheduledTransferUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "RemoteDepositUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "SendMoneyUserFlag",
-						"type": "bit"
-					},
-					{
-						"name": "MobileWalletUserFlag",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignMember"
 				}
 			},
 			"dependsOn": []

@@ -5073,6 +5073,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTBAL\nWHERE TO_TIMESTAMP(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '30' MINUTE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -5180,6 +5181,17 @@
 											"scale": 5,
 											"precision": 20
 										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
 									}
 								],
 								"typeConversion": true,
@@ -5207,6 +5219,8 @@
 					{
 						"name": "DIGITALBANKING_ACCTDETAILS",
 						"type": "Copy",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
@@ -5286,17 +5300,6 @@
 									},
 									{
 										"source": {
-											"name": "MIACCTTYPDESC",
-											"type": "String"
-										},
-										"sink": {
-											"name": "MIACCTTYPDESC",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
 											"name": "MICUSTDESC",
 											"type": "String"
 										},
@@ -5520,7 +5523,7 @@
 									{
 										"source": {
 											"name": "PMTCALPERIODLIST",
-											"type": "Decimal"
+											"type": "String"
 										},
 										"sink": {
 											"name": "PMTCALPERIODLIST",
@@ -5533,7 +5536,7 @@
 									{
 										"source": {
 											"name": "DEFAULTTERMDAYS",
-											"type": "String"
+											"type": "Decimal"
 										},
 										"sink": {
 											"name": "DEFAULTTERMDAYS",
@@ -5548,6 +5551,14 @@
 										},
 										"sink": {
 											"name": "DATELASTCONTACT",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {},
+										"sink": {
+											"name": "DateLastMaint",
 											"type": "DateTime",
 											"physicalType": "datetime"
 										}
@@ -5604,6 +5615,8 @@
 					{
 						"name": "Truncate the staging_DIGITALBANKING_ACCTDETAILS",
 						"type": "Lookup",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -5656,6 +5669,8 @@
 					{
 						"name": "Sp_DIGITALBANKING_ACCTDETAILS",
 						"type": "SqlServerStoredProcedure",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "DIGITALBANKING_ACCTDETAILS",
@@ -5722,6 +5737,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTLOCKOUT\nWHERE TO_TIMESTAMP(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_TIMESTAMP(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '1' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND (InActiveDate IS NULL OR InActiveDate >= SYSDATE);",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -5776,6 +5792,17 @@
 										},
 										"sink": {
 											"name": "INACTIVEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
 											"type": "DateTime",
 											"physicalType": "datetime"
 										}
@@ -5877,6 +5904,8 @@
 					{
 						"name": "DIGITALBANKING_ORGPERSROLE",
 						"type": "Copy",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
@@ -5896,6 +5925,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ORGPERSROLE\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');\n\n",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -5907,6 +5937,78 @@
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ORGNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 10
+										}
+									},
+									{
+										"source": {
+											"name": "PERSROLECD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PERSROLECD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EFFDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EFFDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "PERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PERSNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 10
+										}
+									},
+									{
+										"source": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "INACTIVEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
@@ -5932,7 +6034,14 @@
 					{
 						"name": "DIGITALBANKING_PERSUSERFIELD",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_PERSUSERFIELD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -5944,6 +6053,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_PERSUSERFIELD\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -5956,6 +6066,19 @@
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
+									{
+										"source": {
+											"name": "PERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PERSNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 10
+										}
+									},
 									{
 										"source": {
 											"name": "USERFIELDCD",
@@ -5976,6 +6099,28 @@
 											"name": "VALUE",
 											"type": "String",
 											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUELASTUPDATEDDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "VALUELASTUPDATEDDA",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
 										}
 									}
 								],
@@ -5988,14 +6133,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_O_DIGITALBANKING_ORGSUSERFIELD",
+								"referenceName": "ds_O_Persuserfield",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "AzureSqlTable1",
+								"referenceName": "ds_s_DigitalBanking_persuserfield",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -6004,7 +6149,14 @@
 					{
 						"name": "DIGITALBANKING_ACCTACCTROLEPERS",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_DIGITALBANKING_ACCTACCTROLEPERS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -6016,6 +6168,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTACCTROLEPERS\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -6085,6 +6238,17 @@
 											"name": "ACCTROLECD",
 											"type": "String",
 											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
 										}
 									}
 								],
@@ -6132,6 +6296,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTACCTROLEORG\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');\n",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -6199,6 +6364,17 @@
 										},
 										"sink": {
 											"name": "INACTIVEDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
 											"type": "DateTime",
 											"physicalType": "datetime"
 										}
@@ -6248,6 +6424,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_EAGREEMENT\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');\n",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -6298,6 +6475,17 @@
 											"scale": 2,
 											"precision": 20
 										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
 									}
 								],
 								"typeConversion": true,
@@ -6344,6 +6532,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\r\nFROM DNACUSTOM.VW_DIGITALBANKING_ORGSUSERFIELD\r\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\r\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -6412,6 +6601,17 @@
 											"type": "String",
 											"physicalType": "varchar"
 										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
 									}
 								],
 								"typeConversion": true,
@@ -6439,6 +6639,8 @@
 					{
 						"name": "Truncate the staging_DIGITALBANKING_ORGPERSROLE",
 						"type": "Lookup",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -6482,7 +6684,7 @@
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "AzureSqlTable1",
+								"referenceName": "ds_s_DigitalBanking_persuserfield",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -6595,6 +6797,8 @@
 					{
 						"name": "Sp_DIGITALBANKING_ORGPERSROLE",
 						"type": "SqlServerStoredProcedure",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "DIGITALBANKING_ORGPERSROLE",
@@ -6753,6 +6957,346 @@
 							"referenceName": "ls_transactiondb",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Truncate the staging_ACCTUSERFIELD",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "db_s_DIGITALBANKING_ACCTUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "ACCTUSERFIELD",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_ACCTUSERFIELD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTUSERFIELD\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "USERFIELDCD",
+											"type": "String"
+										},
+										"sink": {
+											"name": "USERFIELDCD",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALUE",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUELASTUPDATEDDATE",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "VALUELASTUPDATEDDATE",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_ACCTUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "db_s_DIGITALBANKING_ACCTUSERFIELD",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Sp_staging_ACCTUSERFIELD",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "ACCTUSERFIELD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoACCTUSERFIELD]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Truncate the staging_EAGREEMENT_MAPPING",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "db_s_DIGITALBANKING_EAGREEMENT_MAPPING",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "EAGREEMENT_MAPPING",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate the staging_EAGREEMENT_MAPPING",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKING_EAGREEMENT_MAPPING\nWHERE TO_DATE(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS') BETWEEN\n    TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\n    AND TO_DATE(TO_CHAR(SYSDATE - INTERVAL '1' DAY, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS');",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "AGREENBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "AGREENBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "PERSNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PERSNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "BYORGNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "BYORGNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "ACCTNBR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ACCTNBR",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 16
+										}
+									},
+									{
+										"source": {
+											"name": "DATELASTMAINT",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DateLastMaint",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_O_DIGITALBANKING_EAGREEMENT_MAPPING",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "db_s_DIGITALBANKING_EAGREEMENT_MAPPING",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Sp_EAGREEMENT_MAPPING",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "EAGREEMENT_MAPPING",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[spi_InserttoEAGREEMENT_MAPPING]"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_transactiondb",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -6763,16 +7307,21 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ORGPERSROLE')]",
 				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ORGPERSROLE')]",
-				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ORGSUSERFIELD')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_Persuserfield')]",
+				"[concat(variables('factoryId'), '/datasets/ds_s_DigitalBanking_persuserfield')]",
 				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ACCTACCTROLEPERS')]",
 				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTACCTROLEPERS')]",
 				"[concat(variables('factoryId'), '/datasets/ds_o_DIGITALBANKING_ACCTACCTROLEORG')]",
 				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_ACCTACCTROLEORG')]",
 				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_EAGREEMENT')]",
 				"[concat(variables('factoryId'), '/datasets/ds_s_DIGITALBANKING_EAGREEMENT')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ORGSUSERFIELD')]",
 				"[concat(variables('factoryId'), '/datasets/db_s_DIGITALBANKING_ORGSUSERFIELD')]",
-				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]",
+				"[concat(variables('factoryId'), '/datasets/db_s_DIGITALBANKING_ACCTUSERFIELD')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_ACCTUSERFIELD')]",
+				"[concat(variables('factoryId'), '/datasets/db_s_DIGITALBANKING_EAGREEMENT_MAPPING')]",
+				"[concat(variables('factoryId'), '/datasets/ds_O_DIGITALBANKING_EAGREEMENT_MAPPING')]"
 			]
 		},
 		{
@@ -7750,7 +8299,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Copy Source to Staging_Maintenance",
+								"activity": "Truncate MiniOAOPromocodeMaintenance",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -7777,7 +8326,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Copy Source to Staging_Static",
+								"activity": "Truncate MiniOAOPromoStaticData",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -7798,6 +8347,72 @@
 							"referenceName": "BusinessData",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Truncate MiniOAOPromocodeMaintenance",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Copy Source to Staging_Maintenance",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance];\r\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_MiniOAOPromocodeMaintenance",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate MiniOAOPromoStaticData",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Copy Source to Staging_Static",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromoStaticData];\r\nselect count(*) from [dbo].[MiniOAOPromoStaticData];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_MiniOAOPromoStaticData",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
 					}
 				],
 				"policy": {
@@ -7811,7 +8426,9 @@
 				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromocodeMaintenanceStaging')]",
 				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromoStaticData_Staging')]",
 				"[concat(variables('factoryId'), '/datasets/ds_ss_PromocodeStatic')]",
-				"[concat(variables('factoryId'), '/linkedServices/BusinessData')]"
+				"[concat(variables('factoryId'), '/linkedServices/BusinessData')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromocodeMaintenance')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromoStaticData')]"
 			]
 		},
 		{
@@ -8789,7 +9406,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Copy Source to Staging_Maintenance",
+								"activity": "Truncate MiniOAOPromocodeMaintenance",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8816,7 +9433,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Copy Source to Staging_Static",
+								"activity": "Truncate MiniOAOPromoStaticData",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8837,6 +9454,72 @@
 							"referenceName": "BusinessDataDev",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Truncate MiniOAOPromocodeMaintenance",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Copy Source to Staging_Maintenance",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance];\r\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_MiniOAOPromocodeMaintenance_DEV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Truncate MiniOAOPromoStaticData",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Copy Source to Staging_Static",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromoStaticData];\r\nselect count(*) from [dbo].[MiniOAOPromoStaticData];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "ds_S_MiniOAOPromoStaticData_DEV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
 					}
 				],
 				"policy": {
@@ -8850,7 +9533,9 @@
 				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromocodeMaintenanceStaging_DEV')]",
 				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromoStaticData_Staging_DEV')]",
 				"[concat(variables('factoryId'), '/datasets/ds_ss_PromocodeStatic')]",
-				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromocodeMaintenance_DEV')]",
+				"[concat(variables('factoryId'), '/datasets/ds_S_MiniOAOPromoStaticData_DEV')]"
 			]
 		},
 		{
@@ -14968,7 +15653,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"name": "[concat(parameters('factoryName'), '/db_s_DIGITALBANKING_ACCTUSERFIELD')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -14980,14 +15665,14 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "PERSUSERFIELD_ID",
+						"name": "ID",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "PERSNBR",
+						"name": "ACCTNBR",
 						"type": "decimal",
-						"precision": 10,
+						"precision": 16,
 						"scale": 2
 					},
 					{
@@ -14999,7 +15684,13 @@
 						"type": "varchar"
 					},
 					{
-						"name": "VALUELASTUPDATEDDA",
+						"name": "VALUELASTUPDATEDDATE",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "DateLastMaint",
 						"type": "datetime",
 						"precision": 23,
 						"scale": 3
@@ -15007,7 +15698,64 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "DIGITALBANKING_PERSUSERFIELD_Staging"
+					"table": "DIGITALBANKING_ACCTUSERFIELD_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/db_s_DIGITALBANKING_EAGREEMENT_MAPPING')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AGREENBR",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "PERSNBR",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "BYORGNBR",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "ACCTNBR",
+						"type": "decimal",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "DateLastMaint",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_EAGREEMENT_MAPPING_Staging"
 				}
 			},
 			"dependsOn": [
@@ -15192,6 +15940,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTUSERFIELD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_ACCTUSERFIELD"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_EAGREEMENT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -15206,6 +15975,27 @@
 				"typeProperties": {
 					"schema": "DNACUSTOM",
 					"table": "VW_DIGITALBANKING_EAGREEMENT"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_EAGREEMENT_MAPPING')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_EAGREEMENT_MAPPING"
 				}
 			},
 			"dependsOn": [
@@ -15248,6 +16038,27 @@
 				"typeProperties": {
 					"schema": "DNACUSTOM",
 					"table": "VW_DIGITALBANKING_ORGSUSERFIELD"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_O_Persuserfield')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Altra_Test_Link",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "DNACUSTOM",
+					"table": "VW_DIGITALBANKING_PERSUSERFIELD"
 				}
 			},
 			"dependsOn": [
@@ -17411,6 +18222,54 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Display Value",
+						"type": "varchar"
+					},
+					{
+						"name": "Type",
+						"type": "varchar"
+					},
+					{
+						"name": "Group",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Is Active",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MiniOAOPromoStaticData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessData')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticDataStaging_UAT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -17456,6 +18315,54 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticData_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Display Value",
+						"type": "varchar"
+					},
+					{
+						"name": "Type",
+						"type": "varchar"
+					},
+					{
+						"name": "Group",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Is Active",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MiniOAOPromoStaticData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
 			]
 		},
 		{
@@ -17552,6 +18459,287 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenance')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PromoCode",
+						"type": "varchar"
+					},
+					{
+						"name": "SavingsAccount",
+						"type": "bit"
+					},
+					{
+						"name": "CheckingAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "CertificateAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "MoneyMarketAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "PromoType",
+						"type": "varchar"
+					},
+					{
+						"name": "Promotion",
+						"type": "varchar"
+					},
+					{
+						"name": "Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Promo Start Date",
+						"type": "date"
+					},
+					{
+						"name": "Administrator I",
+						"type": "varchar"
+					},
+					{
+						"name": "Administrator II",
+						"type": "varchar"
+					},
+					{
+						"name": "Approvers Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Expiration Date",
+						"type": "date"
+					},
+					{
+						"name": "Platforms Impacted",
+						"type": "varchar"
+					},
+					{
+						"name": "Age From",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age To",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Existing Products",
+						"type": "varchar"
+					},
+					{
+						"name": "Existing Products Checking Types",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Zip Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Open Office",
+						"type": "varchar"
+					},
+					{
+						"name": "Balance History Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Balance History Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Opening Date From",
+						"type": "date"
+					},
+					{
+						"name": "Opening Date To",
+						"type": "date"
+					},
+					{
+						"name": "Transaction Type",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Transaction Details",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction Details Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Completed Date From",
+						"type": "date"
+					},
+					{
+						"name": "Completed Date To",
+						"type": "date"
+					},
+					{
+						"name": "Criteria",
+						"type": "varchar"
+					},
+					{
+						"name": "Can Qualify more than once",
+						"type": "bit"
+					},
+					{
+						"name": "Reward Type",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Disclosures",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction Details within",
+						"type": "varchar"
+					},
+					{
+						"name": "Rate",
+						"type": "varchar"
+					},
+					{
+						"name": "Promotion Type Youth",
+						"type": "varchar"
+					},
+					{
+						"name": "Balance History",
+						"type": "varchar"
+					},
+					{
+						"name": "Checkings",
+						"type": "varchar"
+					},
+					{
+						"name": "Savings",
+						"type": "varchar"
+					},
+					{
+						"name": "ActiveInactive",
+						"type": "varchar"
+					},
+					{
+						"name": "HubID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Promo Category",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DetailsQualifications",
+						"type": "varchar"
+					},
+					{
+						"name": "Marketing Materials",
+						"type": "varchar"
+					},
+					{
+						"name": "Market",
+						"type": "varchar"
+					},
+					{
+						"name": "CreatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ModifiedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "ModifiedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Reward Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Minimum Balance",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Aggregate Transaction Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "New Account Deposit Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Aggregate Days",
+						"type": "varchar"
+					},
+					{
+						"name": "Aggregate No",
+						"type": "varchar"
+					},
+					{
+						"name": "Member Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Applicable Region or Market",
+						"type": "varchar"
+					},
+					{
+						"name": "UId",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Source",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MiniOAOPromocodeMaintenance"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessData')]"
 			]
 		},
 		{
@@ -18110,6 +19298,287 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "MiniOAOPromocodeMaintenance_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDataDev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenance_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PromoCode",
+						"type": "varchar"
+					},
+					{
+						"name": "SavingsAccount",
+						"type": "bit"
+					},
+					{
+						"name": "CheckingAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "CertificateAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "MoneyMarketAccounts",
+						"type": "bit"
+					},
+					{
+						"name": "PromoType",
+						"type": "varchar"
+					},
+					{
+						"name": "Promotion",
+						"type": "varchar"
+					},
+					{
+						"name": "Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Promo Start Date",
+						"type": "date"
+					},
+					{
+						"name": "Administrator I",
+						"type": "varchar"
+					},
+					{
+						"name": "Administrator II",
+						"type": "varchar"
+					},
+					{
+						"name": "Approvers Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Expiration Date",
+						"type": "date"
+					},
+					{
+						"name": "Platforms Impacted",
+						"type": "varchar"
+					},
+					{
+						"name": "Age From",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Age To",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Existing Products",
+						"type": "varchar"
+					},
+					{
+						"name": "Existing Products Checking Types",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Zip Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Open Office",
+						"type": "varchar"
+					},
+					{
+						"name": "Balance History Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Balance History Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Opening Date From",
+						"type": "date"
+					},
+					{
+						"name": "Opening Date To",
+						"type": "date"
+					},
+					{
+						"name": "Transaction Type",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Transaction Details",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction Details Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Completed Date From",
+						"type": "date"
+					},
+					{
+						"name": "Completed Date To",
+						"type": "date"
+					},
+					{
+						"name": "Criteria",
+						"type": "varchar"
+					},
+					{
+						"name": "Can Qualify more than once",
+						"type": "bit"
+					},
+					{
+						"name": "Reward Type",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Disclosures",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction Details within",
+						"type": "varchar"
+					},
+					{
+						"name": "Rate",
+						"type": "varchar"
+					},
+					{
+						"name": "Promotion Type Youth",
+						"type": "varchar"
+					},
+					{
+						"name": "Balance History",
+						"type": "varchar"
+					},
+					{
+						"name": "Checkings",
+						"type": "varchar"
+					},
+					{
+						"name": "Savings",
+						"type": "varchar"
+					},
+					{
+						"name": "ActiveInactive",
+						"type": "varchar"
+					},
+					{
+						"name": "HubID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Promo Category",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DetailsQualifications",
+						"type": "varchar"
+					},
+					{
+						"name": "Marketing Materials",
+						"type": "varchar"
+					},
+					{
+						"name": "Market",
+						"type": "varchar"
+					},
+					{
+						"name": "CreatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ModifiedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "ModifiedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Reward Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Minimum Balance",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Aggregate Transaction Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "New Account Deposit Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Aggregate Days",
+						"type": "varchar"
+					},
+					{
+						"name": "Aggregate No",
+						"type": "varchar"
+					},
+					{
+						"name": "Member Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Applicable Region or Market",
+						"type": "varchar"
+					},
+					{
+						"name": "UId",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Source",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MiniOAOPromocodeMaintenance"
 				}
 			},
 			"dependsOn": [
@@ -20201,6 +21670,53 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_s_DigitalBanking_persuserfield')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PERSUSERFIELD_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PERSNBR",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "USERFIELDCD",
+						"type": "varchar"
+					},
+					{
+						"name": "VALUE",
+						"type": "varchar"
+					},
+					{
+						"name": "VALUELASTUPDATEDDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DIGITALBANKING_PERSUSERFIELD_Staging"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_ss_PromoCodeMaintenance')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -21032,18 +22548,28 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [],
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_OfflineServices_30mins",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 30,
-						"startTime": "2023-09-15T10:23:00",
+						"startTime": "2023-11-01T10:23:00",
 						"timeZone": "India Standard Time"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_OfflineServices_30mins')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/str_offlineServices_Daily')]",
@@ -21052,26 +22578,28 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [],
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_OffllineServices_Daily",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2023-09-15T10:22:00",
-						"timeZone": "India Standard Time",
-						"schedule": {
-							"minutes": [
-								15
-							],
-							"hours": [
-								9
-							]
-						}
+						"startTime": "2023-11-01T10:22:00",
+						"timeZone": "India Standard Time"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_OffllineServices_Daily')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/str_offlineServices_Hourly')]",
@@ -21080,18 +22608,28 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [],
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_OfflineServices_Hourly",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Hour",
 						"interval": 1,
-						"startTime": "2023-09-15T03:15:00",
+						"startTime": "2023-10-31T10:15:00",
 						"timeZone": "India Standard Time"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_OfflineServices_Hourly')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AltraOracleIntegrationRuntime')]",
