@@ -964,7 +964,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Copy Source to Staging_Maintenance",
+						"activity": "Truncate MiniOAOPromocodeMaintenance",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -991,7 +991,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Copy Source to Staging_Static",
+						"activity": "Truncate MiniOAOPromoStaticData",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -1011,6 +1011,68 @@
 				"linkedServiceName": {
 					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Truncate MiniOAOPromocodeMaintenance",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Copy Source to Staging_Maintenance",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromocodeMaintenance];\r\nselect count(*) from [dbo].[MiniOAOPromocodeMaintenance];",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MiniOAOPromocodeMaintenance_UAT",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Truncate MiniOAOPromoStaticData",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Copy Source to Staging_Static",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "TRUNCATE TABLE [dbo].[MiniOAOPromoStaticData];\r\nselect count(*) from [dbo].[MiniOAOPromoStaticData];",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_S_MiniOAOPromoStaticData_UAT",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
