@@ -238,7 +238,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "ds_s_DigitalBanking_persuserfield",
 						"type": "DatasetReference"
 					}
 				]
@@ -772,7 +772,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "ds_s_DigitalBanking_persuserfield",
 						"type": "DatasetReference"
 					}
 				}
