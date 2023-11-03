@@ -44,6 +44,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT TO_TIMESTAMP(TO_CHAR(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTLOCKOUT\r\nfetch first 1 rows only;",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
