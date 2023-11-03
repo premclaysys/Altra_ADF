@@ -5,6 +5,8 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -42,7 +44,6 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TO_TIMESTAMP(DATELASTMAINT, 'YYYY-MM-DD\"T\"HH24:MI:SS')\r\nFROM DNACUSTOM.VW_DIGITALBANKING_ACCTLOCKOUT\r\nfetch first 1 rows only;",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
