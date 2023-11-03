@@ -673,32 +673,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Lookup1",
-				"type": "Lookup",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT * DIGITALBANKING_ACCTLOCKOUT\nFROM your_table_name\nWHERE DateLastMaint >= TO_TIMESTAMP('2023-11-03 04:59:12.000', 'YYYY-MM-DD HH24:MI:SS.FF3')\n  AND DateLastMaint <= TO_TIMESTAMP('2023-11-03 05:45:58.000', 'YYYY-MM-DD HH24:MI:SS.FF3');",
-						"partitionOption": "None",
-						"queryTimeout": "02:00:00"
-					},
-					"dataset": {
-						"referenceName": "VW_DIGITALBANKING_ACCTLOCKOUT",
-						"type": "DatasetReference"
-					},
-					"firstRowOnly": false
-				}
 			}
 		],
 		"annotations": []
