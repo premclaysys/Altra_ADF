@@ -52,7 +52,7 @@
 									"name": "BALAMT",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
+									"scale": 5,
 									"precision": 20
 								}
 							},
@@ -122,8 +122,19 @@
 									"name": "AVAILABLEBALANCE_ONLI",
 									"type": "Decimal",
 									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 16
+									"scale": 5,
+									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -232,6 +243,17 @@
 									"type": "String",
 									"physicalType": "varchar"
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -339,6 +361,17 @@
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -425,6 +458,17 @@
 									"physicalType": "decimal",
 									"scale": 2,
 									"precision": 20
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -774,6 +818,13 @@
 								},
 								"sink": {
 									"name": "DATELASTCONTACT",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
