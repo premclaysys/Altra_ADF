@@ -5,8 +5,6 @@
 			{
 				"name": "DIGITALBANKING_ORGPERSROLE",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -86,6 +84,17 @@
 								},
 								"sink": {
 									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
@@ -219,8 +228,6 @@
 			{
 				"name": "DIGITALBANKING_ORGSUSERFIELD",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -301,6 +308,17 @@
 									"type": "String",
 									"physicalType": "varchar"
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -326,8 +344,6 @@
 			{
 				"name": "DIGITALBANKING_ACCTLOCKOUT",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -394,6 +410,17 @@
 								},
 								"sink": {
 									"name": "INACTIVEDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
@@ -422,8 +449,6 @@
 			{
 				"name": "DIGITALBANKING_EAGREEMENT_MAPPING",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -499,6 +524,17 @@
 									"scale": 2,
 									"precision": 16
 								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
 							}
 						],
 						"typeConversion": true,
@@ -524,8 +560,6 @@
 			{
 				"name": "DIGITALBANKING_ACCTUSERFIELD",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -592,6 +626,17 @@
 								},
 								"sink": {
 									"name": "VALUELASTUPDATEDDATE",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "DATELASTMAINT",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DateLastMaint",
 									"type": "DateTime",
 									"physicalType": "datetime"
 								}
