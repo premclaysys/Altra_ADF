@@ -163,6 +163,8 @@
 			{
 				"name": "ACCTACCTROLEPERS Data transfer",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -401,8 +403,6 @@
 			{
 				"name": "EAGREEMENT Data Transfer",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
