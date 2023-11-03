@@ -2,7 +2,7 @@
 	"name": "str_offlineServices_30mins",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
