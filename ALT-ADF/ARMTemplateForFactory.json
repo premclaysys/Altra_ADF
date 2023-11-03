@@ -22562,7 +22562,7 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 30,
-						"startTime": "2023-11-03T11:45:00",
+						"startTime": "2023-11-03T11:55:00",
 						"timeZone": "India Standard Time"
 					}
 				}
@@ -22592,11 +22592,11 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2023-11-03T11:44:00",
+						"startTime": "2023-11-03T12:00:00",
 						"timeZone": "India Standard Time",
 						"schedule": {
 							"minutes": [
-								30
+								0
 							],
 							"hours": [
 								12
