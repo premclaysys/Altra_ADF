@@ -88,7 +88,19 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select TO_TIMESTAMP(TO_CHAR(SYSDATE - INTERVAL '2' HOUR, 'YYYY-MM-DD\"T\"HH24:MI:SS'), 'YYYY-MM-DD\"T\"HH24:MI:SS') from DUAL",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "ds_O_DIGITALBANKING_ACCTLOCKOUT",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"annotations": []
