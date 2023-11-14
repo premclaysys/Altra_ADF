@@ -12,5 +12,6 @@
 			"schema": "DNACUSTOM",
 			"table": "VW_DIGITALBANKING_EAGREEMENT_MAPPING"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

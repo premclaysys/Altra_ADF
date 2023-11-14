@@ -12,5 +12,6 @@
 			"schema": "DNACUSTOM",
 			"table": "VW_DIGITALBANKING_ORGPERSROLE"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

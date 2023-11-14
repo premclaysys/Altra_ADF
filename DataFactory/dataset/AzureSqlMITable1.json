@@ -1,16 +1,16 @@
 {
-	"name": "ds_O_DIGITALBANKING_ACCTACCTROLEPERS",
+	"name": "AzureSqlMITable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Altra_Test_Link",
+			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "OracleTable",
+		"type": "AzureSqlMITable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "DNACUSTOM",
-			"table": "VW_DIGITALBANKING_ACCTACCTROLEPERS"
+			"schema": "dbo",
+			"table": "Transaction_Alerts"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

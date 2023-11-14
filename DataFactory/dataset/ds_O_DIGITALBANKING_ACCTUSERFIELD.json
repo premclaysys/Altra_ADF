@@ -12,5 +12,6 @@
 			"schema": "DNACUSTOM",
 			"table": "VW_DIGITALBANKING_ACCTUSERFIELD"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

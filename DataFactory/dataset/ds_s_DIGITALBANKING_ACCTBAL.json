@@ -60,5 +60,6 @@
 			"schema": "dbo",
 			"table": "DIGITALBANKING_ACCTBAL_Staging"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

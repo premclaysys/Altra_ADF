@@ -12,5 +12,6 @@
 			"schema": "DNACUSTOM",
 			"table": "VW_DIGITALBANKING_ACCTLOCKOUT"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
