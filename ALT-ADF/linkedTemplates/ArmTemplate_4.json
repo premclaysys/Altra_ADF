@@ -3966,7 +3966,8 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-11-06T09:16:32Z"
 			},
 			"dependsOn": []
 		},
@@ -4148,7 +4149,8 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-11-06T09:16:32Z"
 			},
 			"dependsOn": []
 		},
@@ -5559,7 +5561,8 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2023-11-06T09:16:32Z"
 			},
 			"dependsOn": []
 		},
@@ -6658,7 +6661,7 @@
 					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-08-02T08:02:20Z"
+				"lastPublishTime": "2023-11-02T13:33:24Z"
 			},
 			"dependsOn": []
 		},
@@ -7757,7 +7760,7 @@
 					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-08-02T08:02:20Z"
+				"lastPublishTime": "2023-11-02T13:33:24Z"
 			},
 			"dependsOn": []
 		},
@@ -9838,7 +9841,7 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-09-21T07:45:23Z"
+				"lastPublishTime": "2023-09-25T08:06:37Z"
 			},
 			"dependsOn": []
 		},
@@ -9860,7 +9863,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "0.12:00:00",
+							"timeout": "6.12:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -10713,6 +10716,25 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlMITable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlMITable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transaction_Alerts"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_LoanServices_UAT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -11029,73 +11051,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "CampaignShareServices"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_Share_UAT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlMITable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ShareID",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeGroupCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "ShareCloseDate",
-						"type": "date"
-					},
-					{
-						"name": "CurrentBalance",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "ShareMaturityDate",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignShare"
 				}
 			},
 			"dependsOn": []

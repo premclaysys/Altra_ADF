@@ -345,7 +345,7 @@
 					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2023-06-27T16:27:58Z"
+				"lastPublishTime": "2023-10-27T05:54:16Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
