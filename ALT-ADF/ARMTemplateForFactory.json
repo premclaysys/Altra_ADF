@@ -13531,7 +13531,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "6.12:00:00",
+							"timeout": "7.00:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -13542,7 +13542,7 @@
 							"source": {
 								"type": "OracleSource",
 								"oracleReaderQuery": {
-									"value": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TransactionFiscalDate >= TO_TIMESTAMP('@{variables('StartDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\nAND TransactionFiscalDate <= TO_TIMESTAMP('@{variables('EndDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\n\n \n",
+									"value": "SELECT *\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS\nWHERE TransactionFiscalDate >= TO_TIMESTAMP('@{variables('StartDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\nAND TransactionFiscalDate <= TO_TIMESTAMP('@{variables('EndDate')}', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')\nORDER BY TRANSACTIONID, SUBACCTNBR;\n\n \n",
 									"type": "Expression"
 								},
 								"partitionOption": "None",
@@ -22462,13 +22462,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "PL_BackupRecordsBefore18Months",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
 							"type": "PipelineReference"
 						},
@@ -22491,7 +22484,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_BackupRecordsBefore18Months')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_DeleteRecordsBefore18Months_UAT')]"
 			]
 		},
