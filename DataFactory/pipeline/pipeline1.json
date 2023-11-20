@@ -93,7 +93,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TRANSACTIONID, SUBACCTNBR\nFROM dbo.Transactions;",
+						"oracleReaderQuery": "SELECT TRANSACTIONID, SUBACCTNBR\nFROM DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS;",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
