@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * FROM dbo.PromoCodeMaintenace WHERE  PromoCode = 'CHK_LindaleA+100'",
+						"sqlReaderQuery": "SELECT * FROM dbo.PromoCodeMaintenace WHERE  PromoCode = 'checking50'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
