@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "\nselect * from [Nextly_E-Agreement_staging] where AGREENBR =5185452",
+						"sqlReaderQuery": "\nselect * from Nextly_E-Agreement_staging where AGREENBR =5185452",
 						"partitionOption": "None"
 					},
 					"dataset": {
