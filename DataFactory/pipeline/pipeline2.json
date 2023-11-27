@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select * from [Nextly_E-Agreement_staging] where AGREENBR =5185452",
+						"sqlReaderQuery": "select * from Members where MemberNumber is not null",
 						"partitionOption": "None"
 					},
 					"dataset": {
