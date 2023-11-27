@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select * from Members where MemberNumber is not null",
+						"sqlReaderQuery": "select * from Members where MemberNumber is not null and createdby is null",
 						"partitionOption": "None"
 					},
 					"dataset": {
