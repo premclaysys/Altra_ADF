@@ -1,0 +1,217 @@
+{
+	"name": "AzureSqlMITable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlMITable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AccountNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "UserName",
+				"type": "varchar"
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			},
+			{
+				"name": "IsActive",
+				"type": "bit"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CreatedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ModifiedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "MemberNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "ObjectGUID",
+				"type": "varchar"
+			},
+			{
+				"name": "RoleId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EmailAddress",
+				"type": "varchar"
+			},
+			{
+				"name": "PhoneNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "IsDeleted",
+				"type": "bit"
+			},
+			{
+				"name": "IsLocked",
+				"type": "bit"
+			},
+			{
+				"name": "PersonNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "LastLoginDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "EnrollmentDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "BillPayEnrollmentId",
+				"type": "varchar"
+			},
+			{
+				"name": "Status",
+				"type": "varchar"
+			},
+			{
+				"name": "eAgreementNumber",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "UUID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SSN",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LastPasswordUpdatedDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CustomerID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DateOfBirth",
+				"type": "date"
+			},
+			{
+				"name": "OrgNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "IsWalkthroughDone",
+				"type": "bit"
+			},
+			{
+				"name": "NextlyLoginDate",
+				"type": "date"
+			},
+			{
+				"name": "PasswordReset",
+				"type": "varchar"
+			},
+			{
+				"name": "NewMemberNotificationSend",
+				"type": "bit"
+			},
+			{
+				"name": "OrganizationName",
+				"type": "varchar"
+			},
+			{
+				"name": "CellPhoneNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "BusinessPhoneNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "LockReason",
+				"type": "varchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "varchar"
+			},
+			{
+				"name": "MiddleName",
+				"type": "varchar"
+			},
+			{
+				"name": "LastName",
+				"type": "varchar"
+			},
+			{
+				"name": "BusinessEmailAddress",
+				"type": "varchar"
+			},
+			{
+				"name": "MemberSince",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MemberSinceOrg",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NewMemberNotificationModifiedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "IsConvertedUser",
+				"type": "bit"
+			},
+			{
+				"name": "IsMobileAPPDwnld",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Members"
+		}
+	}
+}
