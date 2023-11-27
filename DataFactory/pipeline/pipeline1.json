@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select count(*) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\nwhere TRANSACTIONFISCALDATE >= '2022-05-19T00:00:00' AND TRANSACTIONFISCALDATE <= '2022-11-21T00:00:00'",
+						"oracleReaderQuery": "select count(*) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS \r\nwhere WHERE TransactionFiscalDate >= TO_DATE('2022-05-19T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') \r\n  AND TransactionFiscalDate <= TO_DATE('2022-11-21T00:00:00', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"')",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
