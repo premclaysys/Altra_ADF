@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT count(*) FROM dbo.PromoCodeMaintenace WHERE  PromoCode = 'checking50'",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "OracleSource",
+						"oracleReaderQuery": "select count(*) from DNACUSTOM.VW_DIGITALBANKINGTRANSACTIONS",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "ds_ss_PromoCodeMaintenance",
+						"referenceName": "ds_O_AltraServerConnectivity",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
