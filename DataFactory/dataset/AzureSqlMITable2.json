@@ -211,7 +211,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Nextly_E-Agreement_staging"
+			"table": "Members"
 		}
 	}
 }
