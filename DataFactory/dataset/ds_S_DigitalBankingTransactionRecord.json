@@ -61,37 +61,50 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "TransactionSortIndex",
-				"type": "bigint",
-				"precision": 19
-			},
-			{
-				"name": "PrincipalAmount",
-				"type": "decimal",
-				"precision": 38,
-				"scale": 3
-			},
-			{
-				"name": "PrincipalBalance",
-				"type": "decimal",
-				"precision": 38,
-				"scale": 3
-			},
-			{
-				"name": "LoanInterestAmount",
-				"type": "decimal",
-				"precision": 38,
-				"scale": 3
-			},
-			{
-				"name": "CURRRTXNSTATCD",
-				"type": "nvarchar"
-			},
-			{
-				"name": "CHECKNBR",
+				"name": "SubAcctNbr",
 				"type": "decimal",
 				"precision": 22,
 				"scale": 0
+			},
+			{
+				"name": "BalCatCd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BalTypCd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BalanceDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "TranAmt",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "Balance",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 3
+			},
+			{
+				"name": "CheckNbr",
+				"type": "decimal",
+				"precision": 22,
+				"scale": 0
+			},
+			{
+				"name": "TraceNbr",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
