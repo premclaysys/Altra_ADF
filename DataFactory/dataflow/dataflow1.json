@@ -1,0 +1,99 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlMITable2",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          AccountNumber as decimal(22,0),",
+				"          AccountTransactionNumber as decimal(22,0),",
+				"          TransactionID as decimal(22,0),",
+				"          TransactionFiscalDate as date,",
+				"          TransactionDateTime as timestamp,",
+				"          TransactionEffectiveDate as date,",
+				"          TransactionTypeCode as string,",
+				"          TransactionType as string,",
+				"          TransactionStatusCode as string,",
+				"          TransactionStatus as string,",
+				"          TransactionDescription as string,",
+				"          SubAcctNbr as decimal(22,0),",
+				"          BalCatCd as string,",
+				"          BalTypCd as string,",
+				"          BalanceDescription as string,",
+				"          Amount as decimal(38,3),",
+				"          TranAmt as decimal(38,3),",
+				"          Balance as decimal(38,3),",
+				"          CheckNbr as decimal(22,0),",
+				"          TraceNbr as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          AccountNumber as decimal(22,0),",
+				"          AccountTransactionNumber as decimal(22,0),",
+				"          TransactionID as decimal(22,0),",
+				"          TransactionFiscalDate as date,",
+				"          TransactionDateTime as timestamp,",
+				"          TransactionEffectiveDate as date,",
+				"          TransactionTypeCode as string,",
+				"          TransactionType as string,",
+				"          TransactionStatusCode as string,",
+				"          TransactionStatus as string,",
+				"          TransactionDescription as string,",
+				"          TransactionSortIndex as long,",
+				"          PrincipalAmount as decimal(38,3),",
+				"          PrincipalBalance as decimal(38,3),",
+				"          LoanInterestAmount as decimal(38,3),",
+				"          CURRRTXNSTATCD as string,",
+				"          CHECKNBR as decimal(22,0)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          AccountNumber,",
+				"          AccountTransactionNumber,",
+				"          TransactionID,",
+				"          TransactionFiscalDate,",
+				"          TransactionDateTime,",
+				"          TransactionEffectiveDate,",
+				"          TransactionTypeCode,",
+				"          TransactionType,",
+				"          TransactionStatusCode,",
+				"          TransactionStatus,",
+				"          TransactionDescription,",
+				"          CHECKNBR = CheckNbr",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
