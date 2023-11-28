@@ -32,6 +32,9 @@
 		"ls_transactiondb_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
 		},
+		"nextly_sent_temp_26112023_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Nextly_sent_temp_26112023;User ID=altrasqlappformsadm"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://ALTRA-KEYVAULT.vault.azure.net/"
 		},
