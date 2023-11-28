@@ -52,11 +52,6 @@
 			"metadata": "Secure string for 'connectionString' of 'ls_transactiondb'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
 		},
-		"nextly_sent_temp_26112023_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'nextly_sent_temp_26112023'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Nextly_sent_temp_26112023;User ID=altrasqlappformsadm"
-		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
@@ -22316,34 +22311,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/nextly_sent_temp_26112023')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlMI",
-				"typeProperties": {
-					"connectionString": "[parameters('nextly_sent_temp_26112023_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "altrasqlappformsadm"
-					}
-				},
-				"connectVia": {
-					"referenceName": "AzureSqlPrivateEndPointConnection",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureSqlPrivateEndPointConnection')]",
 				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		},
