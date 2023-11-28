@@ -1,0 +1,22 @@
+{
+	"name": "nextly_sent_temp_26112023",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlMI",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altraprodsql01.fbfb1f231f1d.database.windows.net;Initial Catalog=Nextly_sent_temp_26112023;User ID=altrasqlappformsadm",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ALTADFKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "altrasqlappformsadm"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AzureSqlPrivateEndPointConnection",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
