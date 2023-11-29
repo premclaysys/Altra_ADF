@@ -42,6 +42,11 @@
 			"metadata": "Secure string for 'connectionString' of 'ls_transactiondb'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
 		},
+		"NextlyDev_temp_26112023_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'NextlyDev_temp_26112023'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Nextly_sent_temp_26112023;User ID=altsqldev"
+		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
@@ -315,6 +320,29 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/NextlyDev_temp_26112023')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('NextlyDev_temp_26112023_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "altsqldev"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_BackupRecordsBefore18Months')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -569,27 +597,6 @@
 				"typeProperties": {
 					"schema": "DNACUSTOM",
 					"table": "VW_DIGITALBANKING_ACCTACCTROLEPERS"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTBAL_Source')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Altra_Test_Link",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "DNACUSTOM",
-					"table": "VW_DIGITALBANKING_ACCTBAL"
 				}
 			},
 			"dependsOn": [

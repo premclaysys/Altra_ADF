@@ -7,6 +7,11 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ALT-ADF"
 		},
+		"BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BusinessDATAUAT_UATPRODSQL_Server_Connection'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altrasqlmifailovergroup.fbfb1f231f1d.database.windows.net;Initial Catalog=BusinessData.UAT;User ID=altrasqlappformsadm"
+		},
 		"Transaction_UAT_UATSQL_Server_Connection_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Transaction_UAT_UATSQL_Server_Connection'",
@@ -17,6 +22,31 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/BusinessDATAUAT_UATPRODSQL_Server_Connection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlMI",
+				"typeProperties": {
+					"connectionString": "[parameters('BusinessDATAUAT_UATPRODSQL_Server_Connection_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "altrasqlappformsadm"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AzureSqlPrivateEndPointConnection",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Transaction_UAT_UATSQL_Server_Connection')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -10732,7 +10762,9 @@
 					"table": "Transaction_Alerts"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_LoanServices_UAT')]",
@@ -10793,7 +10825,9 @@
 					"table": "CampaignLoanServices"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_Loan_UAT')]",
@@ -10866,7 +10900,9 @@
 					"table": "CampaignLoan"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_Members_UAT')]",
@@ -10992,68 +11028,9 @@
 					"table": "CampaignMember"
 				}
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaign_ShareServices_UAT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDATAUAT_UATPRODSQL_Server_Connection",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlMITable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "ShareTypeGroupCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareTypeDescription",
-						"type": "varchar"
-					},
-					{
-						"name": "BusinessShareFlag",
-						"type": "bit"
-					},
-					{
-						"name": "ShareGroup1",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup2",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup3",
-						"type": "varchar"
-					},
-					{
-						"name": "ShareGroup4",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignShareServices"
-				}
-			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BusinessDATAUAT_UATPRODSQL_Server_Connection')]"
+			]
 		}
 	]
 }
