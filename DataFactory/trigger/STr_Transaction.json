@@ -9,6 +9,12 @@
 					"referenceName": "PL_TransactionTransfersUAT",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "PL_TransactionTransferQA",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
