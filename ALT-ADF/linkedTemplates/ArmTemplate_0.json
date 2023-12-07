@@ -32,6 +32,11 @@
 			"metadata": "Secure string for 'connectionString' of 'Dynamic Campaigns'",
 			"defaultValue": "Integrated Security=False;Data Source=DWH-DEV.altra.org;Initial Catalog=Nextly;User ID=NextlyMarketing"
 		},
+		"NextlyDev_temp_26112023_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'NextlyDev_temp_26112023'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Nextly_sent_temp_26112023;User ID=altsqldev"
+		},
 		"PromoCode_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'PromoCode'",
@@ -41,11 +46,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_transactiondb'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Transactions;User ID=altsqldev"
-		},
-		"NextlyDev_temp_26112023_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'NextlyDev_temp_26112023'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=altradevsql01.database.windows.net;Initial Catalog=Nextly_sent_temp_26112023;User ID=altsqldev"
 		},
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -226,6 +226,29 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/NextlyDev_temp_26112023')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('NextlyDev_temp_26112023_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ALTADFKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "altsqldev"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PromoCode')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -317,29 +340,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NextlyDev_temp_26112023')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('NextlyDev_temp_26112023_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "ALTADFKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "altsqldev"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ALTADFKeyVault')]"
 			]
 		},
 		{
