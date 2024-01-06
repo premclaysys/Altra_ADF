@@ -6,12 +6,6 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_DeleteRecordsBefore18Months_UAT",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "PL_BackupRecordsBefore18Months",
 					"type": "PipelineReference"
 				}
