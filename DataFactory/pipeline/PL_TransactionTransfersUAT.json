@@ -392,8 +392,6 @@
 			{
 				"name": "fetch the transactionId",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "sp_InsertTransaction",
@@ -425,8 +423,6 @@
 			{
 				"name": "Upperlimit trans id",
 				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "fetch the transactionId",
@@ -451,8 +447,6 @@
 			{
 				"name": "If no new records are there",
 				"type": "IfCondition",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Upperlimit trans id",
