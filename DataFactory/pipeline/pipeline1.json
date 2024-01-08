@@ -44,7 +44,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))",
+						"sqlReaderQuery": "select GETDATE()",
 						"partitionOption": "None"
 					},
 					"dataset": {
