@@ -16,12 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlMISource",
-						"sqlReaderQuery": "select * from Transactions \n  WHERE  TransactionFiscalDate = '2022-07-07'",
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "delete from Transactions where TransactionID =255105978",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_S_TransactionRecord_UAT",
+						"referenceName": "ds_S_DigitalBankingTransactionRecord",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
