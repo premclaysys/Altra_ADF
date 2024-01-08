@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select * from Transactions \n  WHERE  TransactionFiscalDate< DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\n",
+						"sqlReaderQuery": "select * from Transactions \n  WHERE  TransactionFiscalDate = '2022-07-07'",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -30,6 +30,8 @@
 			{
 				"name": "Lookup2",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -55,6 +57,8 @@
 			{
 				"name": "Lookup3",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
