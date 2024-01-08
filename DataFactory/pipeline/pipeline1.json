@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlMISource",
-						"sqlReaderQuery": "select count(TransactionID) from Transactions \n  WHERE  TransactionFiscalDate< DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\n",
+						"sqlReaderQuery": "select * from Transactions \n  WHERE  TransactionFiscalDate< DATEADD(DAY, -1, DATEADD(mm, -18, CONVERT(date, GETDATE())))\n",
 						"partitionOption": "None"
 					},
 					"dataset": {
