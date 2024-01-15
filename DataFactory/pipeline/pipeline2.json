@@ -1,0 +1,26 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecuteStoredProcedureActivity",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "YourStoredProcedureName"
+				}
+			}
+		],
+		"annotations": [],
+		"start": "2024-01-15T00:00:00Z",
+		"end": "2024-01-15T23:59:59Z",
+		"isPaused": false
+	}
+}
