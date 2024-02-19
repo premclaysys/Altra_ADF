@@ -50,20 +50,6 @@
 		"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ALTRA-KEYVAULT.vault.azure.net/"
-		},
-		"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/fa5ce5af-8db2-426e-b50e-23d901fc1249/resourceGroups/altra-cu-prod-srv-rg/providers/Microsoft.Sql/managedInstances/altraprodsql01"
-		},
-		"AzureSqlMIPRODUAT_properties_groupId": {
-			"type": "string",
-			"defaultValue": "managedInstance"
-		},
-		"AzureSqlMIPRODUAT_properties_fqdns": {
-			"type": "array",
-			"defaultValue": [
-				"altraprodsql01.fbfb1f231f1d.database.windows.net"
-			]
 		}
 	},
 	"variables": {
@@ -79,6 +65,203 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('ALTADFKeyVault_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/STr_DynamicCampaigns')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-07-13T06:18:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								13
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/STr_PromocodeRecordsTransfer')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-07-20T13:30:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								13
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/STr_Transaction')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 3,
+						"startTime": "2023-06-06T14:51:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Str_DeleteRecordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-27T08:00:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"hours": [
+								8
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Tr_DataTransfer')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-26T12:02:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								9
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/str_offlineServices_30mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 30,
+						"startTime": "2023-11-03T11:55:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/str_offlineServices_Daily')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-11-03T12:00:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								5
+							],
+							"hours": [
+								12
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/str_offlineServices_Hourly')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 1,
+						"startTime": "2023-11-02T11:44:00",
+						"timeZone": "India Standard Time"
+					}
 				}
 			},
 			"dependsOn": []
@@ -327,280 +510,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default/AzureSqlMIPRODUAT')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"privateLinkResourceId": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]",
-				"groupId": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]",
-				"fqdns": "[parameters('AzureSqlMIPRODUAT_properties_fqdns')]"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_BackupRecordsBefore18Months')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "BackupRecordsBefore18Months",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "dbo.SP_InsertRecordsBefore18Months_TransactionsBackup"
-						},
-						"linkedServiceName": {
-							"referenceName": "ls_transactiondb",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-10-27T05:54:16Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/db_s_DIGITALBANKING_ACCTUSERFIELD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_transactiondb",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ACCTNBR",
-						"type": "decimal",
-						"precision": 16,
-						"scale": 2
-					},
-					{
-						"name": "USERFIELDCD",
-						"type": "varchar"
-					},
-					{
-						"name": "VALUE",
-						"type": "varchar"
-					},
-					{
-						"name": "VALUELASTUPDATEDDATE",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "DateLastMaint",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "DIGITALBANKING_ACCTUSERFIELD_Staging"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/db_s_DIGITALBANKING_EAGREEMENT_MAPPING')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_transactiondb",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "AGREENBR",
-						"type": "decimal",
-						"precision": 16,
-						"scale": 2
-					},
-					{
-						"name": "PERSNBR",
-						"type": "decimal",
-						"precision": 16,
-						"scale": 2
-					},
-					{
-						"name": "BYORGNBR",
-						"type": "decimal",
-						"precision": 16,
-						"scale": 2
-					},
-					{
-						"name": "ACCTNBR",
-						"type": "decimal",
-						"precision": 16,
-						"scale": 2
-					},
-					{
-						"name": "DateLastMaint",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "DIGITALBANKING_EAGREEMENT_MAPPING_Staging"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/db_s_DIGITALBANKING_ORGSUSERFIELD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_transactiondb",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ORGSUSERFIELD_ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ORGNBR",
-						"type": "decimal",
-						"precision": 10,
-						"scale": 2
-					},
-					{
-						"name": "USERFIELDCD",
-						"type": "varchar"
-					},
-					{
-						"name": "VALUE",
-						"type": "varchar"
-					},
-					{
-						"name": "VALUELASTUPDATEDDA",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ORGNAME",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "DIGITALBANKING_ORGSUSERFIELD_Staging"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_transactiondb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_O_AltraServerConnectivity')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Altra_Test_Link",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "DNACUSTOM",
-					"table": "VW_DIGITALBANKINGTRANSACTIONS"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_O_Connectivity_InactiveEagreement')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Altra_Test_Link",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "DNACUSTOM",
-					"table": "VW_DIGITALBANKINGINACTIVEEAGREEMENTS"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_O_DIGITALBANKING_ACCTACCTROLEPERS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Altra_Test_Link",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "DNACUSTOM",
-					"table": "VW_DIGITALBANKING_ACCTACCTROLEPERS"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Altra_Test_Link')]"
 			]
 		}
 	]

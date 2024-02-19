@@ -128,15 +128,6 @@
 					},
 					"ALTADFKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('ALTADFKeyVault_properties_typeProperties_baseUrl')]"
-					},
-					"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]"
-					},
-					"AzureSqlMIPRODUAT_properties_groupId": {
-						"value": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]"
-					},
-					"AzureSqlMIPRODUAT_properties_fqdns": {
-						"value": "[parameters('AzureSqlMIPRODUAT_properties_fqdns')]"
 					}
 				}
 			},
@@ -155,6 +146,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlMIPRODUAT_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureSqlMIPRODUAT_properties_privateLinkResourceId')]"
+					},
+					"AzureSqlMIPRODUAT_properties_groupId": {
+						"value": "[parameters('AzureSqlMIPRODUAT_properties_groupId')]"
+					},
+					"AzureSqlMIPRODUAT_properties_fqdns": {
+						"value": "[parameters('AzureSqlMIPRODUAT_properties_fqdns')]"
 					}
 				}
 			},

@@ -13,6 +13,531 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_SS_DynamicCampaignShare')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dynamic Campaigns",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ShareID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ShareMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "mktg",
+					"table": "Share"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_SS_DynamicCampaignShareServices')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dynamic Campaigns",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "ShareTypeGroupCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessShareFlag",
+						"type": "bit"
+					},
+					{
+						"name": "ShareGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "ShareGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "mktg",
+					"table": "ShareServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DeleteReordsBefore18Months')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DigitalBankingConectivity')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionSortIndex",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalAmount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrincipalBalance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LoanInterestAmount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CURRRTXNSTATCD",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CHECKNBR",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions_Staging"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DigitalBankingTransactionRecord')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_transactiondb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "AccountNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "AccountTransactionNumber",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionID",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					},
+					{
+						"name": "TransactionFiscalDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TransactionEffectiveDate",
+						"type": "date"
+					},
+					{
+						"name": "TransactionTypeCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatusCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TransactionSortIndex",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "PrincipalAmount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "PrincipalBalance",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "LoanInterestAmount",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 3
+					},
+					{
+						"name": "CURRRTXNSTATCD",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CHECKNBR",
+						"type": "decimal",
+						"precision": 22,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Transactions"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoan')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LoanID",
+						"type": "varchar"
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "PartyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanStatusGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanOpenDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanCloseDate",
+						"type": "date"
+					},
+					{
+						"name": "CurrentBalance",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "CreditLimit",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LoanMaturityDate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoan"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoanServices')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessLoanFlag",
+						"type": "bit"
+					},
+					{
+						"name": "LoanGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoanServices_DEV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BusinessDataDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsOfDate",
+						"type": "date"
+					},
+					{
+						"name": "LoanFamilyCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanTypeDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessLoanFlag",
+						"type": "bit"
+					},
+					{
+						"name": "LoanGroup1",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup2",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup3",
+						"type": "varchar"
+					},
+					{
+						"name": "LoanGroup4",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CampaignLoanServices"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_S_DynamicCampaignLoan_DEV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -833,1333 +1358,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "MiniOAOPromoStaticData"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticData_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Display Value",
-						"type": "varchar"
-					},
-					{
-						"name": "Type",
-						"type": "varchar"
-					},
-					{
-						"name": "Group",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Description",
-						"type": "varchar"
-					},
-					{
-						"name": "Is Active",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromoStaticData"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticData_Staging')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Display Value",
-						"type": "varchar"
-					},
-					{
-						"name": "Type",
-						"type": "varchar"
-					},
-					{
-						"name": "Group",
-						"type": "varchar"
-					},
-					{
-						"name": "Description",
-						"type": "varchar"
-					},
-					{
-						"name": "Is Active",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromoStaticData_Staging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromoStaticData_Staging_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Display Value",
-						"type": "varchar"
-					},
-					{
-						"name": "Type",
-						"type": "varchar"
-					},
-					{
-						"name": "Group",
-						"type": "varchar"
-					},
-					{
-						"name": "Description",
-						"type": "varchar"
-					},
-					{
-						"name": "Is Active",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromoStaticData_Staging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenance')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PromoCode",
-						"type": "varchar"
-					},
-					{
-						"name": "SavingsAccount",
-						"type": "bit"
-					},
-					{
-						"name": "CheckingAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "CertificateAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "MoneyMarketAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "PromoType",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion",
-						"type": "varchar"
-					},
-					{
-						"name": "Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Promo Start Date",
-						"type": "date"
-					},
-					{
-						"name": "Administrator I",
-						"type": "varchar"
-					},
-					{
-						"name": "Administrator II",
-						"type": "varchar"
-					},
-					{
-						"name": "Approvers Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Expiration Date",
-						"type": "date"
-					},
-					{
-						"name": "Platforms Impacted",
-						"type": "varchar"
-					},
-					{
-						"name": "Age From",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Age To",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Existing Products",
-						"type": "varchar"
-					},
-					{
-						"name": "Existing Products Checking Types",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Zip Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Open Office",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Balance History Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Opening Date From",
-						"type": "date"
-					},
-					{
-						"name": "Opening Date To",
-						"type": "date"
-					},
-					{
-						"name": "Transaction Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Transaction Details",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Completed Date From",
-						"type": "date"
-					},
-					{
-						"name": "Completed Date To",
-						"type": "date"
-					},
-					{
-						"name": "Criteria",
-						"type": "varchar"
-					},
-					{
-						"name": "Can Qualify more than once",
-						"type": "bit"
-					},
-					{
-						"name": "Reward Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Disclosures",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details within",
-						"type": "varchar"
-					},
-					{
-						"name": "Rate",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion Type Youth",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History",
-						"type": "varchar"
-					},
-					{
-						"name": "Checkings",
-						"type": "varchar"
-					},
-					{
-						"name": "Savings",
-						"type": "varchar"
-					},
-					{
-						"name": "ActiveInactive",
-						"type": "varchar"
-					},
-					{
-						"name": "HubID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Promo Category",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DetailsQualifications",
-						"type": "varchar"
-					},
-					{
-						"name": "Marketing Materials",
-						"type": "varchar"
-					},
-					{
-						"name": "Market",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Reward Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Minimum Balance",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Transaction Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "New Account Deposit Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Days",
-						"type": "varchar"
-					},
-					{
-						"name": "Aggregate No",
-						"type": "varchar"
-					},
-					{
-						"name": "Member Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Applicable Region or Market",
-						"type": "varchar"
-					},
-					{
-						"name": "UId",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 0
-					},
-					{
-						"name": "Source",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromocodeMaintenance"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenanceStaging')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PromoCode",
-						"type": "varchar"
-					},
-					{
-						"name": "SavingsAccount",
-						"type": "bit"
-					},
-					{
-						"name": "CheckingAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "CertificateAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "MoneyMarketAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "PromoType",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion",
-						"type": "varchar"
-					},
-					{
-						"name": "Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Promo Start Date",
-						"type": "date"
-					},
-					{
-						"name": "Administrator I",
-						"type": "varchar"
-					},
-					{
-						"name": "Administrator II",
-						"type": "varchar"
-					},
-					{
-						"name": "Approvers Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Expiration Date",
-						"type": "date"
-					},
-					{
-						"name": "Platforms Impacted",
-						"type": "varchar"
-					},
-					{
-						"name": "Age From",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Age To",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Existing Products",
-						"type": "varchar"
-					},
-					{
-						"name": "Existing Products Checking Types",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Zip Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Open Office",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Balance History Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Opening Date From",
-						"type": "date"
-					},
-					{
-						"name": "Opening Date To",
-						"type": "date"
-					},
-					{
-						"name": "Transaction Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Transaction Details",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Completed Date From",
-						"type": "date"
-					},
-					{
-						"name": "Completed Date To",
-						"type": "date"
-					},
-					{
-						"name": "Criteria",
-						"type": "varchar"
-					},
-					{
-						"name": "Can Qualify more than once",
-						"type": "bit"
-					},
-					{
-						"name": "Reward Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Disclosures",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details within",
-						"type": "varchar"
-					},
-					{
-						"name": "Rate",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion Type Youth",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History",
-						"type": "varchar"
-					},
-					{
-						"name": "Checkings",
-						"type": "varchar"
-					},
-					{
-						"name": "Savings",
-						"type": "varchar"
-					},
-					{
-						"name": "ActiveInactive",
-						"type": "varchar"
-					},
-					{
-						"name": "HubID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Promo Category",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DetailsQualifications",
-						"type": "varchar"
-					},
-					{
-						"name": "Marketing Materials",
-						"type": "varchar"
-					},
-					{
-						"name": "Market",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Reward Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Minimum Balance",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Transaction Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "New Account Deposit Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Days",
-						"type": "varchar"
-					},
-					{
-						"name": "Aggregate No",
-						"type": "varchar"
-					},
-					{
-						"name": "Member Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Applicable Region or Market",
-						"type": "varchar"
-					},
-					{
-						"name": "UId",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 0
-					},
-					{
-						"name": "Source",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromocodeMaintenance_Staging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenanceStaging_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PromoCode",
-						"type": "varchar"
-					},
-					{
-						"name": "SavingsAccount",
-						"type": "bit"
-					},
-					{
-						"name": "CheckingAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "CertificateAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "MoneyMarketAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "PromoType",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion",
-						"type": "varchar"
-					},
-					{
-						"name": "Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Promo Start Date",
-						"type": "date"
-					},
-					{
-						"name": "Administrator I",
-						"type": "varchar"
-					},
-					{
-						"name": "Administrator II",
-						"type": "varchar"
-					},
-					{
-						"name": "Approvers Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Expiration Date",
-						"type": "date"
-					},
-					{
-						"name": "Platforms Impacted",
-						"type": "varchar"
-					},
-					{
-						"name": "Age From",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Age To",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Existing Products",
-						"type": "varchar"
-					},
-					{
-						"name": "Existing Products Checking Types",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Zip Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Open Office",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Balance History Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Opening Date From",
-						"type": "date"
-					},
-					{
-						"name": "Opening Date To",
-						"type": "date"
-					},
-					{
-						"name": "Transaction Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Transaction Details",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Completed Date From",
-						"type": "date"
-					},
-					{
-						"name": "Completed Date To",
-						"type": "date"
-					},
-					{
-						"name": "Criteria",
-						"type": "varchar"
-					},
-					{
-						"name": "Can Qualify more than once",
-						"type": "bit"
-					},
-					{
-						"name": "Reward Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Disclosures",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details within",
-						"type": "varchar"
-					},
-					{
-						"name": "Rate",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion Type Youth",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History",
-						"type": "varchar"
-					},
-					{
-						"name": "Checkings",
-						"type": "varchar"
-					},
-					{
-						"name": "Savings",
-						"type": "varchar"
-					},
-					{
-						"name": "ActiveInactive",
-						"type": "varchar"
-					},
-					{
-						"name": "HubID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Promo Category",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DetailsQualifications",
-						"type": "varchar"
-					},
-					{
-						"name": "Marketing Materials",
-						"type": "varchar"
-					},
-					{
-						"name": "Market",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Reward Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Minimum Balance",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Transaction Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "New Account Deposit Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Days",
-						"type": "varchar"
-					},
-					{
-						"name": "Aggregate No",
-						"type": "varchar"
-					},
-					{
-						"name": "Member Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Applicable Region or Market",
-						"type": "varchar"
-					},
-					{
-						"name": "UId",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 0
-					},
-					{
-						"name": "Source",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromocodeMaintenance_Staging"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_MiniOAOPromocodeMaintenance_DEV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessDataDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PromoCode",
-						"type": "varchar"
-					},
-					{
-						"name": "SavingsAccount",
-						"type": "bit"
-					},
-					{
-						"name": "CheckingAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "CertificateAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "MoneyMarketAccounts",
-						"type": "bit"
-					},
-					{
-						"name": "PromoType",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion",
-						"type": "varchar"
-					},
-					{
-						"name": "Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Promo Start Date",
-						"type": "date"
-					},
-					{
-						"name": "Administrator I",
-						"type": "varchar"
-					},
-					{
-						"name": "Administrator II",
-						"type": "varchar"
-					},
-					{
-						"name": "Approvers Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Expiration Date",
-						"type": "date"
-					},
-					{
-						"name": "Platforms Impacted",
-						"type": "varchar"
-					},
-					{
-						"name": "Age From",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Age To",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Existing Products",
-						"type": "varchar"
-					},
-					{
-						"name": "Existing Products Checking Types",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Zip Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Open Office",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Balance History Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Opening Date From",
-						"type": "date"
-					},
-					{
-						"name": "Opening Date To",
-						"type": "date"
-					},
-					{
-						"name": "Transaction Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Transaction Details",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Completed Date From",
-						"type": "date"
-					},
-					{
-						"name": "Completed Date To",
-						"type": "date"
-					},
-					{
-						"name": "Criteria",
-						"type": "varchar"
-					},
-					{
-						"name": "Can Qualify more than once",
-						"type": "bit"
-					},
-					{
-						"name": "Reward Type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Disclosures",
-						"type": "varchar"
-					},
-					{
-						"name": "Transaction Details within",
-						"type": "varchar"
-					},
-					{
-						"name": "Rate",
-						"type": "varchar"
-					},
-					{
-						"name": "Promotion Type Youth",
-						"type": "varchar"
-					},
-					{
-						"name": "Balance History",
-						"type": "varchar"
-					},
-					{
-						"name": "Checkings",
-						"type": "varchar"
-					},
-					{
-						"name": "Savings",
-						"type": "varchar"
-					},
-					{
-						"name": "ActiveInactive",
-						"type": "varchar"
-					},
-					{
-						"name": "HubID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Promo Category",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DetailsQualifications",
-						"type": "varchar"
-					},
-					{
-						"name": "Marketing Materials",
-						"type": "varchar"
-					},
-					{
-						"name": "Market",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedBy",
-						"type": "varchar"
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Reward Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Minimum Balance",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Transaction Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "New Account Deposit Amount",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Aggregate Days",
-						"type": "varchar"
-					},
-					{
-						"name": "Aggregate No",
-						"type": "varchar"
-					},
-					{
-						"name": "Member Status",
-						"type": "varchar"
-					},
-					{
-						"name": "Applicable Region or Market",
-						"type": "varchar"
-					},
-					{
-						"name": "UId",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 0
-					},
-					{
-						"name": "Source",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "MiniOAOPromocodeMaintenance"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_S_StagingCampaignLoan')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BusinessData",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "LoanID",
-						"type": "varchar"
-					},
-					{
-						"name": "AsOfDate",
-						"type": "date"
-					},
-					{
-						"name": "PartyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanStatusGroup",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanFamilyCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanTypeCode",
-						"type": "varchar"
-					},
-					{
-						"name": "LoanOpenDate",
-						"type": "date"
-					},
-					{
-						"name": "LoanCloseDate",
-						"type": "date"
-					},
-					{
-						"name": "CurrentBalance",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "CreditLimit",
-						"type": "money",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "LoanMaturityDate",
-						"type": "date"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CampaignLoanStaging"
 				}
 			},
 			"dependsOn": []
