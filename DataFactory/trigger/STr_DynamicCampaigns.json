@@ -12,12 +12,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_DynamicCampaigns",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "PL_DynamicCampaigns_UAT",
 					"type": "PipelineReference"
 				}
