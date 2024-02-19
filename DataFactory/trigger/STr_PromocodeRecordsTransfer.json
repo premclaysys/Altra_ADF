@@ -12,12 +12,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_PromocodeReordsTransfer",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "PL_PromocodeReordsTransfer_UAT",
 					"type": "PipelineReference"
 				}
