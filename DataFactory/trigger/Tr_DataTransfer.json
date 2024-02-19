@@ -12,12 +12,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PL_InactiveEAgreementNumberDataTransfer",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "PL_InactiveEAgreementNumberDataTransfer_UAT",
 					"type": "PipelineReference"
 				}
